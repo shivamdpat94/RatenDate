@@ -14,7 +14,7 @@ struct PhotoUploadView: View {
     @Binding var photoURLs: [String]  // This expects a Binding array of strings for URLs
     @State private var showingImagePicker = false
     @State private var selectedImageIndex: Int?  // To know which image slot the user is updating
-    @State private var selectedImages: [Int: UIImage] = [:]  // To hold the selected images with their index
+    @Binding var selectedImages: [Int: UIImage]
     @State private var uploadCount = 0  // To track the number of successful uploads
 
     var onPhotosUploaded: () -> Void  // Closure to call when photos are uploaded and the user proceeds
@@ -50,7 +50,6 @@ struct PhotoUploadView: View {
                         if let image = image, let index = self.selectedImageIndex {
                             // Assign the selected image to the correct index
                             self.selectedImages[index] = image
-                            uploadPhoto(index: index, image: image)
                         }
                         self.showingImagePicker = false
                     }
@@ -65,47 +64,16 @@ struct PhotoUploadView: View {
         }
     }
 
-    func uploadPhoto(index: Int, image: UIImage) {
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
-
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let photoRef = storageRef.child("photos/\(profileID)/photo\(index).jpg")
-
-        // Upload the image to Firebase Storage
-        let uploadTask = photoRef.putData(imageData, metadata: nil) { (metadata, error) in
-            if let error = error {
-                print("Error uploading image: \(error.localizedDescription)")
-                return
-            }
-
-            // Get the download URL
-            photoRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Handle the error
-                    print(error?.localizedDescription ?? "Unknown error")
-                    return
-                }
-
-                // Append the URL string to your photoURLs array
-                DispatchQueue.main.async {
-                    self.photoURLs.append(downloadURL.absoluteString)
-                    self.uploadCount += 1  // Increment the count for each successful upload
-                    
-                    // Check if all photos are uploaded or attempted
-                    if self.uploadCount == 6 {
-                        onPhotosUploaded()  // Call the completion handler after all 6 uploads are attempted
-                    }
-                }
-            }
-        }
-    }
 }
 
 struct PhotoUploadView_Previews: PreviewProvider {
+    @State static var dummyPhotoURLs = [String]()  // Dummy state for photo URLs
+    @State static var dummySelectedImages = [Int: UIImage]()  // Dummy state for selected images
+
     static var previews: some View {
         PhotoUploadView(
-            photoURLs: .constant([]),
+            photoURLs: $dummyPhotoURLs,  // Pass the dummy binding for photo URLs
+            selectedImages: $dummySelectedImages,  // Pass the dummy binding for selected images
             onPhotosUploaded: {
                 // Define what should happen when photos are uploaded here, if anything.
             },

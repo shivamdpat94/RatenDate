@@ -1,6 +1,16 @@
+//
+//  SequentialSignUpView.swift
+//  RatenDate
+//
+//  Created by Shivam Patel on 1/1/24.
+//
+
+// SequentialSignUpView.swift
+
 import SwiftUI
 import CoreLocation
 import Firebase
+import FirebaseStorage  // Ensure you've added Firebase Storage to your project
 
 struct SequentialSignUpView: View {
     @State private var name = ""
@@ -16,6 +26,7 @@ struct SequentialSignUpView: View {
     @State private var currentStep = 1
     @State private var photoURLs = [String]()  // To hold the photo URLs
     @State private var profileID: String?  // To store the profile's unique ID
+    @State private var selectedImages: [Int: UIImage] = [:]  // To hold the selected images
 
     var body: some View {
         VStack {
@@ -35,6 +46,7 @@ struct SequentialSignUpView: View {
                 if let profileID = profileID {
                     PhotoUploadView(
                         photoURLs: $photoURLs,
+                        selectedImages: $selectedImages,  // Pass the Binding to the selected images
                         onPhotosUploaded: {
                             // Move to the next step only after all photos are uploaded
                             currentStep = 4
@@ -63,34 +75,80 @@ struct SequentialSignUpView: View {
     }
     
     func submitProfile() {
-        // Call this function only after all photos are uploaded (currentStep should be 4)
-
         guard let profileID = profileID else {
             print("Profile ID is nil. Cannot submit profile.")
             return
         }
-        let newProfile = Profile(
-            // If Profile expects an id, use the following line:
-            // id: UUID(uuidString: profileID) ?? UUID(),
-            
-            // If Profile doesn't expect an id and generates it internally, remove the id line entirely
-            imageNames: interests.components(separatedBy: ","),
-            location: location,
-            age: age,
-            gender: gender,
-            ethnicity: ethnicity,
-            bio: bio,
-            interests: interests.components(separatedBy: ","),
-            lookingFor: lookingFor,
-            photoURLs: photoURLs
-        )
 
+        // First, upload the images
+        uploadImages { uploadedURLs in
+            // Once the images are uploaded, create the profile with the URLs
+            let newProfile = Profile(
+                // If Profile expects an id, use the following line:
+                // id: UUID(uuidString: profileID) ?? UUID(),
+                
+                // If Profile doesn't expect an id and generates it internally, remove the id line entirely
+                imageNames: self.interests.components(separatedBy: ","),
+                location: self.location,
+                age: self.age,
+                gender: self.gender,
+                ethnicity: self.ethnicity,
+                bio: self.bio,
+                interests: self.interests.components(separatedBy: ","),
+                lookingFor: self.lookingFor,
+                photoURLs: uploadedURLs  // Use the URLs from the uploaded images
+            )
 
-        // Save the profile to Firestore
-        saveProfileToFirebase(profile: newProfile)
-
-        print("User signed up with the following profile: \(newProfile)")
+            // Save the profile to Firestore
+            self.saveProfileToFirebase(profile: newProfile)
+        }
     }
+
+    
+    
+    
+    
+    func uploadImages(completion: @escaping ([String]) -> Void) {
+        let storage = Storage.storage()
+        var uploadedURLs = [String]()
+        let group = DispatchGroup()
+
+        for (index, image) in selectedImages {
+            group.enter()
+            let photoRef = storage.reference().child("photos/\(profileID!)/photo\(index).jpg")
+            
+            if let imageData = image.jpegData(compressionQuality: 0.8) {
+                photoRef.putData(imageData, metadata: nil) { (metadata, error) in
+                    if let error = error {
+                        print("Error uploading image: \(error.localizedDescription)")
+                        group.leave()
+                        return
+                    }
+
+                    photoRef.downloadURL { (url, error) in
+                        if let downloadURL = url {
+                            uploadedURLs.append(downloadURL.absoluteString)
+                        } else {
+                            print(error?.localizedDescription ?? "Unknown error")
+                        }
+                        group.leave()
+                    }
+                }
+            } else {
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion(uploadedURLs)
+        }
+    }
+    
+    
+    
+    
+    
+    
 
     func saveProfileToFirebase(profile: Profile) {
         let db = Firestore.firestore()
