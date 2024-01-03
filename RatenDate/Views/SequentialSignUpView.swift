@@ -27,6 +27,7 @@ struct SequentialSignUpView: View {
     @State private var photoURLs = [String]()  // To hold the photo URLs
     @State private var profileID: String?  // To store the profile's unique ID
     @State private var selectedImages: [Int: UIImage] = [:]  // To hold the selected images
+    @State private var navigateToProfileStack = false  // State to control navigation
 
     var body: some View {
         VStack {
@@ -61,12 +62,16 @@ struct SequentialSignUpView: View {
                     submitProfile()  // Call submitProfile() when 'Complete Sign Up' is tapped
                 }
             }
+            // NavigationLink that triggers navigation when navigateToProfileStack is true
+            NavigationLink(destination: ProfileStackView(), isActive: $navigateToProfileStack) {
+                EmptyView()  // This doesn't create a visible UI element but enables programmatic navigation
+            }
         }
         .onAppear {
             setProfileIDIfNeeded()
         }
     }
-
+    
     private func setProfileIDIfNeeded() {
         if profileID == nil {
             profileID = UUID().uuidString  // Initialize the UUID
@@ -101,7 +106,10 @@ struct SequentialSignUpView: View {
             )
 
             // Save the profile to Firestore
-            self.saveProfileToFirebase(profile: newProfile)
+            self.saveProfileToFirebase(profile: newProfile) {
+                // Trigger navigation to ProfileStackView after the profile is successfully saved
+                self.navigateToProfileStack = true
+            }
         }
     }
 
@@ -151,7 +159,7 @@ struct SequentialSignUpView: View {
     
     
 
-    func saveProfileToFirebase(profile: Profile) {
+    func saveProfileToFirebase(profile: Profile, completion: @escaping () -> Void) {
         let db = Firestore.firestore()
 
         db.collection("profiles").document(profile.id).setData(profile.dictionary) { error in
@@ -159,7 +167,7 @@ struct SequentialSignUpView: View {
                 print("Error adding document: \(error)")
             } else {
                 print("Profile successfully added!")
-                // Here, you might navigate the user to another part of your app
+                completion()  // Call the completion handler after the profile is successfully added
             }
         }
     }
