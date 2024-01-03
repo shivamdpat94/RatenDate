@@ -13,7 +13,7 @@ import Firebase
 import FirebaseStorage  // Ensure you've added Firebase Storage to your project
 
 struct SequentialSignUpView: View {
-    @State private var name = ""
+    @State private var firstName = ""
     @State private var location = CLLocation()
     @State private var occupation = ""
     @State private var age: Int = 18
@@ -32,7 +32,7 @@ struct SequentialSignUpView: View {
         VStack {
             if currentStep == 1 {
                 // Replace with your GenericInfoView
-                GenericInfoView(name: $name, location: $location, occupation: $occupation) {
+                GenericInfoView(name: $firstName, location: $location, occupation: $occupation) {
                     setProfileIDIfNeeded()
                     currentStep += 1  // Move to the next step when 'Next' is tapped
                 }
@@ -75,7 +75,7 @@ struct SequentialSignUpView: View {
     }
     
     func submitProfile() {
-        guard let profileID = profileID else {
+        guard let safeProfileID = profileID else {
             print("Profile ID is nil. Cannot submit profile.")
             return
         }
@@ -91,8 +91,10 @@ struct SequentialSignUpView: View {
                 imageNames: self.interests.components(separatedBy: ","),
                 location: self.location,
                 age: self.age,
+                id: safeProfileID,
                 gender: self.gender,
                 ethnicity: self.ethnicity,
+                firstName: self.firstName,
                 bio: self.bio,
                 interests: self.interests.components(separatedBy: ","),
                 lookingFor: self.lookingFor,
@@ -153,7 +155,7 @@ struct SequentialSignUpView: View {
     func saveProfileToFirebase(profile: Profile) {
         let db = Firestore.firestore()
 
-        db.collection("profiles").document(profile.id.uuidString).setData(profile.dictionary) { error in
+        db.collection("profiles").document(profile.id).setData(profile.dictionary) { error in
             if let error = error {
                 print("Error adding document: \(error)")
             } else {

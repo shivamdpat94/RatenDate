@@ -4,7 +4,7 @@ import SwiftUI
 
 // Define the Profile struct
 struct Profile: Identifiable {
-    let id: UUID
+    let id: String
     var imageNames: [String]
     var rating: Double
     var timesRated: Double
@@ -16,14 +16,17 @@ struct Profile: Identifiable {
     var bio: String
     var interests: [String]
     var lookingFor: String
+    var firstName: String
     var photoURLs: [String]  // To store the URLs of the photos
 
     init(
         imageNames: [String],
         location: CLLocation,
         age: Int,
+        id: String,
         gender: String,
         ethnicity: String,
+        firstName: String,
         bio: String,
         interests: [String],
         lookingFor: String,
@@ -32,7 +35,8 @@ struct Profile: Identifiable {
         photoURLs: [String] = []
 
     ) {
-        self.id = UUID()
+        self.id = id
+        self.firstName = firstName
         self.imageNames = imageNames
         self.location = location
         self.age = age
@@ -54,7 +58,8 @@ struct Profile: Identifiable {
 extension Profile {
     var dictionary: [String: Any] {
         return [
-            "id": id.uuidString,
+            "firstName": firstName,
+            "id": id,
             "imageNames": imageNames,
             "rating": rating,
             "timesRated": timesRated,
@@ -79,8 +84,10 @@ struct Profile_Previews: PreviewProvider {
             imageNames: ["exampleImage1", "exampleImage2"],
             location: CLLocation(latitude: 40.7128, longitude: -74.0060),
             age: 28,
+            id: UUID().uuidString,
             gender: "Female",
             ethnicity: "Hispanic",
+            firstName: "Leslie",
             bio: "Love hiking and the outdoors. Looking for someone to share adventures with.",
             interests: ["Hiking", "Photography", "Cooking"],
             lookingFor: "A serious relationship"
