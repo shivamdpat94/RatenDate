@@ -57,7 +57,6 @@
 		3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */; };
 		3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A282B43D054008CEDF6 /* ImagePicker.swift */; };
 		3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */; };
-		3C570A522B450164008CEDF6 /* GeoNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A512B450164008CEDF6 /* GeoNames.swift */; };
 		3C7E102D2B45C11B00C3E663 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */; };
 		3C7E102F2B45C18700C3E663 /* RetrievedProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */; };
 		3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10302B45C2D500C3E663 /* ProfileView.swift */; };
@@ -80,7 +79,6 @@
 		3C570A282B43D054008CEDF6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3C570A502B44FFF0008CEDF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		3C570A512B450164008CEDF6 /* GeoNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoNames.swift; sourceTree = "<group>"; };
 		3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievedProfile.swift; sourceTree = "<group>"; };
 		3C7E10302B45C2D500C3E663 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 				3C5709C52B4353A6008CEDF6 /* Profile.swift */,
 				3C570A282B43D054008CEDF6 /* ImagePicker.swift */,
 				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
-				3C570A512B450164008CEDF6 /* GeoNames.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
 				3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */,
 			);
@@ -321,7 +318,6 @@
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
-				3C570A522B450164008CEDF6 /* GeoNames.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,

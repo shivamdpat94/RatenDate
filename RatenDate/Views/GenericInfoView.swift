@@ -13,6 +13,8 @@ struct GenericInfoView: View {
     @StateObject private var locationManager = LocationManager()
     @Binding var occupation: String
     @State private var userInputCity: String = ""  // User-typed city
+    @Binding var location: CLLocation  // Bind to the location in the parent view
+
     var onNext: () -> Void
     
     var body: some View {
@@ -28,7 +30,11 @@ struct GenericInfoView: View {
                                 userInputCity = "\(city), \(state)"
                             }
                         }
-                    
+                        .onReceive(locationManager.$location) { newLocation in
+                            if let newLocation = newLocation {
+                                self.location = newLocation  // Update the bound location with the new value
+                            }
+                        }
                     // Location Button
                     Button(action: {
                         locationManager.requestPermission()
@@ -50,14 +56,19 @@ struct GenericInfoView: View {
             locationManager.requestPermission()
         }
     }
+    
+    
 }
 
 
 struct GenericInfoView_Previews: PreviewProvider {
+    @State static var dummyLocation = CLLocation(latitude: 40.7128, longitude: -74.0060)  // Example coordinates (New York City)
+
     static var previews: some View {
         GenericInfoView(
             name: .constant("John Doe"),
             occupation: .constant("Software Developer"),
+            location: $dummyLocation,  // Provide the dummy location
             onNext: {}
         )
     }

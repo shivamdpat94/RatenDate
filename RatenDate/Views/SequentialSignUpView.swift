@@ -32,10 +32,15 @@ struct SequentialSignUpView: View {
     var body: some View {
         VStack {
             if currentStep == 1 {
-                GenericInfoView(name: $firstName, occupation: $occupation) {
-                    setProfileIDIfNeeded()
-                    currentStep += 1
-                }
+                GenericInfoView(
+                    name: $firstName,
+                    occupation: $occupation,
+                    location: $location,  // Bind the location
+                    onNext: {
+                        setProfileIDIfNeeded()
+                        currentStep += 1
+                    }
+                )
             } else if currentStep == 2 {
                 // Replace with your DemographicInfoView
                 DemographicInfoView(age: $age, gender: $gender, ethnicity: $ethnicity, height: $height) {
@@ -106,7 +111,7 @@ struct SequentialSignUpView: View {
             )
 
             // Save the profile to Firestore
-            self.saveProfileToFirebase(profile: newProfile) {
+            FirebaseService().saveProfileToFirebase(profile: newProfile) {
                 // Trigger navigation to ProfileStackView after the profile is successfully saved
                 self.navigateToProfileStack = true
             }
@@ -150,25 +155,6 @@ struct SequentialSignUpView: View {
 
         group.notify(queue: .main) {
             completion(uploadedURLs)
-        }
-    }
-    
-    
-    
-    
-    
-    
-
-    func saveProfileToFirebase(profile: Profile, completion: @escaping () -> Void) {
-        let db = Firestore.firestore()
-
-        db.collection("profiles").document(profile.id).setData(profile.dictionary) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Profile successfully added!")
-                completion()  // Call the completion handler after the profile is successfully added
-            }
         }
     }
 }

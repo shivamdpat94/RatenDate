@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import UIKit
+import Firebase
 
 struct Profile: Identifiable {
     let id: String
@@ -50,6 +51,7 @@ struct Profile: Identifiable {
         // Handle the division by zero case
         self.rating = timesRated == 0 ? 0 : rateSum / timesRated
         self.photoURLs = photoURLs
+        
     }
 }
 
@@ -69,7 +71,9 @@ extension Profile {
             "bio": bio,
             "interests": interests,
             "lookingFor": lookingFor,
-            "photoURLs": photoURLs
+            "photoURLs": photoURLs,
+            "location": GeoPoint(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+
         ]
     }
 }
