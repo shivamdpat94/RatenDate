@@ -1,8 +1,8 @@
 import Foundation
-import CoreLocation
 import SwiftUI
+import CoreLocation
+import UIKit
 
-// Define the Profile struct
 struct Profile: Identifiable {
     let id: String
     var imageNames: [String]
@@ -17,7 +17,8 @@ struct Profile: Identifiable {
     var interests: [String]
     var lookingFor: String
     var firstName: String
-    var photoURLs: [String]  // To store the URLs of the photos
+    var photoURLs: [String]
+    var images: [UIImage] = []  // To store the fetched images
 
     init(
         imageNames: [String],
@@ -33,7 +34,6 @@ struct Profile: Identifiable {
         rateSum: Double = 0.0,
         timesRated: Double = 0.0,
         photoURLs: [String] = []
-
     ) {
         self.id = id
         self.firstName = firstName
@@ -50,11 +50,10 @@ struct Profile: Identifiable {
         // Handle the division by zero case
         self.rating = timesRated == 0 ? 0 : rateSum / timesRated
         self.photoURLs = photoURLs
-
     }
 }
 
-// Extension to convert Profile to a dictionary
+// Extension to convert Profile to a dictionary - useful if you're creating/updating profile documents in Firestore
 extension Profile {
     var dictionary: [String: Any] {
         return [
@@ -64,14 +63,13 @@ extension Profile {
             "rating": rating,
             "timesRated": timesRated,
             "rateSum": rateSum,
-            // "location": location, // Special handling required for CLLocation
             "age": age,
             "gender": gender,
             "ethnicity": ethnicity,
             "bio": bio,
             "interests": interests,
-            "lookingFor": lookingFor
-            // Add other properties here...
+            "lookingFor": lookingFor,
+            "photoURLs": photoURLs
         ]
     }
 }

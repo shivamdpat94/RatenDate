@@ -31,10 +31,9 @@ struct SequentialSignUpView: View {
     var body: some View {
         VStack {
             if currentStep == 1 {
-                // Replace with your GenericInfoView
-                GenericInfoView(name: $firstName, location: $location, occupation: $occupation) {
+                GenericInfoView(name: $firstName, occupation: $occupation) {
                     setProfileIDIfNeeded()
-                    currentStep += 1  // Move to the next step when 'Next' is tapped
+                    currentStep += 1
                 }
             } else if currentStep == 2 {
                 // Replace with your DemographicInfoView

@@ -13,7 +13,6 @@
 		3C5709BB2B434C56008CEDF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */; };
 		3C5709C32B434D61008CEDF6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709C22B434D61008CEDF6 /* CardView.swift */; };
 		3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709C52B4353A6008CEDF6 /* Profile.swift */; };
-		3C5709CA2B4354BC008CEDF6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709C92B4354BC008CEDF6 /* SignUpView.swift */; };
 		3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */; };
 		3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */; };
 		3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */; };
@@ -59,6 +58,9 @@
 		3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */; };
 		3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A282B43D054008CEDF6 /* ImagePicker.swift */; };
 		3C570A4B2B44E5A7008CEDF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A4A2B44E5A7008CEDF6 /* ProfileView.swift */; };
+		3C570A4D2B44F525008CEDF6 /* ProfileFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A4C2B44F525008CEDF6 /* ProfileFetcher.swift */; };
+		3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */; };
+		3C570A522B450164008CEDF6 /* GeoNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A512B450164008CEDF6 /* GeoNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +71,6 @@
 		3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C5709C22B434D61008CEDF6 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3C5709C52B4353A6008CEDF6 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		3C5709C92B4354BC008CEDF6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInfoView.swift; sourceTree = "<group>"; };
 		3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicInfoView.swift; sourceTree = "<group>"; };
 		3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
@@ -78,6 +79,10 @@
 		3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		3C570A282B43D054008CEDF6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3C570A4A2B44E5A7008CEDF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3C570A4C2B44F525008CEDF6 /* ProfileFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFetcher.swift; sourceTree = "<group>"; };
+		3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		3C570A502B44FFF0008CEDF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3C570A512B450164008CEDF6 /* GeoNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +152,7 @@
 		3C5709B22B434C54008CEDF6 /* RatenDate */ = {
 			isa = PBXGroup;
 			children = (
+				3C570A502B44FFF0008CEDF6 /* Info.plist */,
 				3C5709C42B435374008CEDF6 /* Models */,
 				3C5709C12B434D48008CEDF6 /* Views */,
 				3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */,
@@ -170,7 +176,6 @@
 			children = (
 				3C5709B52B434C54008CEDF6 /* ContentView.swift */,
 				3C5709C22B434D61008CEDF6 /* CardView.swift */,
-				3C5709C92B4354BC008CEDF6 /* SignUpView.swift */,
 				3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */,
 				3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */,
 				3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */,
@@ -186,6 +191,9 @@
 			children = (
 				3C5709C52B4353A6008CEDF6 /* Profile.swift */,
 				3C570A282B43D054008CEDF6 /* ImagePicker.swift */,
+				3C570A4C2B44F525008CEDF6 /* ProfileFetcher.swift */,
+				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
+				3C570A512B450164008CEDF6 /* GeoNames.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,7 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
-				3C5709CA2B4354BC008CEDF6 /* SignUpView.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C5709C32B434D61008CEDF6 /* CardView.swift in Sources */,
 				3C570A4B2B44E5A7008CEDF6 /* ProfileView.swift in Sources */,
@@ -312,6 +319,9 @@
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
+				3C570A522B450164008CEDF6 /* GeoNames.swift in Sources */,
+				3C570A4D2B44F525008CEDF6 /* ProfileFetcher.swift in Sources */,
+				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
 				3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */,
@@ -451,6 +461,8 @@
 				DEVELOPMENT_TEAM = GAMD5U5SSA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RatenDate/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -480,6 +492,8 @@
 				DEVELOPMENT_TEAM = GAMD5U5SSA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RatenDate/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

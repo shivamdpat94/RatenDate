@@ -10,15 +10,35 @@ import CoreLocation
 
 struct GenericInfoView: View {
     @Binding var name: String
-    @Binding var location: CLLocation
+    @StateObject private var locationManager = LocationManager()
     @Binding var occupation: String
+    @State private var userInputCity: String = ""  // User-typed city
     var onNext: () -> Void
     
     var body: some View {
         Form {
             Section(header: Text("Generic Information")) {
                 TextField("Name", text: $name)
-                Text("Location: (Add location picker)")
+                
+                HStack {
+                    // Location TextField
+                    TextField("City", text: $userInputCity)
+                        .onReceive(locationManager.$placemark) { placemark in
+                            if let city = placemark?.locality, let state = placemark?.administrativeArea {
+                                userInputCity = "\(city), \(state)"
+                            }
+                        }
+                    
+                    // Location Button
+                    Button(action: {
+                        locationManager.requestPermission()
+                        locationManager.getLocation()
+                    }) {
+                        Image(systemName: "location.fill")
+                            .foregroundColor(.blue)
+                    }
+                }
+                
                 TextField("Occupation", text: $occupation)
             }
             
@@ -26,14 +46,17 @@ struct GenericInfoView: View {
                 onNext()
             }
         }
+        .onAppear {
+            locationManager.requestPermission()
+        }
     }
 }
+
 
 struct GenericInfoView_Previews: PreviewProvider {
     static var previews: some View {
         GenericInfoView(
             name: .constant("John Doe"),
-            location: .constant(CLLocation(latitude: 40.7128, longitude: -74.0060)),
             occupation: .constant("Software Developer"),
             onNext: {}
         )
