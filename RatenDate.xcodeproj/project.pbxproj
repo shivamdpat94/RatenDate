@@ -58,6 +58,7 @@
 		3C570A232B43658B008CEDF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C570A222B43658B008CEDF6 /* GoogleService-Info.plist */; };
 		3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */; };
 		3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A282B43D054008CEDF6 /* ImagePicker.swift */; };
+		3C570A4B2B44E5A7008CEDF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C570A4A2B44E5A7008CEDF6 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		3C570A222B43658B008CEDF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		3C570A282B43D054008CEDF6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		3C570A4A2B44E5A7008CEDF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */,
 				3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */,
 				3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */,
+				3C570A4A2B44E5A7008CEDF6 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				3C5709CA2B4354BC008CEDF6 /* SignUpView.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C5709C32B434D61008CEDF6 /* CardView.swift in Sources */,
+				3C570A4B2B44E5A7008CEDF6 /* ProfileView.swift in Sources */,
 				3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */,
