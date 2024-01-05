@@ -18,7 +18,10 @@ struct SequentialSignUpView: View {
     @State private var occupation = ""
     @State private var age: Int = 18
     @State private var gender = ""
+    @State private var email = ""
+    @State private var password = ""
     @State private var ethnicity = ""
+    @State private var phoneNumber = ""
     @State private var height = ""
     @State private var bio = ""
     @State private var interests = ""
@@ -36,6 +39,8 @@ struct SequentialSignUpView: View {
                     name: $firstName,
                     occupation: $occupation,
                     location: $location,  // Bind the location
+                    email: $email,
+                    password: $password,
                     onNext: {
                         setProfileIDIfNeeded()
                         currentStep += 1
@@ -101,6 +106,8 @@ struct SequentialSignUpView: View {
                 location: self.location,
                 age: self.age,
                 id: safeProfileID,
+                email: self.email,
+                password: self.password,
                 gender: self.gender,
                 ethnicity: self.ethnicity,
                 firstName: self.firstName,
@@ -129,7 +136,7 @@ struct SequentialSignUpView: View {
 
         for (index, image) in selectedImages {
             group.enter()
-            let photoRef = storage.reference().child("photos/\(profileID!)/photo\(index).jpg")
+            let photoRef = storage.reference().child("photos/\(phoneNumber)/photo\(index).jpg")
             
             if let imageData = image.jpegData(compressionQuality: 0.8) {
                 photoRef.putData(imageData, metadata: nil) { (metadata, error) in

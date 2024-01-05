@@ -31,7 +31,7 @@ class FirebaseService {
     func saveProfileToFirebase(profile: Profile, completion: @escaping () -> Void) {
         let db = Firestore.firestore()
 
-        db.collection("profiles").document(profile.id).setData(profile.dictionary) { error in
+        db.collection("profiles").document(profile.email).setData(profile.dictionary) { error in
             if let error = error {
                 print("Error adding document: \(error)")
             } else {

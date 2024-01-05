@@ -10,6 +10,8 @@ struct Profile: Identifiable {
     var rating: Double
     var timesRated: Double
     var rateSum: Double
+    var email: String
+    var password: String
     var location: CLLocation
     var age: Int
     var gender: String
@@ -26,6 +28,8 @@ struct Profile: Identifiable {
         location: CLLocation,
         age: Int,
         id: String,
+        email: String,
+        password: String,
         gender: String,
         ethnicity: String,
         firstName: String,
@@ -40,6 +44,8 @@ struct Profile: Identifiable {
         self.firstName = firstName
         self.imageNames = imageNames
         self.location = location
+        self.email = email
+        self.password = password
         self.age = age
         self.gender = gender
         self.ethnicity = ethnicity
@@ -63,6 +69,8 @@ extension Profile {
             "id": id,
             "imageNames": imageNames,
             "rating": rating,
+            "email" : email,
+            "password" : password,
             "timesRated": timesRated,
             "rateSum": rateSum,
             "age": age,
@@ -81,23 +89,26 @@ extension Profile {
 // SwiftUI Preview for the Profile
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        // Create a dummy profile
+        // Create a dummy profile with the correct order and naming of parameters
         let dummyProfile = Profile(
             imageNames: ["exampleImage1", "exampleImage2"],
             location: CLLocation(latitude: 40.7128, longitude: -74.0060),
             age: 28,
             id: UUID().uuidString,
+            email: "email@gmail.com",
+            password: "password",
             gender: "Female",
             ethnicity: "Hispanic",
             firstName: "Leslie",
             bio: "Love hiking and the outdoors. Looking for someone to share adventures with.",
             interests: ["Hiking", "Photography", "Cooking"],
             lookingFor: "A serious relationship"
+            // rateSum and timesRated will use their default values
         )
 
         // Create a simple view to display some profile information
         VStack(alignment: .leading) {
-            Text("Name: \(dummyProfile.gender)")
+            Text("Name: \(dummyProfile.firstName)")
             Text("Age: \(dummyProfile.age)")
             Text("Bio: \(dummyProfile.bio)")
             // Add more details as needed

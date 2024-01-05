@@ -61,6 +61,7 @@
 		3C7E102F2B45C18700C3E663 /* RetrievedProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */; };
 		3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10302B45C2D500C3E663 /* ProfileView.swift */; };
 		3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */; };
+		3C7E10352B46422900C3E663 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10342B46422900C3E663 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrievedProfile.swift; sourceTree = "<group>"; };
 		3C7E10302B45C2D500C3E663 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStackView.swift; sourceTree = "<group>"; };
+		3C7E10342B46422900C3E663 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */,
 				3C7E10302B45C2D500C3E663 /* ProfileView.swift */,
 				3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */,
+				3C7E10342B46422900C3E663 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */,
+				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E102F2B45C18700C3E663 /* RetrievedProfile.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */,

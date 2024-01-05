@@ -41,15 +41,6 @@ struct ContentView: View {
     }
 }
 
-// Dummy LoginView
-struct LoginView: View {
-    var body: some View {
-        Text("Login View")
-    }
-}
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
