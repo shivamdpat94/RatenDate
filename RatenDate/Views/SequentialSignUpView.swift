@@ -13,6 +13,7 @@ import Firebase
 import FirebaseStorage  // Ensure you've added Firebase Storage to your project
 
 struct SequentialSignUpView: View {
+    @EnvironmentObject var sessionManager: UserSessionManager
     @State private var firstName = ""
     @State private var location = CLLocation()
     @State private var occupation = ""
@@ -88,47 +89,104 @@ struct SequentialSignUpView: View {
         }
     }
     
+    
+    
+    
     func submitProfile() {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Error creating user: \(error.localizedDescription)")
-                return
-            }
-        }
-        guard let safeProfileID = profileID else {
-            print("Profile ID is nil. Cannot submit profile.")
-            return
-        }
+        sessionManager.signUp(email: email, password: password) { success, errorMessage in
+            if success {
+                guard let safeProfileID = self.profileID else {
+                    print("Profile ID is nil. Cannot submit profile.")
+                    return
+                }
 
-        // First, upload the images
-        uploadImages { uploadedURLs in
-            // Once the images are uploaded, create the profile with the URLs
-            let newProfile = Profile(
-                // If Profile expects an id, use the following line:
-                // id: UUID(uuidString: profileID) ?? UUID(),
-                
-                // If Profile doesn't expect an id and generates it internally, remove the id line entirely
-                imageNames: self.interests.components(separatedBy: ","),
-                location: self.location,
-                age: self.age,
-                id: safeProfileID,
-                email: self.email,
-                gender: self.gender,
-                ethnicity: self.ethnicity,
-                firstName: self.firstName,
-                bio: self.bio,
-                interests: self.interests.components(separatedBy: ","),
-                lookingFor: self.lookingFor,
-                photoURLs: uploadedURLs  // Use the URLs from the uploaded images
-            )
+                // First, upload the images
+                self.uploadImages { uploadedURLs in
+                    // Once the images are uploaded, create the profile with the URLs
+                    let newProfile = Profile(
+                        imageNames: self.interests.components(separatedBy: ","),
+                        location: self.location,
+                        age: self.age,
+                        id: safeProfileID,
+                        email: self.email,
+                        gender: self.gender,
+                        ethnicity: self.ethnicity,
+                        firstName: self.firstName,
+                        bio: self.bio,
+                        interests: self.interests.components(separatedBy: ","),
+                        lookingFor: self.lookingFor,
+                        photoURLs: uploadedURLs
+                    )
 
-            // Save the profile to Firestore
-            FirebaseService().saveProfileToFirebase(profile: newProfile) {
-                // Trigger navigation to ProfileStackView after the profile is successfully saved
-                self.navigateToMainTabView = true
+                    // Save the profile to Firestore
+                    FirebaseService().saveProfileToFirebase(profile: newProfile) {
+                        // Trigger navigation to MainTabView after the profile is successfully saved
+                        DispatchQueue.main.async {
+                            self.navigateToMainTabView = true
+                        }
+                    }
+                }
+            } else if let errorMessage = errorMessage {
+                print("Sign Up Error: \(errorMessage)")
+                // Handle sign-up error, perhaps update a user-facing error message
             }
         }
     }
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    func submitProfile() {
+//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//            if let error = error {
+//                print("Error creating user: \(error.localizedDescription)")
+//                return
+//            }
+//        }
+//        guard let safeProfileID = profileID else {
+//            print("Profile ID is nil. Cannot submit profile.")
+//            return
+//        }
+//
+//        // First, upload the images
+//        uploadImages { uploadedURLs in
+//            // Once the images are uploaded, create the profile with the URLs
+//            let newProfile = Profile(
+//                // If Profile expects an id, use the following line:
+//                // id: UUID(uuidString: profileID) ?? UUID(),
+//                
+//                // If Profile doesn't expect an id and generates it internally, remove the id line entirely
+//                imageNames: self.interests.components(separatedBy: ","),
+//                location: self.location,
+//                age: self.age,
+//                id: safeProfileID,
+//                email: self.email,
+//                gender: self.gender,
+//                ethnicity: self.ethnicity,
+//                firstName: self.firstName,
+//                bio: self.bio,
+//                interests: self.interests.components(separatedBy: ","),
+//                lookingFor: self.lookingFor,
+//                photoURLs: uploadedURLs  // Use the URLs from the uploaded images
+//            )
+//
+//            // Save the profile to Firestore
+//            FirebaseService().saveProfileToFirebase(profile: newProfile) {
+//                // Trigger navigation to ProfileStackView after the profile is successfully saved
+//                self.navigateToMainTabView = true
+//            }
+//        }
+//    }
 
     
     

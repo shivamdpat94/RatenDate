@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var sessionManager: UserSessionManager
     var body: some View {
-        Text("Settings")
+        Text(sessionManager.userEmail!)
             .font(.largeTitle)
     }
 }

@@ -22,7 +22,7 @@ struct ContentView: View {
                 }
                 
                 // Button to navigate to the Sign Up view
-                NavigationLink(destination: SequentialSignUpView()) {
+                NavigationLink(destination: SequentialSignUpView().environmentObject(UserSessionManager())) {
                     Text("Sign Up")
                         .font(.headline)
                         .foregroundColor(.white)

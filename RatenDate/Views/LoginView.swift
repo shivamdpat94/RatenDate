@@ -9,50 +9,59 @@ import SwiftUI
 import Firebase
 
 struct LoginView: View {
+    @EnvironmentObject var sessionManager: UserSessionManager
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String?
-    
+    @State private var isLoginSuccessful = false
+
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Email")) {
-                    TextField("Enter your email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                }
-                
-                Section(header: Text("Password")) {
-                    SecureField("Enter your password", text: $password)
-                }
-                
-                if let errorMessage = errorMessage {
+            VStack {
+                Form {
+                    Section(header: Text("Email")) {
+                        TextField("Enter your email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                    }
+                    
+                    Section(header: Text("Password")) {
+                        SecureField("Enter your password", text: $password)
+                    }
+                    
+                    if let errorMessage = errorMessage {
+                        Section {
+                            Text(errorMessage).foregroundColor(.red)
+                        }
+                    }
+                    
                     Section {
-                        Text(errorMessage).foregroundColor(.red)
+                        Button("Login") {
+                            loginUser(email: email, password: password)
+                        }
                     }
                 }
-                
-                Section {
-                    Button("Login") {
-                        loginUser(email: email, password: password)
-                    }
+                .navigationBarTitle("Login")
+
+                // This empty navigation link will trigger when isLoginSuccessful is set to true
+                NavigationLink(destination: MainTabView(), isActive: $isLoginSuccessful) {
+                    EmptyView()
                 }
             }
-            .navigationBarTitle("Login")
         }
     }
     
     func loginUser(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                print("Login error: \(error.localizedDescription)")
-                // For more detailed debugging:
-                print(error)
-                return
-            } 
-            print("Login Successful")
-            MainTabView()
-            // Proceed if login is successful
+        sessionManager.signIn(email: email, password: password) {
+            if sessionManager.isAuthenticated {
+                // Navigate to MainTabView by replacing the root view
+                if let window = UIApplication.shared.windows.first {
+                    window.rootViewController = UIHostingController(rootView: MainTabView().environmentObject(sessionManager))
+                    window.makeKeyAndVisible()
+                }
+            } else {
+                self.errorMessage = "Failed to login. Please check your credentials."
+            }
         }
     }
 }
