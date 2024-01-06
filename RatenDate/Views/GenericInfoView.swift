@@ -17,9 +17,9 @@ struct GenericInfoView: View {
     @State private var userInputCity: String = ""  // User-typed city
     @Binding var location: CLLocation  // Bind to the location in the parent view
     @Binding var email: String
-    @Binding var password: String
     @Environment(\.presentationMode) var presentationMode  // To control the navigation stack
     @State private var showAlert = false  // To control the alert presentation
+    @Binding var password: String  // Continue to use this to collect the password input
     var onNext: () -> Void
     
     var body: some View {
@@ -44,7 +44,7 @@ struct GenericInfoView: View {
                 
                 TextField("Occupation", text: $occupation)
                 TextField("Email", text: $email)
-                TextField("Password", text: $password)
+                SecureField("Password", text: $password)
 
             }
             
@@ -96,7 +96,7 @@ struct GenericInfoView_Previews: PreviewProvider {
             occupation: .constant("Software Developer"),
             location: $dummyLocation,
             email: .constant("Email@email.com"),
-            password: .constant("********"),
+            password: .constant(""),
             onNext: {}
         )
     }

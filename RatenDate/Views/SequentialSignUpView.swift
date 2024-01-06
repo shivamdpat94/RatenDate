@@ -30,7 +30,7 @@ struct SequentialSignUpView: View {
     @State private var photoURLs = [String]()  // To hold the photo URLs
     @State private var profileID: String?  // To store the profile's unique ID
     @State private var selectedImages: [Int: UIImage] = [:]  // To hold the selected images
-    @State private var navigateToProfileStack = false  // State to control navigation
+    @State private var navigateToMainTabView = false  // State to control navigation
 
     var body: some View {
         VStack {
@@ -73,7 +73,7 @@ struct SequentialSignUpView: View {
                 }
             }
             // NavigationLink that triggers navigation when navigateToProfileStack is true
-            NavigationLink(destination: ProfileStackView(), isActive: $navigateToProfileStack) {
+            NavigationLink(destination: MainTabView(), isActive: $navigateToMainTabView) {
                 EmptyView()  // This doesn't create a visible UI element but enables programmatic navigation
             }
         }
@@ -89,6 +89,12 @@ struct SequentialSignUpView: View {
     }
     
     func submitProfile() {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print("Error creating user: \(error.localizedDescription)")
+                return
+            }
+        }
         guard let safeProfileID = profileID else {
             print("Profile ID is nil. Cannot submit profile.")
             return
@@ -107,7 +113,6 @@ struct SequentialSignUpView: View {
                 age: self.age,
                 id: safeProfileID,
                 email: self.email,
-                password: self.password,
                 gender: self.gender,
                 ethnicity: self.ethnicity,
                 firstName: self.firstName,
@@ -120,7 +125,7 @@ struct SequentialSignUpView: View {
             // Save the profile to Firestore
             FirebaseService().saveProfileToFirebase(profile: newProfile) {
                 // Trigger navigation to ProfileStackView after the profile is successfully saved
-                self.navigateToProfileStack = true
+                self.navigateToMainTabView = true
             }
         }
     }

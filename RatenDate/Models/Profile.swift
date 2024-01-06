@@ -11,7 +11,6 @@ struct Profile: Identifiable {
     var timesRated: Double
     var rateSum: Double
     var email: String
-    var password: String
     var location: CLLocation
     var age: Int
     var gender: String
@@ -23,13 +22,13 @@ struct Profile: Identifiable {
     var photoURLs: [String]
     var images: [UIImage] = []  // To store the fetched images
 
+    // Adjust the initializer to remove the password parameter
     init(
         imageNames: [String],
         location: CLLocation,
         age: Int,
         id: String,
         email: String,
-        password: String,
         gender: String,
         ethnicity: String,
         firstName: String,
@@ -45,7 +44,6 @@ struct Profile: Identifiable {
         self.imageNames = imageNames
         self.location = location
         self.email = email
-        self.password = password
         self.age = age
         self.gender = gender
         self.ethnicity = ethnicity
@@ -70,7 +68,6 @@ extension Profile {
             "imageNames": imageNames,
             "rating": rating,
             "email" : email,
-            "password" : password,
             "timesRated": timesRated,
             "rateSum": rateSum,
             "age": age,
@@ -96,7 +93,6 @@ struct Profile_Previews: PreviewProvider {
             age: 28,
             id: UUID().uuidString,
             email: "email@gmail.com",
-            password: "password",
             gender: "Female",
             ethnicity: "Hispanic",
             firstName: "Leslie",

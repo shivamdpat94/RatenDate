@@ -9,65 +9,50 @@ import SwiftUI
 import Firebase
 
 struct LoginView: View {
-    @State private var phoneNumber = ""
-    @State private var verificationCode = ""
-    @State private var verificationID: String? = nil  // To hold the verification ID from Firebase
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
-
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var errorMessage: String?
+    
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Phone Number")) {
-                    TextField("Enter your phone number", text: $phoneNumber)
-                        .keyboardType(.phonePad)
+                Section(header: Text("Email")) {
+                    TextField("Enter your email", text: $email)
+                        .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                 }
                 
-                if verificationID != nil {
-                    Section(header: Text("Verification Code")) {
-                        TextField("Enter the 6-digit code", text: $verificationCode)
-                            .keyboardType(.numberPad)
+                Section(header: Text("Password")) {
+                    SecureField("Enter your password", text: $password)
+                }
+                
+                if let errorMessage = errorMessage {
+                    Section {
+                        Text(errorMessage).foregroundColor(.red)
                     }
                 }
                 
-                Button(verificationID == nil ? "Send Verification Code" : "Log In") {
-                    if verificationID == nil {
-                        sendVerificationCode()
-                    } else {
-                        verifyCode()
+                Section {
+                    Button("Login") {
+                        loginUser(email: email, password: password)
                     }
                 }
             }
-            .navigationBarTitle("Log In")
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
+            .navigationBarTitle("Login")
         }
     }
     
-    func sendVerificationCode() {
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+    func loginUser(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                self.alertMessage = error.localizedDescription
-                self.showingAlert = true
+                print("Login error: \(error.localizedDescription)")
+                // For more detailed debugging:
+                print(error)
                 return
-            }
-            self.verificationID = verificationID
-        }
-    }
-    
-    func verifyCode() {
-        guard let verificationID = verificationID else { return }
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode)
-        
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                self.alertMessage = error.localizedDescription
-                self.showingAlert = true
-                return
-            }
-            // User is logged in, navigate to the main part of your app
+            } 
+            print("Login Successful")
+            MainTabView()
+            // Proceed if login is successful
         }
     }
 }
@@ -77,4 +62,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
