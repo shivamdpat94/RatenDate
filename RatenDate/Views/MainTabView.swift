@@ -24,8 +24,11 @@ struct MainTabView: View {
                     Text("Settings")
                 }
         }
-        NavigationLink(destination: MainTabView(), isActive: $isLoginSuccessful) {
-            EmptyView()
+        .navigationBarBackButtonHidden(true) // This hides the back button
+        .navigationBarHidden(true) // Optionally, this hides the entire navigation bar
+        .navigationTitle("") // Clear any title that might take space
+        .onAppear {
+            self.isLoginSuccessful = true // Assuming you set this based on some condition
         }
     }
 }

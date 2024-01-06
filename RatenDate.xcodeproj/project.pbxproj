@@ -65,6 +65,7 @@
 		3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */; };
 		3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */; };
 		3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */; };
+		3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10402B49241900C3E663 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		3C7E10402B49241900C3E663 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				3C7E10342B46422900C3E663 /* LoginView.swift */,
 				3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */,
 				3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */,
+				3C7E10402B49241900C3E663 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
 				3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */,
+				3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */,
 				3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

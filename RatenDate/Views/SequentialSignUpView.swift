@@ -33,8 +33,16 @@ struct SequentialSignUpView: View {
     @State private var selectedImages: [Int: UIImage] = [:]  // To hold the selected images
     @State private var navigateToMainTabView = false  // State to control navigation
 
+
     var body: some View {
         VStack {
+            if currentStep > 1 {
+                Button("Back") {
+                    // Decrement the current step to go back in the sequence
+                    currentStep -= 1
+                }
+            }
+
             if currentStep == 1 {
                 GenericInfoView(
                     name: $firstName,
@@ -133,63 +141,6 @@ struct SequentialSignUpView: View {
         }
     }
 
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func submitProfile() {
-//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//            if let error = error {
-//                print("Error creating user: \(error.localizedDescription)")
-//                return
-//            }
-//        }
-//        guard let safeProfileID = profileID else {
-//            print("Profile ID is nil. Cannot submit profile.")
-//            return
-//        }
-//
-//        // First, upload the images
-//        uploadImages { uploadedURLs in
-//            // Once the images are uploaded, create the profile with the URLs
-//            let newProfile = Profile(
-//                // If Profile expects an id, use the following line:
-//                // id: UUID(uuidString: profileID) ?? UUID(),
-//                
-//                // If Profile doesn't expect an id and generates it internally, remove the id line entirely
-//                imageNames: self.interests.components(separatedBy: ","),
-//                location: self.location,
-//                age: self.age,
-//                id: safeProfileID,
-//                email: self.email,
-//                gender: self.gender,
-//                ethnicity: self.ethnicity,
-//                firstName: self.firstName,
-//                bio: self.bio,
-//                interests: self.interests.components(separatedBy: ","),
-//                lookingFor: self.lookingFor,
-//                photoURLs: uploadedURLs  // Use the URLs from the uploaded images
-//            )
-//
-//            // Save the profile to Firestore
-//            FirebaseService().saveProfileToFirebase(profile: newProfile) {
-//                // Trigger navigation to ProfileStackView after the profile is successfully saved
-//                self.navigateToMainTabView = true
-//            }
-//        }
-//    }
-
-    
-    
     
     
     func uploadImages(completion: @escaping ([String]) -> Void) {

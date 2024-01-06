@@ -80,12 +80,12 @@ class UserSessionManager: ObservableObject {
 
 
     // Sign-out method
-    func signOut() {
+    func signOut(completion: @escaping () -> Void) {
         do {
             try Auth.auth().signOut()
             self.isAuthenticated = false
             self.userEmail = nil
-            // Perform any additional cleanup on sign out if needed
+            completion()  // Notify that sign-out is complete
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
             errorMessage = signOutError.localizedDescription
