@@ -29,6 +29,7 @@ struct ContentView: View {
                             .cornerRadius(15.0)
                     }
                     
+                    
                     // Button to navigate to the Sign Up view
                     NavigationLink(destination: SequentialSignUpView().environmentObject(sessionManager)) {
                         Text("Sign Up")
