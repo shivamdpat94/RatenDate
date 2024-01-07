@@ -17,37 +17,53 @@ struct LoginView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Form {
-                    Section(header: Text("Email")) {
-                        TextField("Enter your email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                    }
-                    
-                    Section(header: Text("Password")) {
-                        SecureField("Enter your password", text: $password)
-                    }
-                    
-                    if let errorMessage = errorMessage {
-                        Section {
-                            Text(errorMessage).foregroundColor(.red)
-                        }
-                    }
-                    
-                    Section {
-                        Button("Login") {
-                            loginUser(email: email, password: password)
-                        }
-                    }
-                }
-                .navigationBarTitle("Login")
+            ZStack {
+                // Background image
+                Image("LoginBackground")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
 
-                // This empty navigation link will trigger when isLoginSuccessful is set to true
-                NavigationLink(destination: MainTabView(), isActive: $isLoginSuccessful) {
-                    EmptyView()
+                // Transparent content area
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Email")
+                        .foregroundColor(.gray)
+                    TextField("Enter your email", text: $email)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Color.white.opacity(0.7)))
+                        .foregroundColor(.black)
+
+                    Text("Password")
+                        .foregroundColor(.gray)
+                    SecureField("Enter your password", text: $password)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Color.white.opacity(0.7)))
+                        .foregroundColor(.black)
+
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                    }
+
+                    Button("Login") {
+                        loginUser(email: email, password: password)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+
+                    NavigationLink(destination: MainTabView(), isActive: $isLoginSuccessful) {
+                        EmptyView()
+                    }
                 }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .navigationBarTitle("Login", displayMode: .inline)
         }
     }
     

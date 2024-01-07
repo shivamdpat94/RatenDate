@@ -86,9 +86,11 @@ struct SequentialSignUpView: View {
                 EmptyView()  // This doesn't create a visible UI element but enables programmatic navigation
             }
         }
+        
         .onAppear {
             setProfileIDIfNeeded()
         }
+        
     }
     
     private func setProfileIDIfNeeded() {

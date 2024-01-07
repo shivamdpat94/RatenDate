@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
-    let darkOrange = Color(red: 1.0, green: 0.3, blue: 0, opacity: 1)
 
     var body: some View {
         NavigationView {
@@ -13,11 +12,14 @@ struct ContentView: View {
             } else {
                 // User is not authenticated, show login and sign up options
                 VStack(spacing: 20) {
-                    Text("Welcome to the App")
-                        .font(.largeTitle)
+//                    Text("Welcome to the App")
+//                        .font(.largeTitle)
+//                        .foregroundColor(.white) // Ensuring text is visible on the background image
                     
                     Spacer()
-                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
                     // Button to navigate to the Login view
                     NavigationLink(destination: LoginView().environmentObject(sessionManager)) {
                         Text("Login")
@@ -25,7 +27,7 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 280, height: 60)
-                            .background(darkOrange)
+                            .background(Color.black.opacity(0.7)) // Slight transparency for better visibility
                             .cornerRadius(15.0)
                     }
                     
@@ -37,14 +39,20 @@ struct ContentView: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 280, height: 60)
-                            .background(darkOrange)
+                            .background(Color.black.opacity(0.7)) // Slight transparency for better visibility
                             .cornerRadius(15.0)
                     }
                     
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(darkOrange)
+                .background(
+                    // Set the image as the background
+                    Image("LoginSignup")
+                        .resizable() // Make the image resizable
+                        .aspectRatio(contentMode: .fill) // Fill the entire view
+                        .edgesIgnoringSafeArea(.all) // Extend the background image to the screen edges
+                )
             }
         }
         .onAppear {
