@@ -26,20 +26,17 @@ struct LoginView: View {
 
                 // Transparent content area
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("Email")
-                        .foregroundColor(.gray)
-                    TextField("Enter your email", text: $email)
+
+                    TextField("Email", text: $email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color.white.opacity(0.7)))
+                        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white.opacity(0.7)))
                         .foregroundColor(.black)
-
-                    Text("Password")
-                        .foregroundColor(.gray)
-                    SecureField("Enter your password", text: $password)
+                    
+                    SecureField("Password", text: $password)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color.white.opacity(0.7)))
+                        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white.opacity(0.7)))
                         .foregroundColor(.black)
 
                     if let errorMessage = errorMessage {
@@ -47,14 +44,22 @@ struct LoginView: View {
                             .foregroundColor(.red)
                     }
 
-                    Button("Login") {
-                        loginUser(email: email, password: password)
+                    // Centering the 'Login' button using HStack
+                    HStack {
+                        Spacer() // Spacer on the left side
+                        
+                        Button("Login") {
+                            loginUser(email: email, password: password)
+                        }
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 280, height: 60)
+                        .background(Color.black.opacity(0.7)) // Slight transparency for better visibility
+                        .cornerRadius(15.0)
+                        
+                        Spacer() // Spacer on the right side
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
 
                     NavigationLink(destination: MainTabView(), isActive: $isLoginSuccessful) {
                         EmptyView()
@@ -63,8 +68,13 @@ struct LoginView: View {
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .navigationBarTitle("Login", displayMode: .inline)
-        }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Login")
+                        .font(.custom("Nunito-Regular", size: 20)) // Set the font here
+                }
+            }        }
     }
     
     func loginUser(email: String, password: String) {

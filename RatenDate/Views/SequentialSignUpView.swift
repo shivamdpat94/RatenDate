@@ -42,40 +42,43 @@ struct SequentialSignUpView: View {
                     currentStep -= 1
                 }
             }
-
             if currentStep == 1 {
+                EmailPassView(email: $email, password: $password) {
+                    setProfileIDIfNeeded()
+                    currentStep += 1
+                }
+            }
+            if currentStep == 2 {
                 GenericInfoView(
                     name: $firstName,
                     occupation: $occupation,
                     location: $location,  // Bind the location
-                    email: $email,
-                    password: $password,
                     onNext: {
                         setProfileIDIfNeeded()
                         currentStep += 1
                     }
                 )
-            } else if currentStep == 2 {
+            } else if currentStep == 3 {
                 // Replace with your DemographicInfoView
                 DemographicInfoView(age: $age, gender: $gender, ethnicity: $ethnicity, height: $height) {
                     setProfileIDIfNeeded()
                     currentStep += 1
                 }
-            } else if currentStep == 3 {
+            } else if currentStep == 4 {
                 if let profileID = profileID {
                     PhotoUploadView(
                         photoURLs: $photoURLs,
                         selectedImages: $selectedImages,  // Pass the Binding to the selected images
                         onPhotosUploaded: {
                             // Move to the next step only after all photos are uploaded
-                            currentStep = 4
+                            currentStep = 5
                         },
                         profileID: profileID
                     )
                 } else {
                     Text("Error: Profile ID is missing. Please restart the sign-up process.")
                 }
-            } else if currentStep == 4 {
+            } else if currentStep == 5 {
                 // Replace with your PersonalInfoView
                 PersonalInfoView(bio: $bio, interests: $interests, lookingFor: $lookingFor) {
                     submitProfile()  // Call submitProfile() when 'Complete Sign Up' is tapped
