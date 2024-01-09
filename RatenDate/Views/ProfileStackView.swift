@@ -1,10 +1,3 @@
-//
-//  ProfileStackView.swift
-//  RatenDate
-//
-//  Created by Shivam Patel on 1/3/24.
-//
-
 import SwiftUI
 
 struct ProfileStackView: View {
@@ -16,26 +9,34 @@ struct ProfileStackView: View {
     }
 
     var body: some View {
-        VStack {
-            if !profiles.isEmpty {
-                ProfileView(profile: profiles[currentIndex])
-                    .transition(.slide)
-            } else {
-                Text("No profiles available.")
-            }
-            
-            Button(action: {
-                withAnimation {
-                    removeCurrentProfile()
+        ZStack {
+            Image("lemonfinal")
+                .resizable()
+                .scaledToFill()
+                .opacity(0.25)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack {
+                if !profiles.isEmpty {
+                    ProfileView(profile: profiles[currentIndex])
+                        .transition(.slide)
+                } else {
+                    Text("No profiles available.")
                 }
-            }) {
-                Text("Next Profile")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
+
+                Button(action: {
+                    withAnimation {
+                        removeCurrentProfile()
+                    }
+                }) {
+                    Text("Next Profile")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
             }
-            .padding()
+            .padding(.bottom, 100)
         }
         .onAppear {
             if profiles.isEmpty {
@@ -55,7 +56,6 @@ struct ProfileStackView: View {
     }
 }
 
-// PreviewProvider for ProfileStackView
 struct ProfileStackView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleProfiles = [

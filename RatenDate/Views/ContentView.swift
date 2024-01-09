@@ -12,7 +12,7 @@ struct ContentView: View {
             } else {
                 // User is not authenticated, show login and sign up options
                 VStack(spacing: 20) {
-//                    Text("Welcome to the App")®
+//                    Text("Welcome to the App")
 //                        .font(.largeTitle)
 //                        .foregroundColor(.white) // Ensuring text is visible on the background image
                     

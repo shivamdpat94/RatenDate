@@ -16,6 +16,7 @@ struct ProfileView: View {
             Text(profile.firstName)
             // Add more UI elements as needed
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Expand the VStack to fill the screen
     }
 }
 

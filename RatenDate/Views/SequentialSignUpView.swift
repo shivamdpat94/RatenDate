@@ -155,7 +155,7 @@ struct SequentialSignUpView: View {
 
         for (index, image) in selectedImages {
             group.enter()
-            let photoRef = storage.reference().child("photos/\(phoneNumber)/photo\(index).jpg")
+            let photoRef = storage.reference().child("photos/\(email)/photo\(index).jpg")
             
             if let imageData = image.jpegData(compressionQuality: 0.8) {
                 photoRef.putData(imageData, metadata: nil) { (metadata, error) in
