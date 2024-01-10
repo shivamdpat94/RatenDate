@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileStackView: View {
     @State private var profiles: [RetrievedProfile]
     @State private var currentIndex: Int = 0
+    @EnvironmentObject var sessionManager: UserSessionManager
 
     init(profiles: [RetrievedProfile] = []) {
         _profiles = State(initialValue: profiles)
@@ -17,8 +18,8 @@ struct ProfileStackView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                if !profiles.isEmpty {
-                    ProfileView(profile: profiles[currentIndex])
+                if !filteredProfiles.isEmpty {
+                    ProfileView(profile: filteredProfiles[currentIndex])
                         .transition(.slide)
                 } else {
                     Text("No profiles available.")
@@ -47,15 +48,19 @@ struct ProfileStackView: View {
         }
     }
 
+    private var filteredProfiles: [RetrievedProfile] {
+        profiles.filter { $0.email != sessionManager.email }
+    }
+
     private func removeCurrentProfile() {
-        if profiles.count > 1 {
-            profiles.remove(at: currentIndex)
+        if filteredProfiles.count > 1 {
+            currentIndex = (currentIndex + 1) % filteredProfiles.count
         } else {
             profiles.removeAll()
+            currentIndex = 0
         }
     }
 }
-
 struct ProfileStackView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleProfiles = [
@@ -72,7 +77,8 @@ struct ProfileStackView_Previews: PreviewProvider {
                 photoURLs: ["https://example.com/photo1.jpg"],
                 rateSum: 10,
                 rating: 5,
-                timesRated: 2
+                timesRated: 2,
+                email: "John@aol.com"
             ),
             // Add more sample profiles as needed
         ]

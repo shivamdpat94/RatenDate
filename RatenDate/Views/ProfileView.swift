@@ -32,6 +32,7 @@ struct ProfileView: View {
                 Text("Gender: \(profile.gender)")
                 Text("Interests: \(profile.interests.joined(separator: ", "))")
                 Text("Looking For: \(profile.lookingFor)")
+                Text("email: \(profile.email)")
                 // Add more attributes as needed
             }
             .padding()
@@ -57,7 +58,8 @@ struct ProfileView_Previews: PreviewProvider {
             photoURLs: ["https://example.com/photo1.jpg"],
             rateSum: 10,
             rating: 5,
-            timesRated: 2
+            timesRated: 2,
+            email: "John@aol.com"
         )
 
         // Pass the sample profile to the ProfileView

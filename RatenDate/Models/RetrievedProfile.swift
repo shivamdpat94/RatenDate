@@ -25,9 +25,11 @@ struct RetrievedProfile {
     var rateSum: Int
     var rating: Int
     var timesRated: Int
-
+    var email: String
+    
+    
     // Initialize with individual parameters
-    init(age: Int, bio: String, ethnicity: String, firstName: String, gender: String, id: String, imageNames: [String], interests: [String], lookingFor: String, photoURLs: [String], rateSum: Int, rating: Int, timesRated: Int) {
+    init(age: Int, bio: String, ethnicity: String, firstName: String, gender: String, id: String, imageNames: [String], interests: [String], lookingFor: String, photoURLs: [String], rateSum: Int, rating: Int, timesRated: Int, email: String) {
         self.age = age
         self.bio = bio
         self.ethnicity = ethnicity
@@ -41,6 +43,7 @@ struct RetrievedProfile {
         self.rateSum = rateSum
         self.rating = rating
         self.timesRated = timesRated
+        self.email = email
     }
 
     // Initialize from a dictionary
@@ -58,5 +61,6 @@ struct RetrievedProfile {
         self.rateSum = dictionary["rateSum"] as? Int ?? 0
         self.rating = dictionary["rating"] as? Int ?? 0
         self.timesRated = dictionary["timesRated"] as? Int ?? 0
+        self.email = dictionary["email"] as? String ?? ""
     }
 }

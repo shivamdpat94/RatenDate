@@ -12,8 +12,8 @@ struct SettingsView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                if let userEmail = sessionManager.userEmail {
-                    Text(userEmail)
+                if let email = sessionManager.email {
+                    Text(email)
                         .font(.largeTitle)
                 } else {
                     Text("Not logged in")

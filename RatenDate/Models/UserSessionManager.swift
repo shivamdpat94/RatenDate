@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 class UserSessionManager: ObservableObject {
-    @Published var userEmail: String?
+    @Published var email: String?
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?  // To hold error messages
 
@@ -22,11 +22,11 @@ class UserSessionManager: ObservableObject {
             if let user = user {
                 // User is signed in
                 self?.isAuthenticated = true
-                self?.userEmail = user.email
+                self?.email = user.email
             } else {
                 // User is signed out
                 self?.isAuthenticated = false
-                self?.userEmail = nil
+                self?.email = nil
             }
         }
     }
@@ -35,11 +35,11 @@ class UserSessionManager: ObservableObject {
         if let user = Auth.auth().currentUser {
             // User is signed in
             self.isAuthenticated = true
-            self.userEmail = user.email
+            self.email = user.email
         } else {
             // No user is signed in
             self.isAuthenticated = false
-            self.userEmail = nil
+            self.email = nil
         }
     }
     
@@ -51,8 +51,8 @@ class UserSessionManager: ObservableObject {
             if let error = error {
                 self?.errorMessage = error.localizedDescription
                 self?.isAuthenticated = false
-            } else if let userEmail = authResult?.user.email {
-                self?.userEmail = userEmail
+            } else if let email = authResult?.user.email {
+                self?.email = email
                 self?.isAuthenticated = true
             }
             completion()
@@ -67,9 +67,9 @@ class UserSessionManager: ObservableObject {
                 completion(false, error.localizedDescription)
                 return
             }
-            if let userEmail = authResult?.user.email {
+            if let email = authResult?.user.email {
                 print("Sign Up Successful")
-                self?.userEmail = userEmail
+                self?.email = email
                 self?.isAuthenticated = true
                 completion(true, nil)
             } else {
@@ -84,7 +84,7 @@ class UserSessionManager: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.isAuthenticated = false
-            self.userEmail = nil
+            self.email = nil
             completion()  // Notify that sign-out is complete
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
