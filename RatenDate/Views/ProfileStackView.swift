@@ -1,13 +1,11 @@
 import SwiftUI
 
 struct ProfileStackView: View {
-    @State private var profiles: [RetrievedProfile]
+    @Binding var profiles: [RetrievedProfile]
     @State private var currentIndex: Int = 0
     @EnvironmentObject var sessionManager: UserSessionManager
 
-    init(profiles: [RetrievedProfile] = []) {
-        _profiles = State(initialValue: profiles)
-    }
+
 
     var body: some View {
         ZStack {
@@ -53,14 +51,16 @@ struct ProfileStackView: View {
     }
 
     private func removeCurrentProfile() {
-        if filteredProfiles.count > 1 {
-            currentIndex = (currentIndex + 1) % filteredProfiles.count
-        } else {
-            profiles.removeAll()
-            currentIndex = 0
+        if !filteredProfiles.isEmpty {
+            // Remove the current profile
+            profiles.removeAll { $0.id == filteredProfiles[currentIndex].id }
+
+            // Reset currentIndex if it's out of bounds
+            if currentIndex >= filteredProfiles.count {
+                currentIndex = 0
+            }
         }
-    }
-}
+    }}
 struct ProfileStackView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleProfiles = [
@@ -83,6 +83,6 @@ struct ProfileStackView_Previews: PreviewProvider {
             // Add more sample profiles as needed
         ]
 
-        ProfileStackView(profiles: sampleProfiles)
+        ProfileStackView(profiles: .constant(sampleProfiles))
     }
 }

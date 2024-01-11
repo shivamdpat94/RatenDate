@@ -13,6 +13,7 @@
 		3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D32B4CB049007F5429 /* MatchView.swift */; };
 		3C2FE5D62B4CDA18007F5429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */; };
 		3C2FE5DD2B4CDC94007F5429 /* Allura-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */; };
+		3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5E12B4FA7A2007F5429 /* testview.swift */; };
 		3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */; };
 		3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B52B434C54008CEDF6 /* ContentView.swift */; };
 		3C5709BB2B434C56008CEDF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allura-Regular.ttf"; sourceTree = "<group>"; };
 		3C2FE5DE2B4CDC99007F5429 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		3C2FE5E12B4FA7A2007F5429 /* testview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview.swift; sourceTree = "<group>"; };
 		3C5709B02B434C54008CEDF6 /* RatenDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatenDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatenDateApp.swift; sourceTree = "<group>"; };
 		3C5709B52B434C54008CEDF6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				3C2FE5CF2B4CB02B007F5429 /* RateView.swift */,
 				3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */,
 				3C2FE5D32B4CB049007F5429 /* MatchView.swift */,
+				3C2FE5E12B4FA7A2007F5429 /* testview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */,
+				3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */,
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C7E102F2B45C18700C3E663 /* RetrievedProfile.swift in Sources */,
