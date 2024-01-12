@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
+    @State private var showContentView = false
 
     var body: some View {
         ZStack {
@@ -18,14 +19,12 @@ struct SettingsView: View {
                 } else {
                     Text("Not logged in")
                         .font(.largeTitle)
-                    
                 }
 
                 Button(action: {
-                    // Call signOut with a completion handler
                     sessionManager.signOut {
-                        // Actions after signing out, if any
-                        // You can leave this empty if there's nothing to do
+                        // Update the state to show ContentView after sign out
+                        self.showContentView = !sessionManager.isAuthenticated
                     }
                 }) {
                     Text("Sign Out")
@@ -36,6 +35,12 @@ struct SettingsView: View {
                         .cornerRadius(15.0)
                 }
             }
+        }
+        .fullScreenCover(isPresented: $showContentView) {
+            ContentView()
+        }
+        .onChange(of: sessionManager.isAuthenticated) { newValue in
+            showContentView = !newValue
         }
     }
 }

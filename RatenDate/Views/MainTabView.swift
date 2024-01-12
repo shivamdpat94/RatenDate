@@ -4,6 +4,7 @@ struct MainTabView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var isLoginSuccessful: Bool = false
     @State private var profiles: [RetrievedProfile] = []
+    @State private var selectedTab: Int = 0 // Track the selected tab
 
     var body: some View {
         VStack(spacing: 0) {
@@ -15,36 +16,41 @@ struct MainTabView: View {
 //                .foregroundColor(colorScheme == .dark ? .white : .black)
 
 
-            TabView {
+            TabView(selection: $selectedTab) {
                 ProfileStackView(profiles: $profiles)
                     .tabItem {
-                        tabIcon("lemon favicon-32x32")
+                        tabIcon("lemon favicon-32x32", isSelected: selectedTab == 0)
                         Text("Profiles")
                     }
-                
+                    .tag(0)
+
                 RateView()
                     .tabItem {
-                        tabIcon("rate favicon-32x32")
+                        tabIcon("rate favicon-32x32", isSelected: selectedTab == 1)
                         Text("Ratings")
                     }
-                
+                    .tag(1)
+
                 LikesMeView()
                     .tabItem {
-                        tabIcon("hearts favicon-32x32")
+                        tabIcon("hearts favicon-32x32", isSelected: selectedTab == 2)
                         Text("LikesMe")
                     }
-                
+                    .tag(2)
+
                 MatchView()
                     .tabItem {
-                        tabIcon("chat favicon-32x32")
+                        tabIcon("chat favicon-32x32", isSelected: selectedTab == 3)
                         Text("Match")
                     }
-                
+                    .tag(3)
+
                 SettingsView()
                     .tabItem {
-                        tabIcon("profile favicon-32x32")
+                        tabIcon("profile favicon-32x32", isSelected: selectedTab == 4)
                         Text("Profile")
                     }
+                    .tag(4)
             }
             .background(Color.white)
             .navigationBarBackButtonHidden(true)
@@ -77,13 +83,13 @@ struct MainTabView: View {
     
     
     // Helper function to create tab icons
-    private func tabIcon(_ imageName: String) -> some View {
-        Image(imageName)
+    private func tabIcon(_ imageName: String, isSelected: Bool) -> some View {
+        Image(isSelected ? "green \(imageName)" : imageName) // Choose the green version if selected
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 30, height: 30) // Adjusted size to a reasonable value
+            .frame(width: 30, height: 30)
             .if(colorScheme == .dark) {
-                $0.colorInvert() // Invert colors if in dark mode
+                $0.colorInvert()
             }
     }
 }

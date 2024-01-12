@@ -19,33 +19,57 @@ struct ProfileStackView: View {
                 if !filteredProfiles.isEmpty {
                     ProfileView(profile: filteredProfiles[currentIndex])
                         .transition(.slide)
+
+                    Button(action: {
+                        withAnimation {
+                            removeCurrentProfile()
+                        }
+                    }) {
+                        Text("Next Profile")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
                 } else {
                     Text("No profiles available.")
-                }
-
-                Button(action: {
-                    withAnimation {
-                        removeCurrentProfile()
+                    Button(action: fetchProfilesAgain) {
+                        Text("Fetch Profiles Again")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.green)
+                            .cornerRadius(10)
                     }
-                }) {
-                    Text("Next Profile")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
                 }
             }
             .padding(.bottom, 100)
         }
         .onAppear {
-            if profiles.isEmpty {
-                FirebaseService().fetchProfiles { fetchedProfiles in
-                    self.profiles = fetchedProfiles
-                }
-            }
+            fetchProfilesIfNeeded()
         }
     }
+    
+    
+    private func fetchProfilesIfNeeded() {
+         if profiles.isEmpty {
+             fetchProfiles()
+         }
+     }
 
+    
+    private func fetchProfilesAgain() {
+        fetchProfiles()
+    }
+    
+    
+    private func fetchProfiles() {
+        FirebaseService().fetchProfiles { fetchedProfiles in
+            self.profiles = fetchedProfiles
+        }
+    }
+    
+    
+    
     private var filteredProfiles: [RetrievedProfile] {
         profiles.filter { $0.email != sessionManager.email }
     }
