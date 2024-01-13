@@ -21,10 +21,10 @@ struct ChatBubbleView: View {
             }
             
             Text(message.text)
-                .padding(10)
+                .padding(8)
                 .foregroundColor(.black) // Text color is now black for all messages
                 .background(message.isCurrentUser ? customGreen : customGray)
-                .cornerRadius(15)
+                .cornerRadius(12)
                 .shadow(color: .gray, radius: 3, x: 0, y: 3) // Shadow with offset
             
             if !message.isCurrentUser {
@@ -32,7 +32,7 @@ struct ChatBubbleView: View {
             }
         }
         .padding(message.isCurrentUser ? .leading : .trailing, 60)
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 20)
         .transition(.slide)
         .animation(.default)
     }
