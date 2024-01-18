@@ -1,7 +1,8 @@
 import SwiftUI
+import CoreLocation
 
 struct ProfileStackView: View {
-    @Binding var profiles: [RetrievedProfile]
+    @Binding var profiles: [Profile]
     @State private var currentIndex: Int = 0
     @EnvironmentObject var sessionManager: UserSessionManager
 
@@ -70,7 +71,7 @@ struct ProfileStackView: View {
     
     
     
-    private var filteredProfiles: [RetrievedProfile] {
+    private var filteredProfiles: [Profile] {
         profiles.filter { $0.email != sessionManager.email }
     }
 
@@ -85,27 +86,35 @@ struct ProfileStackView: View {
             }
         }
     }}
+
+
+
 struct ProfileStackView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleProfiles = [
-            RetrievedProfile(
-                age: 24,
-                bio: "Sample bio...",
-                ethnicity: "Sample Ethnicity",
-                firstName: "John",
-                gender: "Male",
-                id: "sample-id-1",
-                imageNames: ["image1", "image2"],
-                interests: ["Music", "Art"],
-                lookingFor: "Friendship",
-                photoURLs: ["https://example.com/photo1.jpg"],
-                rateSum: 10,
-                rating: 5,
-                timesRated: 2,
-                email: "John@aol.com"
-            ),
-            // Add more sample profiles as needed
+        // Create a CLLocation instance for sample profiles
+        let sampleLocation = CLLocation(latitude: 40.7128, longitude: -74.0060)
+
+        // Create dictionaries representing sample profiles
+        let sampleProfileData1: [String: Any] = [
+            "age": 24,
+            "bio": "Sample bio...",
+            "ethnicity": "Sample Ethnicity",
+            "firstName": "John",
+            "gender": "Male",
+            "id": "sample-id-1",
+            "traits": ["Music", "Art"],
+            "lookingFor": "Friendship",
+            "photoURLs": ["https://example.com/photo1.jpg"],
+            "rateSum": 10,
+            "rating": 5,
+            "timesRated": 2,
+            "email": "John@aol.com",
+            "location": sampleLocation
         ]
+
+        // Initialize Profile instances using the dictionaries
+        let sampleProfiles = [Profile(dictionary: sampleProfileData1)]
+        // Add additional profiles to the array as needed
 
         ProfileStackView(profiles: .constant(sampleProfiles))
     }

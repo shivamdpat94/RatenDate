@@ -19,7 +19,7 @@ struct RetrievedProfile {
     var gender: String
     var id: String
     var imageNames: [String]
-    var interests: [String]
+    var traits: [String]
     var lookingFor: String
     var photoURLs: [String]
     var rateSum: Int
@@ -29,7 +29,7 @@ struct RetrievedProfile {
     
     
     // Initialize with individual parameters
-    init(age: Int, bio: String, ethnicity: String, firstName: String, gender: String, id: String, imageNames: [String], interests: [String], lookingFor: String, photoURLs: [String], rateSum: Int, rating: Int, timesRated: Int, email: String) {
+    init(age: Int, bio: String, ethnicity: String, firstName: String, gender: String, id: String, imageNames: [String], traits: [String], lookingFor: String, photoURLs: [String], rateSum: Int, rating: Int, timesRated: Int, email: String) {
         self.age = age
         self.bio = bio
         self.ethnicity = ethnicity
@@ -37,7 +37,7 @@ struct RetrievedProfile {
         self.gender = gender
         self.id = id
         self.imageNames = imageNames
-        self.interests = interests
+        self.traits = traits
         self.lookingFor = lookingFor
         self.photoURLs = photoURLs
         self.rateSum = rateSum
@@ -55,7 +55,7 @@ struct RetrievedProfile {
         self.gender = dictionary["gender"] as? String ?? ""
         self.id = dictionary["id"] as? String ?? UUID().uuidString
         self.imageNames = dictionary["imageNames"] as? [String] ?? []
-        self.interests = dictionary["interests"] as? [String] ?? []
+        self.traits = dictionary["traits"] as? [String] ?? []
         self.lookingFor = dictionary["lookingFor"] as? String ?? ""
         self.photoURLs = dictionary["photoURLs"] as? [String] ?? []
         self.rateSum = dictionary["rateSum"] as? Int ?? 0

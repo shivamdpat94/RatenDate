@@ -14,19 +14,53 @@ import FirebaseStorage  // Ensure you've added Firebase Storage to your project
 
 struct SequentialSignUpView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
-    @State private var firstName = ""
-    @State private var location = CLLocation()
-    @State private var occupation = ""
-    @State private var age: Int = 18
-    @State private var gender = ""
+
     @State private var email = ""
     @State private var password = ""
-    @State private var ethnicity = ""
     @State private var phoneNumber = ""
-    @State private var height = ""
-    @State private var bio = ""
-    @State private var interests = ""
+
+    
+    
+    @State private var firstName = ""
+    @State private var location = CLLocation()
+    @State private var dob: Date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+    @State private var ethnicity: String? = nil
+    @State private var gender: String? = nil
+    @State private var height: String? = nil
+
+
     @State private var lookingFor = ""
+    @State private var wantKids = ""
+    @State private var hasKids = ""
+    @State private var politics = ""
+    @State private var religion = ""
+
+    
+    
+    @State private var languages = [""]
+
+        
+    
+    @State private var occupation = ""
+    @State private var educationLevel = ""
+    @State private var areaOfStudy = ""
+    
+    @State private var alcohol = ""
+    @State private var cigerettes = ""
+    @State private var drugs = ""
+    
+
+
+    
+
+
+    
+    @State private var bio = ""
+    @State private var traits = [""]
+    @State private var interests = [""]
+
+    
+    
     @State private var currentStep = 1
     @State private var photoURLs = [String]()  // To hold the photo URLs
     @State private var profileID: String?  // To store the profile's unique ID
@@ -43,45 +77,57 @@ struct SequentialSignUpView: View {
                 }
             }
             if currentStep == 1 {
-                EmailPassView(email: $email, password: $password) {
-                    setProfileIDIfNeeded()
+                EmailPassView(email: $email,
+                              password: $password,
+                              phoneNumber: $phoneNumber) {
                     currentStep += 1
                 }
             }
             if currentStep == 2 {
                 GenericInfoView(
                     name: $firstName,
-                    occupation: $occupation,
+                    gender: $gender,
+                    ethnicity: $ethnicity,
+                    dob: $dob,
+                    height: $height,
                     location: $location,  // Bind the location
                     onNext: {
-                        setProfileIDIfNeeded()
                         currentStep += 1
                     }
                 )
             } else if currentStep == 3 {
+                
+                
                 // Replace with your DemographicInfoView
-                DemographicInfoView(age: $age, gender: $gender, ethnicity: $ethnicity, height: $height) {
-                    setProfileIDIfNeeded()
+                LifestyleView(lookingFor: $lookingFor,
+                              wantKids: $wantKids,
+                              hasKids: $hasKids,
+                              politics: $politics,
+                              religion: $religion,
+                    onNext: {
                     currentStep += 1
-                }
+                    }
+                )
+                
             } else if currentStep == 4 {
-                if let profileID = profileID {
-                    PhotoUploadView(
-                        photoURLs: $photoURLs,
-                        selectedImages: $selectedImages,  // Pass the Binding to the selected images
-                        onPhotosUploaded: {
-                            // Move to the next step only after all photos are uploaded
-                            currentStep = 5
-                        },
-                        profileID: profileID
-                    )
-                } else {
-                    Text("Error: Profile ID is missing. Please restart the sign-up process.")
-                }
+                LanguageSelectionView(languages: $languages, onNext: {
+                    currentStep += 1
+                    }
+                )
+                
             } else if currentStep == 5 {
+                PhotoUploadView(
+                    photoURLs: $photoURLs,
+                    selectedImages: $selectedImages,
+                    onPhotosUploaded: {
+                        currentStep += 1
+                    }
+                )
+            } else if currentStep == 6 {
                 // Replace with your PersonalInfoView
-                PersonalInfoView(bio: $bio, interests: $interests, lookingFor: $lookingFor) {
+                TraitsAndInterestsView(traits: $traits, interests: $interests) {
                     submitProfile()  // Call submitProfile() when 'Complete Sign Up' is tapped
+                    
                 }
             }
             // NavigationLink that triggers navigation when navigateToProfileStack is true
@@ -89,48 +135,62 @@ struct SequentialSignUpView: View {
                 EmptyView()  // This doesn't create a visible UI element but enables programmatic navigation
             }
         }
-        
-        .onAppear {
-            setProfileIDIfNeeded()
-        }
-        
     }
     
-    private func setProfileIDIfNeeded() {
-        if profileID == nil {
-            profileID = UUID().uuidString  // Initialize the UUID
-        }
-    }
-    
-    
+  
     
     
     func submitProfile() {
         sessionManager.signUp(email: email, password: password) { success, errorMessage in
             if success {
-                guard let safeProfileID = self.profileID else {
-                    print("Profile ID is nil. Cannot submit profile.")
-                    return
-                }
-
                 // First, upload the images
                 self.uploadImages { uploadedURLs in
-                    // Once the images are uploaded, create the profile with the URLs
-                    let newProfile = Profile(
-                        imageNames: self.interests.components(separatedBy: ","),
-                        location: self.location,
-                        age: self.age,
-                        id: safeProfileID,
-                        email: self.email,
-                        gender: self.gender,
-                        ethnicity: self.ethnicity,
-                        firstName: self.firstName,
-                        bio: self.bio,
-                        interests: self.interests.components(separatedBy: ","),
-                        lookingFor: self.lookingFor,
-                        photoURLs: uploadedURLs
-                    )
+                    // Calculate age from dob
+                    let age = self.calculateAge()
 
+                    // Create a dictionary for the profile data including all fields
+                    let profileData: [String: Any] = [
+                        "location": GeoPoint(latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude),
+                        "age": age,
+                        "email": self.email,
+                        "gender": self.gender,
+                        "ethnicity": self.ethnicity,
+                        "firstName": self.firstName,
+                        "bio": self.bio,
+                        "traits": self.traits,
+                        "lookingFor": self.lookingFor,
+                        "photoURLs": uploadedURLs,
+                        "rateSum": 0.0,
+                        "timesRated": 0.0,
+                        "rating": 0.0,
+                        // Add the new fields here
+                        "password": self.password,
+                        "phoneNumber": self.phoneNumber,
+                        "dob": self.dob,
+                        "height": self.height,
+                        "wantKids": self.wantKids,
+                        "hasKids": self.hasKids,
+                        "politics": self.politics,
+                        "religion": self.religion,
+                        "languages": self.languages,
+                        "occupation": self.occupation,
+                        "educationLevel": self.educationLevel,
+                        "areaOfStudy": self.areaOfStudy,
+                        "alcohol": self.alcohol,
+                        "cigerettes": self.cigerettes,
+                        "drugs": self.drugs,
+                        "interests": self.interests
+                    ]
+
+                    // Initialize the profile with the dictionary
+                    let newProfile = Profile(dictionary: profileData)
+                    
+                    print("again name is")
+                    print(firstName)
+                    print(newProfile.firstName)
+                    print("again height is ")
+                    print(height)
+                    print(newProfile.height)
                     // Save the profile to Firestore
                     FirebaseService().saveProfileToFirebase(profile: newProfile) {
                         // Trigger navigation to MainTabView after the profile is successfully saved
@@ -141,12 +201,17 @@ struct SequentialSignUpView: View {
                 }
             } else if let errorMessage = errorMessage {
                 print("Sign Up Error: \(errorMessage)")
-                // Handle sign-up error, perhaps update a user-facing error message
+                // Handle sign-up error
             }
         }
     }
 
-    
+
+    func calculateAge() -> Int {
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: self.dob, to: Date())
+        return ageComponents.year ?? 0
+    }
     
     func uploadImages(completion: @escaping ([String]) -> Void) {
         let storage = Storage.storage()

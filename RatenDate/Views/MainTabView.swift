@@ -3,7 +3,7 @@ import SwiftUI
 struct MainTabView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var isLoginSuccessful: Bool = false
-    @State private var profiles: [RetrievedProfile] = []
+    @State private var profiles: [Profile] = []
     @State private var selectedTab: Int = 0 // Track the selected tab
 
     var body: some View {

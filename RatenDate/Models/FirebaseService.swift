@@ -10,16 +10,15 @@ import Firebase
 class FirebaseService {
     let db = Firestore.firestore()
 
-    func fetchProfiles(completion: @escaping ([RetrievedProfile]) -> Void) {
+    func fetchProfiles(completion: @escaping ([Profile]) -> Void) {
         db.collection("profiles").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                var profiles = [RetrievedProfile]()
+                var profiles = [Profile]()
                 for document in querySnapshot!.documents {
                     let data = document.data()
-                    // Create a RetrievedProfile from data and append to profiles
-                    let profile = RetrievedProfile(dictionary: data)
+                    let profile = Profile(dictionary: data)
                     profiles.append(profile)
                 }
                 completion(profiles)

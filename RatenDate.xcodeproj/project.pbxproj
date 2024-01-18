@@ -19,8 +19,6 @@
 		3C5709BB2B434C56008CEDF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */; };
 		3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709C52B4353A6008CEDF6 /* Profile.swift */; };
 		3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */; };
-		3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */; };
-		3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */; };
 		3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */; };
 		3C5709D52B435C3D008CEDF6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5709D42B435C3D008CEDF6 /* FirebaseAnalytics */; };
 		3C5709D72B435C3D008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5709D62B435C3D008CEDF6 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -72,6 +70,10 @@
 		3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */; };
 		3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */; };
 		3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E10402B49241900C3E663 /* LoadingView.swift */; };
+		3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */; };
+		3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */; };
+		3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */; };
+		3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,8 +91,6 @@
 		3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C5709C52B4353A6008CEDF6 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericInfoView.swift; sourceTree = "<group>"; };
-		3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicInfoView.swift; sourceTree = "<group>"; };
-		3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
 		3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialSignUpView.swift; sourceTree = "<group>"; };
 		3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		3C570A282B43D054008CEDF6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -106,6 +106,10 @@
 		3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		3C7E10402B49241900C3E663 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifestyleView.swift; sourceTree = "<group>"; };
+		3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
+		3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsAndInterestsView.swift; sourceTree = "<group>"; };
+		3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,10 +213,8 @@
 			children = (
 				3C5709B52B434C54008CEDF6 /* ContentView.swift */,
 				3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */,
-				3C5709CD2B4355CC008CEDF6 /* DemographicInfoView.swift */,
-				3C5709CF2B4355F2008CEDF6 /* PersonalInfoView.swift */,
-				3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */,
 				3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */,
+				3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */,
 				3C7E10302B45C2D500C3E663 /* ProfileView.swift */,
 				3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */,
 				3C7E10342B46422900C3E663 /* LoginView.swift */,
@@ -224,6 +226,10 @@
 				3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */,
 				3C2FE5D32B4CB049007F5429 /* MatchView.swift */,
 				3C2FE5E12B4FA7A2007F5429 /* testview.swift */,
+				3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */,
+				3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */,
+				3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */,
+				3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,10 +238,10 @@
 			isa = PBXGroup;
 			children = (
 				3C5709C52B4353A6008CEDF6 /* Profile.swift */,
+				3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */,
 				3C570A282B43D054008CEDF6 /* ImagePicker.swift */,
 				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
-				3C7E102E2B45C18700C3E663 /* RetrievedProfile.swift */,
 				3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */,
 			);
 			path = Models;
@@ -355,24 +361,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */,
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
+				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
 				3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
-				3C5709D02B4355F2008CEDF6 /* PersonalInfoView.swift in Sources */,
 				3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */,
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C7E102F2B45C18700C3E663 /* RetrievedProfile.swift in Sources */,
+				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
-				3C5709CE2B4355CC008CEDF6 /* DemographicInfoView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
 				3C7E102D2B45C11B00C3E663 /* FirebaseService.swift in Sources */,
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
+				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
 				3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */,
 				3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */,

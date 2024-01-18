@@ -18,7 +18,6 @@ struct PhotoUploadView: View {
     @State private var uploadCount = 0  // To track the number of successful uploads
 
     var onPhotosUploaded: () -> Void  // Closure to call when photos are uploaded and the user proceeds
-    var profileID: String  // Add this to accept the profile's unique ID
 
     var body: some View {
         VStack {
@@ -76,8 +75,7 @@ struct PhotoUploadView_Previews: PreviewProvider {
             selectedImages: $dummySelectedImages,  // Pass the dummy binding for selected images
             onPhotosUploaded: {
                 // Define what should happen when photos are uploaded here, if anything.
-            },
-            profileID: "dummyProfileID"  // Provide a dummy profileID for preview purposes
+            }
         )
     }
 }

@@ -1,70 +1,62 @@
-//
-//  testview.swift
-//  RatenDate
-//
-//  Created by Shivam Patel on 1/10/24.
-//
-
 import SwiftUI
 
-struct GameView: View {
+struct TestView: View {
+    @State private var selectedDate: Date? = nil
+    @State private var isPickerPresented = false
+    let eighteenYearsAgo: Date
+    let oneHundredYearsAgo: Date
+
+    init() {
+        let calendar = Calendar.current
+        eighteenYearsAgo = calendar.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+        oneHundredYearsAgo = calendar.date(byAdding: .year, value: -100, to: Date()) ?? Date()
+    }
+
     var body: some View {
         VStack {
-            // Title
-            Text("LEMONLIME")
-                .font(.largeTitle)
-                .foregroundColor(.green)
-            
-            // Cards area
-            VStack {
+            Text("Select a Date")
+                .font(.headline)
+
+            Button(action: {
+                self.isPickerPresented.toggle()
+            }) {
                 HStack {
-                    CardView(score: 6.9)
-                    CardView(score: 6.9)
-                    CardView(score: 6.9)
+                    if let selectedDate = selectedDate {
+                        Text("Selected: \(selectedDate, formatter: dateFormatter)")
+                    } else {
+                        Text("No Date Selected")
+                    }
+                    Spacer()
+                    Image(systemName: "calendar")
                 }
-                HStack {
-                    CardView(score: 6.9)
-                    CardView(score: 6.9)
-                    CardView(score: 6.9)
-                }
-                // Add more HStacks if there are more rows of cards
             }
-            
-            Spacer()
-            
-            // Bottom navigation bar
-            HStack {
-                Image(systemName: "lemon.fill") // replace with your custom icon
-                Image(systemName: "face.dashed") // replace with your custom icon
-                Image(systemName: "heart.fill") // replace with your custom icon
-                Image(systemName: "bubble.left") // replace with your custom icon
-                Image(systemName: "person.fill") // replace with your custom icon
-            }
-            .imageScale(.large)
             .padding()
+
+            if isPickerPresented {
+                DatePicker(
+                    "Select Date",
+                    selection: Binding(
+                        get: { self.selectedDate ?? eighteenYearsAgo },
+                        set: { self.selectedDate = $0 }
+                    ),
+                    in: oneHundredYearsAgo...eighteenYearsAgo,
+                    displayedComponents: .date
+                )
+                .datePickerStyle(WheelDatePickerStyle())
+                .labelsHidden()
+            }
         }
     }
 }
 
-struct CardView: View {
-    var score: Double // Assuming you want to pass a dynamic score for each card
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    return formatter
+}()
 
-    var body: some View {
-        ZStack(alignment: .topTrailing) { // Align the score to the top right
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray) // Change to lime green color
-                .frame(width: 100, height: 150)
-
-            Text(String(format: "%.1f", score)) // Format the double to one decimal place
-                .foregroundColor(.green) // Assuming you want the score text in white
-                .font(.caption)
-                .padding([.top, .trailing], 5) // Add padding to position the score inside the card's corner
-        }
-    }
-}
-
-struct GameView_Previews: PreviewProvider {
+struct TestView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        TestView()
     }
 }

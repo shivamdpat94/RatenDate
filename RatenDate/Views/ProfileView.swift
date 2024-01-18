@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ProfileView: View {
-    var profile: RetrievedProfile
+    var profile: Profile
 
     var body: some View {
         ScrollView {
@@ -30,7 +31,7 @@ struct ProfileView: View {
                 Text("Bio: \(profile.bio)")
                 Text("Ethnicity: \(profile.ethnicity)")
                 Text("Gender: \(profile.gender)")
-                Text("Interests: \(profile.interests.joined(separator: ", "))")
+                Text("traits: \(profile.traits.joined(separator: ", "))")
                 Text("Looking For: \(profile.lookingFor)")
                 Text("email: \(profile.email)")
                 // Add more attributes as needed
@@ -42,27 +43,35 @@ struct ProfileView: View {
 }
 
 
+
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        // Create a sample profile to display in the preview
-        let sampleProfile = RetrievedProfile(
-            age: 24,
-            bio: "Sample bio...",
-            ethnicity: "Sample Ethnicity",
-            firstName: "John",
-            gender: "Male",
-            id: "sample-id",
-            imageNames: ["image1", "image2"],
-            interests: ["Music", "Art"],
-            lookingFor: "Friendship",
-            photoURLs: ["https://example.com/photo1.jpg"],
-            rateSum: 10,
-            rating: 5,
-            timesRated: 2,
-            email: "John@aol.com"
-        )
+        // Create a dictionary representing the sample profile
+        let sampleLocation = CLLocation(latitude: 40.7128, longitude: -74.0060)
+        let sampleProfileData: [String: Any] = [
+            "age": 24,
+            "bio": "Sample bio...",
+            "ethnicity": "Sample Ethnicity",
+            "firstName": "John",
+            "gender": "Male",
+            "id": "sample-id",
+            "imageNames": ["image1", "image2"],
+            "traits": ["Music", "Art"],
+            "lookingFor": "Friendship",
+            "photoURLs": ["https://example.com/photo1.jpg"],
+            "rateSum": 10,
+            "rating": 5,
+            "timesRated": 2,
+            "email": "John@aol.com",
+            // Use CLLocation directly for the sample location
+            "location": sampleLocation
+        ]
+
+        // Initialize the Profile using the dictionary
+        let sampleProfile = Profile(dictionary: sampleProfileData)
 
         // Pass the sample profile to the ProfileView
         ProfileView(profile: sampleProfile)
     }
 }
+
