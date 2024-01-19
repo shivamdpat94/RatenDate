@@ -6,12 +6,18 @@ struct GenericInfoView: View {
     @Binding var gender: String?
     @StateObject private var locationManager = LocationManager()
     @Binding var ethnicity: String?
-    @Binding var dob: Date // Binding for Date of Birth
+    @Binding var dob: Date? // Binding for Date of Birth
     @Binding var height: String? // Add this binding for height
     @State private var userInputCity: String = ""
     @Binding var location: CLLocation
+    @State private var isDatePickerShown = false
+    @State private var displayDate = "Not set"
+    @State private var tempDate: Date = Date()
+
     var onNext: () -> Void
-    
+    let startDate = Calendar.current.date(byAdding: .year, value: -100, to: Date()) ?? Date()
+    let endDate = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+
     // Ethnicities list
     let ethnicities: [String?] = [nil] + [
         "Akan", "Albanian", "Amhara", "Arab", "Armenian", "Ashkenazi Jewish", "Assyrian", "Aymara",
@@ -42,13 +48,22 @@ struct GenericInfoView: View {
     ]
 
     let genders: [String?] = [nil, "Male", "Female"]
-    let startDate = Calendar.current.date(byAdding: .year, value: -100, to: Date()) ?? Date()
-    let endDate = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+
 
 
     // Heights range
     let heights: [String?] = [nil] + (48...96).map { "\($0 / 12)' \($0 % 12)\"" } // Heights from 4'0" to 8'0"
-
+//    init(name: Binding<String>, gender: Binding<String?>, ethnicity: Binding<String?>, dob: Binding<Date?>, height: Binding<String?>, location: Binding<CLLocation>, onNext: @escaping () -> Void) {
+//        self._name = name
+//        self._gender = gender
+//        self._ethnicity = ethnicity
+//        self._dob = dob
+//        self._height = height
+//        self._location = location
+//        self.onNext = onNext
+//        let endDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())!
+//        self._tempDate = State(initialValue: dob.wrappedValue ?? endDate)
+//    }
     var body: some View {
         Form {
             Section(header: Text("Generic Information")) {
@@ -71,14 +86,34 @@ struct GenericInfoView: View {
                 }
                 
                 
-                DatePicker(
-                    "Date of Birth",
-                    selection: $dob,
-                    in: startDate...endDate,
-                    displayedComponents: [.date]
-                )
+                Button(action: {
+                    isDatePickerShown.toggle()
+                }) {
+                    HStack {
+                        Text("Date of Birth")
+                        Spacer()
+                        Text(displayDate)
+                            .foregroundColor(.gray)
+                    }
+                }
 
-                
+                // DatePicker and Select button
+                if isDatePickerShown {
+                    DatePicker(
+                        "Select Date of Birth",
+                        selection: $tempDate,
+                        in: startDate...endDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(WheelDatePickerStyle())
+
+                    Button("Select") {
+                        self.dob = self.tempDate
+                        self.displayDate = self.tempDate.formatted(date: .long, time: .omitted)
+                        self.isDatePickerShown = false
+                    }
+                }
+
                 // Gender Picker
                 Picker("Gender", selection: $gender) {
                     Text("Select Gender").tag(String?.none)
@@ -117,10 +152,10 @@ struct GenericInfoView: View {
 struct GenericInfoView_Previews: PreviewProvider {
     @State static var dummyLocation = CLLocation(latitude: 40.7128, longitude: -74.0060)
     @State static var dummyName = "John Doe"
-    @State static var dummyEthnicity: String? = "Asian"  // Changed to optional
-    @State static var dummyHeight: String? = "5' 6\""   // Changed to optional
-    @State static var dummyGender: String? = "Male"     // Changed to optional
-    @State static var dummyDOB = Date() // Existing line for the date of birth
+    @State static var dummyEthnicity: String?
+    @State static var dummyHeight: String?
+    @State static var dummyGender: String?
+    @State static var dummyDOB: Date? = nil // Changed to be an optional Date
 
     static var previews: some View {
         GenericInfoView(

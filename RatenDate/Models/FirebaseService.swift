@@ -39,4 +39,38 @@ class FirebaseService {
             }
         }
     }
+    
+    
+    
+    func fetchProfile(email: String, completion: @escaping (Profile?) -> Void) {
+        db.collection("profiles").document(email).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let profileData = document.data() ?? [:]
+                let profile = Profile(dictionary: profileData)
+                completion(profile)
+            } else {
+                print("Document does not exist")
+                completion(nil)
+            }
+        }
+    }
+
+    
+    
+    
+    func updateProfile(profile: Profile, completion: @escaping (Bool) -> Void) {
+        db.collection("profiles").document(profile.email).updateData(profile.dictionary) { error in
+            if let error = error {
+                print("Error updating profile: \(error)")
+                completion(false)
+            } else {
+                print("Profile successfully updated!")
+                completion(true)
+            }
+        }
+    }
+
 }
+
+
+

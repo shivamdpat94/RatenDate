@@ -10,36 +10,45 @@ import FirebaseAuth
 
 class UserSessionManager: ObservableObject {
     @Published var email: String?
+    @Published var phoneNumber: String?
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?  // To hold error messages
-
+    
     init() {
         setupAuthListener()
     }
-
+    
     func setupAuthListener() {
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if let user = user {
                 // User is signed in
                 self?.isAuthenticated = true
                 self?.email = user.email
+                self?.phoneNumber = user.phoneNumber
+                print("user email is")
+                print(user.email)
+                print("user phonenumber is")
+                print(user.phoneNumber)
             } else {
                 // User is signed out
                 self?.isAuthenticated = false
                 self?.email = nil
+                self?.phoneNumber = nil
             }
         }
     }
-
+    
     func checkAuthStatus() {
         if let user = Auth.auth().currentUser {
             // User is signed in
             self.isAuthenticated = true
             self.email = user.email
+            self.phoneNumber = user.phoneNumber
         } else {
             // No user is signed in
             self.isAuthenticated = false
             self.email = nil
+            self.phoneNumber = nil
         }
     }
     
@@ -53,22 +62,21 @@ class UserSessionManager: ObservableObject {
                 self?.isAuthenticated = false
             } else if let email = authResult?.user.email {
                 self?.email = email
+                self?.phoneNumber = authResult?.user.phoneNumber  // If available
                 self?.isAuthenticated = true
             }
             completion()
         }
     }
 
+    
     // Sign-up method with improved error handling
     func signUp(email: String, password: String, completion: @escaping (Bool, String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             if let error = error {
                 print("Sign up error: \(error.localizedDescription)")
                 completion(false, error.localizedDescription)
-                return
-            }
-            if let email = authResult?.user.email {
-                print("Sign Up Successful")
+            } else if let email = authResult?.user.email {
                 self?.email = email
                 self?.isAuthenticated = true
                 completion(true, nil)
@@ -78,7 +86,8 @@ class UserSessionManager: ObservableObject {
         }
     }
 
-
+    
+    
     // Sign-out method
     func signOut(completion: @escaping () -> Void) {
         do {
@@ -91,6 +100,5 @@ class UserSessionManager: ObservableObject {
             errorMessage = signOutError.localizedDescription
         }
     }
-
-    // Other methods as needed
+    
 }

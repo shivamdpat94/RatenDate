@@ -23,18 +23,18 @@ struct SequentialSignUpView: View {
     
     @State private var firstName = ""
     @State private var location = CLLocation()
-    @State private var dob: Date = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
-    @State private var ethnicity: String? = nil
-    @State private var gender: String? = nil
-    @State private var height: String? = nil
+    @State private var dob: Date? = nil
+
+    @State private var ethnicity: String?
+    @State private var gender: String?
+    @State private var height: String?
 
 
-    @State private var lookingFor = ""
-    @State private var wantKids = ""
-    @State private var hasKids = ""
-    @State private var politics = ""
-    @State private var religion = ""
-
+    @State private var lookingFor:  String?
+    @State private var wantKids:  String?
+    @State private var hasKids:  String?
+    @State private var politics:  String?
+    @State private var religion:  String?
     
     
     @State private var languages = [""]
@@ -209,7 +209,7 @@ struct SequentialSignUpView: View {
 
     func calculateAge() -> Int {
         let calendar = Calendar.current
-        let ageComponents = calendar.dateComponents([.year], from: self.dob, to: Date())
+        let ageComponents = calendar.dateComponents([.year], from: self.dob!, to: Date())
         return ageComponents.year ?? 0
     }
     

@@ -37,7 +37,10 @@ struct Profile: Identifiable {
     var cigerettes: String
     var drugs: String
     var interests: [String]
-
+    var likeSet: Set<String>
+    var matchSet: Set<String>
+    
+    
     init(dictionary: [String: Any]) {
         self.id = dictionary["id"] as? String ?? UUID().uuidString
         self.firstName = dictionary["firstName"] as? String ?? ""
@@ -81,6 +84,8 @@ struct Profile: Identifiable {
         self.drugs = dictionary["drugs"] as? String ?? ""
         self.interests = dictionary["interests"] as? [String] ?? []
         self.images = []
+        self.likeSet = Set(dictionary["likeSet"] as? [String] ?? [])
+        self.matchSet = Set(dictionary["matchSet"] as? [String] ?? [])
     }
 }
 
@@ -121,7 +126,9 @@ extension Profile {
             "alcohol": alcohol,
             "cigerettes": cigerettes,
             "drugs": drugs,
-            "interests": interests
+            "interests": interests,
+            "likeSet": Array(likeSet),
+            "matchSet": Array(matchSet)
         ]
     }
 }
