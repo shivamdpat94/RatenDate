@@ -41,14 +41,23 @@ class AWS {
         let request = Rekognition.DetectModerationLabelsRequest(image: image)
         return rekognition.detectModerationLabels(request)
     }
-
-    deinit {
-        // Attempt to shut down the client gracefully
+    
+    func clientShutdown(){
         do {
-            try client.syncShutdown()
+            try self.client.syncShutdown()
             print("AWS client shut down successfully.")
         } catch {
             print("Error shutting down AWS client: \(error)")
         }
     }
+
+//    deinit {
+//        // Attempt to shut down the client gracefully
+//        do {
+//            try client.syncShutdown()
+//            print("AWS client shut down successfully.")
+//        } catch {
+//            print("Error shutting down AWS client: \(error)")
+//        }
+//    }
 }

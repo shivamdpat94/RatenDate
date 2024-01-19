@@ -100,6 +100,7 @@ struct PhotoUploadView: View {
                     }
                 }
             }
+            aws.clientShutdown()
         }
 }
 
