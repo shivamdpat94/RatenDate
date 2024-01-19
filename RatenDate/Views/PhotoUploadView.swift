@@ -63,6 +63,7 @@ struct PhotoUploadView: View {
 
             Button("Next") {
                 uploadAndCheckImages()
+                onPhotosUploaded()
             }
         }
     }
