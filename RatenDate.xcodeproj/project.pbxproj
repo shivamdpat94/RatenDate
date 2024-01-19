@@ -73,7 +73,7 @@
 		3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */; };
 		3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */; };
 		3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */; };
-		3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* Message.swift */; };
+		3CEF4A3C2B5A231D00FADD91 /* FBMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,7 +109,7 @@
 		3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsAndInterestsView.swift; sourceTree = "<group>"; };
 		3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
-		3CEF4A3B2B5A231D00FADD91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +242,7 @@
 				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
 				3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */,
-				3CEF4A3B2B5A231D00FADD91 /* Message.swift */,
+				3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,7 +370,7 @@
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
-				3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */,
+				3CEF4A3C2B5A231D00FADD91 /* FBMessage.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
