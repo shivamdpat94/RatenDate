@@ -13,8 +13,8 @@ struct AWS {
 
     init() {
         // Initialize with environment variables
-        guard let accessKey = ProcessInfo.processInfo.environment["AWS_ACCESS_KEY_ID"],
-              let secretKey = ProcessInfo.processInfo.environment["AWS_SECRET_ACCESS_KEY"] else {
+        guard let accessKey = ProcessInfo.processInfo.environment["ACCESS_KEY"],
+              let secretKey = ProcessInfo.processInfo.environment["SECRET_ACCESS_KEY"] else {
             fatalError("AWS credentials are not set in environment variables")
         }
 

@@ -9,8 +9,11 @@
 
 import SwiftUI
 import FirebaseStorage  // Ensure you've added Firebase Storage to your project
+import SotoRekognition
+import SotoS3
 
 struct PhotoUploadView: View {
+    let aws = AWS()  // Create an instance of your AWS struct
     @Binding var photoURLs: [String]  // This expects a Binding array of strings for URLs
     @State private var showingImagePicker = false
     @State private var selectedImageIndex: Int?  // To know which image slot the user is updating
@@ -59,11 +62,44 @@ struct PhotoUploadView: View {
             }
 
             Button("Next") {
-                onPhotosUploaded()
+                uploadAndCheckImages()
             }
         }
     }
+    private func uploadAndCheckImages() {
+            // Iterate through selected images
+            for (index, image) in selectedImages {
+                // Convert UIImage to Data for uploading
+                guard let imageData = image.jpegData(compressionQuality: 0.8) else { continue }
+                let key = "photos/\(UUID().uuidString)/photo\(index).jpg"  // Generate a unique key for S3
 
+                // Upload the image to S3
+                aws.uploadImageToS3(bucket: "lemonlime-rekognition-input-bucket", key: key, imageData: imageData).whenComplete { result in
+                    switch result {
+                        case .success:
+                            // Check the image for moderation labels
+                            aws.detectModerationLabels(bucket: "lemonlime-rekognition-input-bucket", key: key).whenComplete { result in
+                                switch result {
+                                    case .success(let response):
+                                        if let labels = response.moderationLabels, labels.isEmpty {
+                                            // Image passed moderation
+                                            print("Image \(index) is OK")
+                                        } else {
+                                            // Image contains moderation labels
+                                            print("Image \(index) is lewd")
+                                        }
+                                    case .failure(let error):
+                                        // Handle error in moderation label detection
+                                        print("Error in detecting moderation labels: \(error)")
+                                }
+                            }
+                        case .failure(let error):
+                            // Handle error in uploading to S3
+                            print("Error in uploading image to S3: \(error)")
+                    }
+                }
+            }
+        }
 }
 
 struct PhotoUploadView_Previews: PreviewProvider {
