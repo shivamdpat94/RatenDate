@@ -1,11 +1,13 @@
 import SwiftUI
 import CoreLocation
+import FirebaseFirestore
 
 struct ProfileStackView: View {
     @Binding var profiles: [Profile]
     @State private var currentIndex: Int = 0
     @EnvironmentObject var sessionManager: UserSessionManager
-    
+    @State private var currentUserProfile: Profile?
+
     
     
     var body: some View {
@@ -23,6 +25,7 @@ struct ProfileStackView: View {
                     
                     HStack {
                         Button("Dislike") {
+                            dislikeCurrentProfile()
                             withAnimation {
                                 removeCurrentProfile()
                             }
@@ -46,7 +49,7 @@ struct ProfileStackView: View {
                     }
                 } else {
                     Text("No profiles available.")
-                    Button(action: fetchProfilesAgain) {
+                    Button(action: fetchProfiles) {
                         Text("Fetch Profiles Again")
                             .foregroundColor(.white)
                             .padding()
@@ -58,12 +61,37 @@ struct ProfileStackView: View {
             .padding(.bottom, 100)
         }
         .onAppear {
-            fetchProfilesIfNeeded()
+            fetchCurrentUserProfile()
         }
+        
     }
     
-    
-    
+    private func fetchCurrentUserProfile() {
+        FirebaseService().fetchProfile(email: sessionManager.email ?? "") { profile in
+            self.currentUserProfile = profile
+        }
+    }
+    private func dislikeCurrentProfile() {
+        guard !filteredProfiles.isEmpty else { return }
+        let dislikedProfileEmail = filteredProfiles[currentIndex].email
+
+        FirebaseService().fetchProfile(email: sessionManager.email ?? "") { currentUserProfile in
+            guard var userProfile = currentUserProfile else { return }
+            let currentUserEmail = userProfile.email
+
+            // Add liked profile's phone number to current user's likeSet
+            userProfile.dislikeSet.insert(dislikedProfileEmail)
+            
+            // Update current user's profile
+            FirebaseService().updateProfile(profile: userProfile) { success in
+                if success {
+                    print("Successfully updated user profile with like.")
+                } else {
+                    print("Failed to update user profile.")
+                }
+            }
+        }
+    }
     private func likeCurrentProfile() {
         guard !filteredProfiles.isEmpty else { return }
         let likedProfileEmail = filteredProfiles[currentIndex].email
@@ -94,10 +122,8 @@ struct ProfileStackView: View {
     private func checkForMutualLike(currentUserEmail: String, likedProfileEmail: String) {
         FirebaseService().fetchProfile(email: likedProfileEmail) { likedUserProfile in
             guard var likedProfile = likedUserProfile else { return }
-            print("checking for match")
             if likedProfile.likeSet.contains(currentUserEmail) {
                 // It's a match - concatenate and update matchSet for both users
-                print("match found")
                 let concatenatedEmail = [currentUserEmail, likedProfileEmail].sorted().joined(separator: "")
                 likedProfile.matchSet.insert(concatenatedEmail)
                 FirebaseService().updateProfile(profile: likedProfile) { success in
@@ -111,26 +137,30 @@ struct ProfileStackView: View {
                     FirebaseService().updateProfile(profile: currentUser) { success in
                         // Handle the update result
                     }
+                    
+                    // Create a new match document in Firestore
+                    self.createMatchDocument(concatenatedEmail: concatenatedEmail)
                 }
             }
         }
     }
 
-    
-    
-    
-    
-    
-    private func fetchProfilesIfNeeded() {
-        if profiles.isEmpty {
-            fetchProfiles()
+    private func createMatchDocument(concatenatedEmail: String) {
+        let db = Firestore.firestore()
+        let matchDocument = db.collection("Matches").document(concatenatedEmail)
+        matchDocument.setData(["Chat": []]) { error in
+            if let error = error {
+                print("Error creating match document: \(error)")
+            } else {
+                print("Match document successfully created!")
+            }
         }
     }
     
     
-    private func fetchProfilesAgain() {
-        fetchProfiles()
-    }
+    
+    
+ 
     
     
     private func fetchProfiles() {
@@ -140,11 +170,19 @@ struct ProfileStackView: View {
     }
     
     
-    
+//    private var filteredProfiles: [Profile] {
+//        profiles.filter { $0.email != sessionManager.email }
+//    }
+//    
     private var filteredProfiles: [Profile] {
-        profiles.filter { $0.email != sessionManager.email }
+        guard let currentUserProfile = currentUserProfile else { return [] }
+        return profiles.filter { profile in
+            profile.email != sessionManager.email &&
+            !currentUserProfile.likeSet.contains(profile.email) &&
+            !currentUserProfile.dislikeSet.contains(profile.email)
+        }
     }
-    
+ 
     private func removeCurrentProfile() {
         if !filteredProfiles.isEmpty {
             // Remove the current profile
