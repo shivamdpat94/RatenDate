@@ -78,6 +78,7 @@
 		3CE2C3A12B5C373E00CF3628 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A02B5C373E00CF3628 /* Match.swift */; };
 		3CE2C3A52B5C377100CF3628 /* TopMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */; };
 		3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A62B5C37A700CF3628 /* Message.swift */; };
+		3CE2C3AB2B5C46E600CF3628 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */; };
 		3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,7 @@
 		3CE2C3A02B5C373E00CF3628 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMatchesView.swift; sourceTree = "<group>"; };
 		3CE2C3A62B5C37A700CF3628 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,6 +245,7 @@
 				3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */,
 				3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */,
 				3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */,
+				3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
+				3CE2C3AB2B5C46E600CF3628 /* MatchesView.swift in Sources */,
 				3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */,
 				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,

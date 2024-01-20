@@ -38,7 +38,7 @@ struct MainTabView: View {
                     }
                     .tag(2)
 
-                MatchView()
+                MatchesView()
                     .tabItem {
                         tabIcon("chat favicon-32x32", isSelected: selectedTab == 3)
                         Text("Match")
