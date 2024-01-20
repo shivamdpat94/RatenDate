@@ -2,14 +2,33 @@
 //  Message.swift
 //  RatenDate
 //
-//  Created by Mitchell Buff on 1/13/24.
+//  Created by Shivam Patel on 1/18/24.
 //
 
 import Foundation
+import FirebaseFirestore // Import Firestore to use Timestamp
 
-struct Message: Identifiable, Equatable {
-    var id: String
+struct Message: Codable {
     var text: String
-    var isCurrentUser: Bool
-    var date: Date
+    var timestamp: Timestamp
+    var firstName: String
+    var email: String
+
+    // Initialize the struct with all properties
+    init(text: String, timestamp: Timestamp = Timestamp(date: Date()), firstName: String, email: String) {
+        self.text = text
+        self.timestamp = timestamp
+        self.firstName = firstName
+        self.email = email
+    }
+
+    // Helper to convert to a dictionary, useful for uploading to Firestore
+    var dictionary: [String: Any] {
+        return [
+            "text": text,
+            "timestamp": timestamp,
+            "firstName": firstName,
+            "email": email
+        ]
+    }
 }
