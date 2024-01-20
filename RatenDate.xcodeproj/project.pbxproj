@@ -10,7 +10,6 @@
 		3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */; };
 		3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CF2B4CB02B007F5429 /* RateView.swift */; };
 		3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */; };
-		3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D32B4CB049007F5429 /* MatchView.swift */; };
 		3C2FE5D62B4CDA18007F5429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */; };
 		3C2FE5DD2B4CDC94007F5429 /* Allura-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */; };
 		3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5E12B4FA7A2007F5429 /* testview.swift */; };
@@ -73,14 +72,20 @@
 		3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */; };
 		3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */; };
 		3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */; };
-		3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* Message.swift */; };
+		3CE2C39B2B5C36F100CF3628 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */; };
+		3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */; };
+		3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39E2B5C371700CF3628 /* ChatView.swift */; };
+		3CE2C3A12B5C373E00CF3628 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A02B5C373E00CF3628 /* Match.swift */; };
+		3CE2C3A32B5C374B00CF3628 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A22B5C374B00CF3628 /* MatchView.swift */; };
+		3CE2C3A52B5C377100CF3628 /* TopMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */; };
+		3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A62B5C37A700CF3628 /* Message.swift */; };
+		3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPassView.swift; sourceTree = "<group>"; };
 		3C2FE5CF2B4CB02B007F5429 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeView.swift; sourceTree = "<group>"; };
-		3C2FE5D32B4CB049007F5429 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allura-Regular.ttf"; sourceTree = "<group>"; };
 		3C2FE5DE2B4CDC99007F5429 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
@@ -109,7 +114,14 @@
 		3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsAndInterestsView.swift; sourceTree = "<group>"; };
 		3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
-		3CEF4A3B2B5A231D00FADD91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewView.swift; sourceTree = "<group>"; };
+		3CE2C39E2B5C371700CF3628 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		3CE2C3A02B5C373E00CF3628 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		3CE2C3A22B5C374B00CF3628 /* MatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchView.swift; path = ../../../../../Downloads/MatchView.swift; sourceTree = "<group>"; };
+		3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMatchesView.swift; sourceTree = "<group>"; };
+		3CE2C3A62B5C37A700CF3628 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,17 +228,21 @@
 				3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */,
 				3C570A242B43C4B7008CEDF6 /* PhotoUploadView.swift */,
 				3C5709D12B435731008CEDF6 /* SequentialSignUpView.swift */,
+				3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */,
 				3C7E10302B45C2D500C3E663 /* ProfileView.swift */,
+				3CE2C39E2B5C371700CF3628 /* ChatView.swift */,
 				3C7E10342B46422900C3E663 /* LoginView.swift */,
 				3C7E103C2B48E2BB00C3E663 /* SettingsView.swift */,
 				3C7E103E2B48E2EA00C3E663 /* MainTabView.swift */,
 				3C7E10402B49241900C3E663 /* LoadingView.swift */,
 				3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */,
 				3C2FE5CF2B4CB02B007F5429 /* RateView.swift */,
+				3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */,
 				3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */,
-				3C2FE5D32B4CB049007F5429 /* MatchView.swift */,
+				3CE2C3A22B5C374B00CF3628 /* MatchView.swift */,
 				3C2FE5E12B4FA7A2007F5429 /* testview.swift */,
 				3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */,
+				3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */,
 				3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */,
 				3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */,
 				3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */,
@@ -242,7 +258,9 @@
 				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
 				3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */,
-				3CEF4A3B2B5A231D00FADD91 /* Message.swift */,
+				3CE2C3A62B5C37A700CF3628 /* Message.swift */,
+				3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */,
+				3CE2C3A02B5C373E00CF3628 /* Match.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,6 +379,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE2C39B2B5C36F100CF3628 /* ChatBubbleView.swift in Sources */,
+				3CE2C3A32B5C374B00CF3628 /* MatchView.swift in Sources */,
+				3CE2C3A52B5C377100CF3628 /* TopMatchesView.swift in Sources */,
+				3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */,
 				3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */,
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
 				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
@@ -370,9 +392,9 @@
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
-				3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */,
+				3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */,
+				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
-				3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
@@ -382,9 +404,11 @@
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
 				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
+				3CE2C3A12B5C373E00CF3628 /* Match.swift in Sources */,
 				3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */,
 				3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */,
 				3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */,
+				3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */,
 				3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */,
 				3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */,
 			);
