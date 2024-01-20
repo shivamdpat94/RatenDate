@@ -80,6 +80,15 @@
 		3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3A62B5C37A700CF3628 /* Message.swift */; };
 		3CE2C3AB2B5C46E600CF3628 /* MatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */; };
 		3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */; };
+		683DC1E02B5C4B5C0079CB7D /* SotoACM in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1DF2B5C4B5C0079CB7D /* SotoACM */; };
+		683DC1E22B5C4B5C0079CB7D /* SotoACMPCA in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E12B5C4B5C0079CB7D /* SotoACMPCA */; };
+		683DC1E42B5C4B5C0079CB7D /* SotoAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E32B5C4B5C0079CB7D /* SotoAPIGateway */; };
+		683DC1E62B5C4B5C0079CB7D /* SotoARCZonalShift in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E52B5C4B5C0079CB7D /* SotoARCZonalShift */; };
+		683DC1E82B5C4B5C0079CB7D /* SotoAccessAnalyzer in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E72B5C4B5C0079CB7D /* SotoAccessAnalyzer */; };
+		683DC1EA2B5C4BC40079CB7D /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683DC1E92B5C4BC40079CB7D /* AWS.swift */; };
+		683DC1ED2B5C4DD80079CB7D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */; };
+		683DC1EF2B5C4EAD0079CB7D /* SotoRekognition in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */; };
+		683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1F02B5C4EB60079CB7D /* SotoS3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +131,8 @@
 		3CE2C3A62B5C37A700CF3628 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
+		683DC1E92B5C4BC40079CB7D /* AWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
+		683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +140,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */,
 				3C570A132B435FB2008CEDF6 /* FirebaseMLModelDownloader in Frameworks */,
+				683DC1E02B5C4B5C0079CB7D /* SotoACM in Frameworks */,
 				3C5709FF2B435FB2008CEDF6 /* FirebaseDatabaseSwift in Frameworks */,
 				3C570A012B435FB2008CEDF6 /* FirebaseDynamicLinks in Frameworks */,
 				3C5709D92B435C3D008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
@@ -139,17 +152,22 @@
 				3C5709F72B435FB2008CEDF6 /* FirebaseAuth in Frameworks */,
 				3C5709E12B435F64008CEDF6 /* FirebaseAnalytics in Frameworks */,
 				3C5709E32B435F64008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				683DC1E22B5C4B5C0079CB7D /* SotoACMPCA in Frameworks */,
 				3C570A112B435FB2008CEDF6 /* FirebaseInstallations in Frameworks */,
+				683DC1EF2B5C4EAD0079CB7D /* SotoRekognition in Frameworks */,
 				3C570A172B435FB2008CEDF6 /* FirebasePerformance in Frameworks */,
 				3C570A092B435FB2008CEDF6 /* FirebaseFunctions in Frameworks */,
+				683DC1E62B5C4B5C0079CB7D /* SotoARCZonalShift in Frameworks */,
 				3C5709E52B435F64008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
 				3C570A052B435FB2008CEDF6 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				3C5709D72B435C3D008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				3C5709EB2B435FB2008CEDF6 /* FirebaseAnalytics in Frameworks */,
 				3C570A1B2B435FB2008CEDF6 /* FirebaseRemoteConfigSwift in Frameworks */,
+				683DC1E82B5C4B5C0079CB7D /* SotoAccessAnalyzer in Frameworks */,
 				3C570A152B435FB2008CEDF6 /* FirebaseMessaging in Frameworks */,
 				3C5709F52B435FB2008CEDF6 /* FirebaseAppDistribution-Beta in Frameworks */,
 				3C570A0D2B435FB2008CEDF6 /* FirebaseInAppMessaging-Beta in Frameworks */,
+				683DC1ED2B5C4DD80079CB7D /* CoreAudio.framework in Frameworks */,
 				3C5709FD2B435FB2008CEDF6 /* FirebaseDatabase in Frameworks */,
 				3C570A192B435FB2008CEDF6 /* FirebaseRemoteConfig in Frameworks */,
 				3C570A1F2B435FB2008CEDF6 /* FirebaseStorageCombine-Community in Frameworks */,
@@ -166,6 +184,7 @@
 				3C5709E92B435F64008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C5709F32B435FB2008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C5709DB2B435C3D008CEDF6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				683DC1E42B5C4B5C0079CB7D /* SotoAPIGateway in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +205,7 @@
 			children = (
 				3C5709B22B434C54008CEDF6 /* RatenDate */,
 				3C5709B12B434C54008CEDF6 /* Products */,
+				683DC1EB2B5C4DD80079CB7D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,8 +281,17 @@
 				3CE2C3A62B5C37A700CF3628 /* Message.swift */,
 				3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */,
 				3CE2C3A02B5C373E00CF3628 /* Match.swift */,
+				683DC1E92B5C4BC40079CB7D /* AWS.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		683DC1EB2B5C4DD80079CB7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +348,13 @@
 				3C570A1A2B435FB2008CEDF6 /* FirebaseRemoteConfigSwift */,
 				3C570A1C2B435FB2008CEDF6 /* FirebaseStorage */,
 				3C570A1E2B435FB2008CEDF6 /* FirebaseStorageCombine-Community */,
+				683DC1DF2B5C4B5C0079CB7D /* SotoACM */,
+				683DC1E12B5C4B5C0079CB7D /* SotoACMPCA */,
+				683DC1E32B5C4B5C0079CB7D /* SotoAPIGateway */,
+				683DC1E52B5C4B5C0079CB7D /* SotoARCZonalShift */,
+				683DC1E72B5C4B5C0079CB7D /* SotoAccessAnalyzer */,
+				683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */,
+				683DC1F02B5C4EB60079CB7D /* SotoS3 */,
 			);
 			productName = RatenDate;
 			productReference = 3C5709B02B434C54008CEDF6 /* RatenDate.app */;
@@ -350,6 +386,7 @@
 			mainGroup = 3C5709A72B434C54008CEDF6;
 			packageReferences = (
 				3C5709D32B435C3D008CEDF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */,
 			);
 			productRefGroup = 3C5709B12B434C54008CEDF6 /* Products */;
 			projectDirPath = "";
@@ -397,6 +434,7 @@
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
+				683DC1EA2B5C4BC40079CB7D /* AWS.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
@@ -632,6 +670,14 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soto-project/soto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -819,6 +865,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C5709D32B435C3D008CEDF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		683DC1DF2B5C4B5C0079CB7D /* SotoACM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACM;
+		};
+		683DC1E12B5C4B5C0079CB7D /* SotoACMPCA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACMPCA;
+		};
+		683DC1E32B5C4B5C0079CB7D /* SotoAPIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAPIGateway;
+		};
+		683DC1E52B5C4B5C0079CB7D /* SotoARCZonalShift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoARCZonalShift;
+		};
+		683DC1E72B5C4B5C0079CB7D /* SotoAccessAnalyzer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAccessAnalyzer;
+		};
+		683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoRekognition;
+		};
+		683DC1F02B5C4EB60079CB7D /* SotoS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 683DC1DE2B5C4B5C0079CB7D /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoS3;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
