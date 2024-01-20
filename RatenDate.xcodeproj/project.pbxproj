@@ -106,7 +106,8 @@
 		3C94DDA52B5B4FAB009AB58C /* SotoCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA42B5B4FAB009AB58C /* SotoCore */; };
 		3C94DDA72B5B4FAB009AB58C /* SotoSignerV4 in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA62B5B4FAB009AB58C /* SotoSignerV4 */; };
 		3C94DDA92B5B4FAB009AB58C /* SotoTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA82B5B4FAB009AB58C /* SotoTestUtils */; };
-		3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* Message.swift */; };
+		3CDED30D2B5B57770094EDDD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDED30C2B5B57770094EDDD /* Message.swift */; };
+		3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,7 +149,8 @@
 		3C94DD6B2B5B493A009AB58C /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		3C94DD6D2B5B4953009AB58C /* MatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		3C94DD6F2B5B497D009AB58C /* TopMatchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMatchesView.swift; sourceTree = "<group>"; };
-		3CEF4A3B2B5A231D00FADD91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CDED30C2B5B57770094EDDD /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,7 +316,8 @@
 				3C94DD6B2B5B493A009AB58C /* Match.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
 				3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */,
-				3CEF4A3B2B5A231D00FADD91 /* Message.swift */,
+				3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */,
+				3CDED30C2B5B57770094EDDD /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
 				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
 				3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */,
+				3CDED30D2B5B57770094EDDD /* Message.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */,
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
@@ -476,7 +480,7 @@
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
 				3C94DD642B5B4802009AB58C /* AWS.swift in Sources */,
-				3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */,
+				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
 				3C94DD662B5B4876009AB58C /* ChatBubbleView.swift in Sources */,
