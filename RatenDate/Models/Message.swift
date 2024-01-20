@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore // Import Firestore to use Timestamp
 
-struct FBMessage: Codable {
+struct Message: Codable {
     var text: String
     var timestamp: Timestamp
     var firstName: String

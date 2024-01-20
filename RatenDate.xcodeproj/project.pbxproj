@@ -10,7 +10,6 @@
 		3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */; };
 		3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CF2B4CB02B007F5429 /* RateView.swift */; };
 		3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */; };
-		3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D32B4CB049007F5429 /* MatchView.swift */; };
 		3C2FE5D62B4CDA18007F5429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */; };
 		3C2FE5DD2B4CDC94007F5429 /* Allura-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */; };
 		3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5E12B4FA7A2007F5429 /* testview.swift */; };
@@ -73,14 +72,47 @@
 		3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */; };
 		3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */; };
 		3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */; };
-		3CEF4A3C2B5A231D00FADD91 /* FBMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */; };
+		3C94DD642B5B4802009AB58C /* AWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD632B5B4802009AB58C /* AWS.swift */; };
+		3C94DD662B5B4876009AB58C /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD652B5B4876009AB58C /* ChatBubbleView.swift */; };
+		3C94DD682B5B48C3009AB58C /* ChatPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD672B5B48C3009AB58C /* ChatPreviewView.swift */; };
+		3C94DD6A2B5B48D5009AB58C /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD692B5B48D5009AB58C /* ChatView.swift */; };
+		3C94DD6C2B5B493A009AB58C /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD6B2B5B493A009AB58C /* Match.swift */; };
+		3C94DD6E2B5B4953009AB58C /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD6D2B5B4953009AB58C /* MatchView.swift */; };
+		3C94DD702B5B497D009AB58C /* TopMatchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94DD6F2B5B497D009AB58C /* TopMatchesView.swift */; };
+		3C94DD732B5B4BBF009AB58C /* AWSACM in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD722B5B4BBF009AB58C /* AWSACM */; };
+		3C94DD752B5B4BBF009AB58C /* AWSACMPCA in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD742B5B4BBF009AB58C /* AWSACMPCA */; };
+		3C94DD772B5B4BBF009AB58C /* AWSAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD762B5B4BBF009AB58C /* AWSAPIGateway */; };
+		3C94DD792B5B4BBF009AB58C /* AWSARCZonalShift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD782B5B4BBF009AB58C /* AWSARCZonalShift */; };
+		3C94DD7B2B5B4BBF009AB58C /* AWSAccessAnalyzer in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD7A2B5B4BBF009AB58C /* AWSAccessAnalyzer */; };
+		3C94DD7E2B5B4CF3009AB58C /* SotoCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD7D2B5B4CF3009AB58C /* SotoCore */; };
+		3C94DD802B5B4CF3009AB58C /* SotoSignerV4 in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD7F2B5B4CF3009AB58C /* SotoSignerV4 */; };
+		3C94DD822B5B4CF3009AB58C /* SotoTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD812B5B4CF3009AB58C /* SotoTestUtils */; };
+		3C94DD842B5B4D2A009AB58C /* SotoCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD832B5B4D2A009AB58C /* SotoCore */; };
+		3C94DD862B5B4D2A009AB58C /* SotoSignerV4 in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD852B5B4D2A009AB58C /* SotoSignerV4 */; };
+		3C94DD882B5B4D2A009AB58C /* SotoTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD872B5B4D2A009AB58C /* SotoTestUtils */; };
+		3C94DD8A2B5B4D65009AB58C /* SotoCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD892B5B4D65009AB58C /* SotoCore */; };
+		3C94DD8C2B5B4D65009AB58C /* SotoSignerV4 in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD8B2B5B4D65009AB58C /* SotoSignerV4 */; };
+		3C94DD8E2B5B4D65009AB58C /* SotoTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD8D2B5B4D65009AB58C /* SotoTestUtils */; };
+		3C94DD912B5B4DC2009AB58C /* SotoACM in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD902B5B4DC2009AB58C /* SotoACM */; };
+		3C94DD932B5B4DC2009AB58C /* SotoACMPCA in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD922B5B4DC2009AB58C /* SotoACMPCA */; };
+		3C94DD952B5B4DC2009AB58C /* SotoAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD942B5B4DC2009AB58C /* SotoAPIGateway */; };
+		3C94DD972B5B4DC2009AB58C /* SotoARCZonalShift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD962B5B4DC2009AB58C /* SotoARCZonalShift */; };
+		3C94DD992B5B4DC2009AB58C /* SotoAccessAnalyzer in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD982B5B4DC2009AB58C /* SotoAccessAnalyzer */; };
+		3C94DD9B2B5B4FA0009AB58C /* SotoACM in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD9A2B5B4FA0009AB58C /* SotoACM */; };
+		3C94DD9D2B5B4FA0009AB58C /* SotoACMPCA in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD9C2B5B4FA0009AB58C /* SotoACMPCA */; };
+		3C94DD9F2B5B4FA0009AB58C /* SotoAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DD9E2B5B4FA0009AB58C /* SotoAPIGateway */; };
+		3C94DDA12B5B4FA0009AB58C /* SotoARCZonalShift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA02B5B4FA0009AB58C /* SotoARCZonalShift */; };
+		3C94DDA32B5B4FA0009AB58C /* SotoAccessAnalyzer in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA22B5B4FA0009AB58C /* SotoAccessAnalyzer */; };
+		3C94DDA52B5B4FAB009AB58C /* SotoCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA42B5B4FAB009AB58C /* SotoCore */; };
+		3C94DDA72B5B4FAB009AB58C /* SotoSignerV4 in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA62B5B4FAB009AB58C /* SotoSignerV4 */; };
+		3C94DDA92B5B4FAB009AB58C /* SotoTestUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 3C94DDA82B5B4FAB009AB58C /* SotoTestUtils */; };
+		3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPassView.swift; sourceTree = "<group>"; };
 		3C2FE5CF2B4CB02B007F5429 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeView.swift; sourceTree = "<group>"; };
-		3C2FE5D32B4CB049007F5429 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allura-Regular.ttf"; sourceTree = "<group>"; };
 		3C2FE5DE2B4CDC99007F5429 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
@@ -109,7 +141,14 @@
 		3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsAndInterestsView.swift; sourceTree = "<group>"; };
 		3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
-		3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMessage.swift; sourceTree = "<group>"; };
+		3C94DD632B5B4802009AB58C /* AWS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
+		3C94DD652B5B4876009AB58C /* ChatBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		3C94DD672B5B48C3009AB58C /* ChatPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewView.swift; sourceTree = "<group>"; };
+		3C94DD692B5B48D5009AB58C /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		3C94DD6B2B5B493A009AB58C /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		3C94DD6D2B5B4953009AB58C /* MatchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		3C94DD6F2B5B497D009AB58C /* TopMatchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMatchesView.swift; sourceTree = "<group>"; };
+		3CEF4A3B2B5A231D00FADD91 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,33 +159,59 @@
 				3C570A132B435FB2008CEDF6 /* FirebaseMLModelDownloader in Frameworks */,
 				3C5709FF2B435FB2008CEDF6 /* FirebaseDatabaseSwift in Frameworks */,
 				3C570A012B435FB2008CEDF6 /* FirebaseDynamicLinks in Frameworks */,
+				3C94DD952B5B4DC2009AB58C /* SotoAPIGateway in Frameworks */,
+				3C94DD882B5B4D2A009AB58C /* SotoTestUtils in Frameworks */,
 				3C5709D92B435C3D008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
+				3C94DD932B5B4DC2009AB58C /* SotoACMPCA in Frameworks */,
+				3C94DD992B5B4DC2009AB58C /* SotoAccessAnalyzer in Frameworks */,
 				3C5709F92B435FB2008CEDF6 /* FirebaseAuthCombine-Community in Frameworks */,
 				3C5709D52B435C3D008CEDF6 /* FirebaseAnalytics in Frameworks */,
 				3C570A072B435FB2008CEDF6 /* FirebaseFirestoreSwift in Frameworks */,
+				3C94DD802B5B4CF3009AB58C /* SotoSignerV4 in Frameworks */,
 				3C5709F72B435FB2008CEDF6 /* FirebaseAuth in Frameworks */,
 				3C5709E12B435F64008CEDF6 /* FirebaseAnalytics in Frameworks */,
 				3C5709E32B435F64008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				3C570A112B435FB2008CEDF6 /* FirebaseInstallations in Frameworks */,
+				3C94DD8C2B5B4D65009AB58C /* SotoSignerV4 in Frameworks */,
+				3C94DD792B5B4BBF009AB58C /* AWSARCZonalShift in Frameworks */,
+				3C94DD7B2B5B4BBF009AB58C /* AWSAccessAnalyzer in Frameworks */,
 				3C570A172B435FB2008CEDF6 /* FirebasePerformance in Frameworks */,
+				3C94DD732B5B4BBF009AB58C /* AWSACM in Frameworks */,
 				3C570A092B435FB2008CEDF6 /* FirebaseFunctions in Frameworks */,
 				3C5709E52B435F64008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
 				3C570A052B435FB2008CEDF6 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				3C5709D72B435C3D008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				3C5709EB2B435FB2008CEDF6 /* FirebaseAnalytics in Frameworks */,
+				3C94DD862B5B4D2A009AB58C /* SotoSignerV4 in Frameworks */,
+				3C94DDA72B5B4FAB009AB58C /* SotoSignerV4 in Frameworks */,
+				3C94DD8A2B5B4D65009AB58C /* SotoCore in Frameworks */,
+				3C94DD752B5B4BBF009AB58C /* AWSACMPCA in Frameworks */,
+				3C94DD7E2B5B4CF3009AB58C /* SotoCore in Frameworks */,
 				3C570A1B2B435FB2008CEDF6 /* FirebaseRemoteConfigSwift in Frameworks */,
+				3C94DD772B5B4BBF009AB58C /* AWSAPIGateway in Frameworks */,
 				3C570A152B435FB2008CEDF6 /* FirebaseMessaging in Frameworks */,
 				3C5709F52B435FB2008CEDF6 /* FirebaseAppDistribution-Beta in Frameworks */,
+				3C94DDA92B5B4FAB009AB58C /* SotoTestUtils in Frameworks */,
+				3C94DDA12B5B4FA0009AB58C /* SotoARCZonalShift in Frameworks */,
 				3C570A0D2B435FB2008CEDF6 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				3C5709FD2B435FB2008CEDF6 /* FirebaseDatabase in Frameworks */,
+				3C94DDA32B5B4FA0009AB58C /* SotoAccessAnalyzer in Frameworks */,
+				3C94DD912B5B4DC2009AB58C /* SotoACM in Frameworks */,
 				3C570A192B435FB2008CEDF6 /* FirebaseRemoteConfig in Frameworks */,
+				3C94DD822B5B4CF3009AB58C /* SotoTestUtils in Frameworks */,
+				3C94DD9B2B5B4FA0009AB58C /* SotoACM in Frameworks */,
+				3C94DDA52B5B4FAB009AB58C /* SotoCore in Frameworks */,
 				3C570A1F2B435FB2008CEDF6 /* FirebaseStorageCombine-Community in Frameworks */,
 				3C5709ED2B435FB2008CEDF6 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				3C5709DD2B435C3D008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C570A032B435FB2008CEDF6 /* FirebaseFirestore in Frameworks */,
 				3C570A0F2B435FB2008CEDF6 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				3C5709EF2B435FB2008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
+				3C94DD972B5B4DC2009AB58C /* SotoARCZonalShift in Frameworks */,
 				3C570A0B2B435FB2008CEDF6 /* FirebaseFunctionsCombine-Community in Frameworks */,
+				3C94DD9D2B5B4FA0009AB58C /* SotoACMPCA in Frameworks */,
+				3C94DD8E2B5B4D65009AB58C /* SotoTestUtils in Frameworks */,
+				3C94DD842B5B4D2A009AB58C /* SotoCore in Frameworks */,
 				3C570A1D2B435FB2008CEDF6 /* FirebaseStorage in Frameworks */,
 				3C5709E72B435F64008CEDF6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				3C5709FB2B435FB2008CEDF6 /* FirebaseCrashlytics in Frameworks */,
@@ -154,6 +219,7 @@
 				3C5709E92B435F64008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C5709F32B435FB2008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C5709DB2B435C3D008CEDF6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				3C94DD9F2B5B4FA0009AB58C /* SotoAPIGateway in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +277,11 @@
 		3C5709C12B434D48008CEDF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3C94DD692B5B48D5009AB58C /* ChatView.swift */,
+				3C94DD6D2B5B4953009AB58C /* MatchView.swift */,
+				3C94DD672B5B48C3009AB58C /* ChatPreviewView.swift */,
+				3C94DD6F2B5B497D009AB58C /* TopMatchesView.swift */,
+				3C94DD652B5B4876009AB58C /* ChatBubbleView.swift */,
 				3C5709B52B434C54008CEDF6 /* ContentView.swift */,
 				3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */,
 				3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */,
@@ -224,7 +295,6 @@
 				3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */,
 				3C2FE5CF2B4CB02B007F5429 /* RateView.swift */,
 				3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */,
-				3C2FE5D32B4CB049007F5429 /* MatchView.swift */,
 				3C2FE5E12B4FA7A2007F5429 /* testview.swift */,
 				3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */,
 				3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */,
@@ -237,12 +307,14 @@
 		3C5709C42B435374008CEDF6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3C94DD632B5B4802009AB58C /* AWS.swift */,
 				3C5709C52B4353A6008CEDF6 /* Profile.swift */,
 				3C570A282B43D054008CEDF6 /* ImagePicker.swift */,
 				3C570A4E2B44F71C008CEDF6 /* LocationManager.swift */,
+				3C94DD6B2B5B493A009AB58C /* Match.swift */,
 				3C7E102C2B45C11B00C3E663 /* FirebaseService.swift */,
 				3C7E103A2B48E0F100C3E663 /* UserSessionManager.swift */,
-				3CEF4A3B2B5A231D00FADD91 /* FBMessage.swift */,
+				3CEF4A3B2B5A231D00FADD91 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +373,33 @@
 				3C570A1A2B435FB2008CEDF6 /* FirebaseRemoteConfigSwift */,
 				3C570A1C2B435FB2008CEDF6 /* FirebaseStorage */,
 				3C570A1E2B435FB2008CEDF6 /* FirebaseStorageCombine-Community */,
+				3C94DD722B5B4BBF009AB58C /* AWSACM */,
+				3C94DD742B5B4BBF009AB58C /* AWSACMPCA */,
+				3C94DD762B5B4BBF009AB58C /* AWSAPIGateway */,
+				3C94DD782B5B4BBF009AB58C /* AWSARCZonalShift */,
+				3C94DD7A2B5B4BBF009AB58C /* AWSAccessAnalyzer */,
+				3C94DD7D2B5B4CF3009AB58C /* SotoCore */,
+				3C94DD7F2B5B4CF3009AB58C /* SotoSignerV4 */,
+				3C94DD812B5B4CF3009AB58C /* SotoTestUtils */,
+				3C94DD832B5B4D2A009AB58C /* SotoCore */,
+				3C94DD852B5B4D2A009AB58C /* SotoSignerV4 */,
+				3C94DD872B5B4D2A009AB58C /* SotoTestUtils */,
+				3C94DD892B5B4D65009AB58C /* SotoCore */,
+				3C94DD8B2B5B4D65009AB58C /* SotoSignerV4 */,
+				3C94DD8D2B5B4D65009AB58C /* SotoTestUtils */,
+				3C94DD902B5B4DC2009AB58C /* SotoACM */,
+				3C94DD922B5B4DC2009AB58C /* SotoACMPCA */,
+				3C94DD942B5B4DC2009AB58C /* SotoAPIGateway */,
+				3C94DD962B5B4DC2009AB58C /* SotoARCZonalShift */,
+				3C94DD982B5B4DC2009AB58C /* SotoAccessAnalyzer */,
+				3C94DD9A2B5B4FA0009AB58C /* SotoACM */,
+				3C94DD9C2B5B4FA0009AB58C /* SotoACMPCA */,
+				3C94DD9E2B5B4FA0009AB58C /* SotoAPIGateway */,
+				3C94DDA02B5B4FA0009AB58C /* SotoARCZonalShift */,
+				3C94DDA22B5B4FA0009AB58C /* SotoAccessAnalyzer */,
+				3C94DDA42B5B4FAB009AB58C /* SotoCore */,
+				3C94DDA62B5B4FAB009AB58C /* SotoSignerV4 */,
+				3C94DDA82B5B4FAB009AB58C /* SotoTestUtils */,
 			);
 			productName = RatenDate;
 			productReference = 3C5709B02B434C54008CEDF6 /* RatenDate.app */;
@@ -332,6 +431,9 @@
 			mainGroup = 3C5709A72B434C54008CEDF6;
 			packageReferences = (
 				3C5709D32B435C3D008CEDF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
+				3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */,
+				3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */,
 			);
 			productRefGroup = 3C5709B12B434C54008CEDF6 /* Products */;
 			projectDirPath = "";
@@ -362,24 +464,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */,
+				3C94DD6E2B5B4953009AB58C /* MatchView.swift in Sources */,
+				3C94DD702B5B497D009AB58C /* TopMatchesView.swift in Sources */,
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
 				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
 				3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */,
 				3C7E10352B46422900C3E663 /* LoginView.swift in Sources */,
+				3C94DD682B5B48C3009AB58C /* ChatPreviewView.swift in Sources */,
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
-				3CEF4A3C2B5A231D00FADD91 /* FBMessage.swift in Sources */,
+				3C94DD642B5B4802009AB58C /* AWS.swift in Sources */,
+				3CEF4A3C2B5A231D00FADD91 /* Message.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
-				3C2FE5D42B4CB049007F5429 /* MatchView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
+				3C94DD662B5B4876009AB58C /* ChatBubbleView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
 				3C7E102D2B45C11B00C3E663 /* FirebaseService.swift in Sources */,
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
+				3C94DD6C2B5B493A009AB58C /* Match.swift in Sources */,
+				3C94DD6A2B5B48D5009AB58C /* ChatView.swift in Sources */,
 				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
 				3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */,
@@ -608,6 +716,30 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/awslabs/aws-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.34.0;
+			};
+		};
+		3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soto-project/soto-core";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.2;
+			};
+		};
+		3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soto-project/soto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -795,6 +927,141 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C5709D32B435C3D008CEDF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		3C94DD722B5B4BBF009AB58C /* AWSACM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSACM;
+		};
+		3C94DD742B5B4BBF009AB58C /* AWSACMPCA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSACMPCA;
+		};
+		3C94DD762B5B4BBF009AB58C /* AWSAPIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSAPIGateway;
+		};
+		3C94DD782B5B4BBF009AB58C /* AWSARCZonalShift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSARCZonalShift;
+		};
+		3C94DD7A2B5B4BBF009AB58C /* AWSAccessAnalyzer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD712B5B4BBF009AB58C /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSAccessAnalyzer;
+		};
+		3C94DD7D2B5B4CF3009AB58C /* SotoCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoCore;
+		};
+		3C94DD7F2B5B4CF3009AB58C /* SotoSignerV4 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoSignerV4;
+		};
+		3C94DD812B5B4CF3009AB58C /* SotoTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoTestUtils;
+		};
+		3C94DD832B5B4D2A009AB58C /* SotoCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoCore;
+		};
+		3C94DD852B5B4D2A009AB58C /* SotoSignerV4 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoSignerV4;
+		};
+		3C94DD872B5B4D2A009AB58C /* SotoTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoTestUtils;
+		};
+		3C94DD892B5B4D65009AB58C /* SotoCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoCore;
+		};
+		3C94DD8B2B5B4D65009AB58C /* SotoSignerV4 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoSignerV4;
+		};
+		3C94DD8D2B5B4D65009AB58C /* SotoTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoTestUtils;
+		};
+		3C94DD902B5B4DC2009AB58C /* SotoACM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACM;
+		};
+		3C94DD922B5B4DC2009AB58C /* SotoACMPCA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACMPCA;
+		};
+		3C94DD942B5B4DC2009AB58C /* SotoAPIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAPIGateway;
+		};
+		3C94DD962B5B4DC2009AB58C /* SotoARCZonalShift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoARCZonalShift;
+		};
+		3C94DD982B5B4DC2009AB58C /* SotoAccessAnalyzer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAccessAnalyzer;
+		};
+		3C94DD9A2B5B4FA0009AB58C /* SotoACM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACM;
+		};
+		3C94DD9C2B5B4FA0009AB58C /* SotoACMPCA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoACMPCA;
+		};
+		3C94DD9E2B5B4FA0009AB58C /* SotoAPIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAPIGateway;
+		};
+		3C94DDA02B5B4FA0009AB58C /* SotoARCZonalShift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoARCZonalShift;
+		};
+		3C94DDA22B5B4FA0009AB58C /* SotoAccessAnalyzer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD8F2B5B4DC2009AB58C /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoAccessAnalyzer;
+		};
+		3C94DDA42B5B4FAB009AB58C /* SotoCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoCore;
+		};
+		3C94DDA62B5B4FAB009AB58C /* SotoSignerV4 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoSignerV4;
+		};
+		3C94DDA82B5B4FAB009AB58C /* SotoTestUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C94DD7C2B5B4CF3009AB58C /* XCRemoteSwiftPackageReference "soto-core" */;
+			productName = SotoTestUtils;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
