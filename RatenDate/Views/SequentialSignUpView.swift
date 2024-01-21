@@ -185,12 +185,7 @@ struct SequentialSignUpView: View {
                     // Initialize the profile with the dictionary
                     let newProfile = Profile(dictionary: profileData)
                     
-                    print("again name is")
-                    print(firstName)
-                    print(newProfile.firstName)
-                    print("again height is ")
-                    print(height)
-                    print(newProfile.height)
+
                     // Save the profile to Firestore
                     FirebaseService().saveProfileToFirebase(profile: newProfile) {
                         // Trigger navigation to MainTabView after the profile is successfully saved

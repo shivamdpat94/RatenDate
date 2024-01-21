@@ -25,10 +25,6 @@ class UserSessionManager: ObservableObject {
                 self?.isAuthenticated = true
                 self?.email = user.email
                 self?.phoneNumber = user.phoneNumber
-                print("user email is")
-                print(user.email)
-                print("user phonenumber is")
-                print(user.phoneNumber)
             } else {
                 // User is signed out
                 self?.isAuthenticated = false

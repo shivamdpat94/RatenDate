@@ -17,12 +17,7 @@ struct RatenDateApp: App {
     
     init() {
         FirebaseApp.configure()
-
-        // Print all available fonts
-        for family in UIFont.familyNames.sorted() {
-            let fonts = UIFont.fontNames(forFamilyName: family)
-            print("\(family): \(fonts)")
-        }    }
+    }
 
     var body: some Scene {
         WindowGroup {

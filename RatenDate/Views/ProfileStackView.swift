@@ -19,7 +19,7 @@ struct ProfileStackView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                if !filteredProfiles.isEmpty && filteredProfiles.indices.contains(currentIndex) {
+                if !filteredProfiles.isEmpty {
                     ProfileView(profile: filteredProfiles[currentIndex])
                         .transition(.slide)
                     
@@ -34,6 +34,18 @@ struct ProfileStackView: View {
                         .padding()
                         .background(Color.blue)
                         .cornerRadius(10)
+      
+                        Button("Next") {
+                            withAnimation {
+                                removeCurrentProfile()
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(10)
+                        
+                        
                         
                         Button("Like") {
                             likeCurrentProfile()
@@ -46,19 +58,7 @@ struct ProfileStackView: View {
                         .background(Color.green)
                         .cornerRadius(10)
                         
-                        Button("Next") {
-                            withAnimation {
-                                removeCurrentProfile()
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(10)
-                        
                     }
-                    
-                    
                 } else {
                     Text("No profiles available.")
                     Button(action: fetchProfiles) {
@@ -178,13 +178,14 @@ struct ProfileStackView: View {
     private func fetchProfiles() {
         FirebaseService().fetchProfiles { fetchedProfiles in
             self.profiles = fetchedProfiles
-            preloadImages(for: Array(fetchedProfiles.prefix(10)))
-            self.currentIndex = 0
         }
     }
-
     
     
+//    private var filteredProfiles: [Profile] {
+//        profiles.filter { $0.email != sessionManager.email }
+//    }
+//
     private var filteredProfiles: [Profile] {
         guard let currentUserProfile = currentUserProfile else { return [] }
         return profiles.filter { profile in
@@ -199,29 +200,12 @@ struct ProfileStackView: View {
             // Remove the current profile
             profiles.removeAll { $0.id == filteredProfiles[currentIndex].id }
             
-            // Update currentIndex
-            currentIndex = min(filteredProfiles.count - 1, currentIndex)
-        }
-    }
-
-    
-    private func preloadImages(for profiles: [Profile]) {
-        let profilesToPreload = Array(profiles.prefix(10))
-
-        for profile in profilesToPreload {
-            for url in profile.photoURLs {
-                guard let imageUrl = URL(string: url) else { continue }
-                URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                    guard let data = data, let image = UIImage(data: data) else { return }
-                    DispatchQueue.main.async {
-                        ImageCache.shared.setImage(image, forKey: url)
-                    }
-                }.resume()
+            // Reset currentIndex if it's out of bounds
+            if currentIndex >= filteredProfiles.count {
+                currentIndex = 0
             }
         }
     }
-
-   
 }
 
 
