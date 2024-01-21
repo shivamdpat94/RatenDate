@@ -14,6 +14,7 @@ import SotoS3
 
 struct PhotoUploadView: View {
     let aws = AWS()  // Create an instance of your AWS struct
+    let imageManipulator = ImageManipulation()
     @Binding var photoURLs: [String]  // This expects a Binding array of strings for URLs
     @State private var showingImagePicker = false
     @State private var selectedImageIndex: Int?  // To know which image slot the user is updating
@@ -71,13 +72,18 @@ struct PhotoUploadView: View {
         
         var count = 0
         let upto = selectedImages.count
-        for (index, image) in selectedImages {
+        for (index, OGimage) in selectedImages {
             // Convert UIImage to Data for uploading
-            guard let imageData = image.jpegData(compressionQuality: 0.8) else { continue }
+            
+            var image = OGimage // Creating a mutable image
+            image = image.resized(percentage: 0.50)! // Making the image 50% smaller
+            let compressedData = image.jpegData(compressionQuality: 0.001) // Compressing the image as much as possible
+            
+            guard let finalImageData = compressedData else { continue }
             let key = "photos/\(UUID().uuidString)/photo\(index).jpg"  // Generate a unique key for S3
 
             // Upload the image to S3
-            aws.uploadImageToS3(bucket: "lemonlime-rekognition-input-bucket", key: key, imageData: imageData).whenComplete { result in
+            aws.uploadImageToS3(bucket: "lemonlime-rekognition-input-bucket", key: key, imageData: finalImageData).whenComplete { result in
                 switch result {
                     case .success:
                         // Check the image for moderation labels
