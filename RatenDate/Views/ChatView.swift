@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ChatView: View {
+    @Binding var matchName: String
     @State private var newMessageText = ""
+    @EnvironmentObject var sessionManager: UserSessionManager
     @State private var messages: [Message] = [
         // Dummy data for testing
         Message(id: UUID().uuidString, text: "Hello!", isCurrentUser: false, date: Date().addingTimeInterval(-86400)),
@@ -58,7 +60,7 @@ struct ChatView: View {
                                         .padding(.top, 8)
                                 }
                                 
-                                ChatBubbleView(message: messages[index])
+                                ChatBubbleView(message: messages[index], matchName: matchName)
                                     .padding(.vertical, isLastMessageOfDay(at: index) ? 8 : 2)
                                     .id(messages[index].id)
                             }
@@ -108,6 +110,8 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView()
+        // Provide a sample name for the matchName binding
+        ChatView(matchName: .constant("Sample Match Name"))
+            .environmentObject(UserSessionManager()) // Provide a dummy UserSessionManager if needed
     }
 }

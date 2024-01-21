@@ -5,6 +5,7 @@
 //  Created by Shivam Patel on 1/3/24.
 //
 
+
 import SwiftUI
 import CoreLocation
 
@@ -15,14 +16,24 @@ struct ProfileView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(profile.photoURLs, id: \.self) { photoURL in
-                    AsyncImage(url: URL(string: photoURL)) { image in
-                        image.resizable()
-                             .aspectRatio(contentMode: .fill) // Fill the width of the screen
-                    } placeholder: {
-                        ProgressView()
+                    if let image = ImageCache.shared.image(forKey: photoURL) {
+                        // Load from cache
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: UIScreen.main.bounds.width)
+                            .clipped()
+                    } else {
+                        // Fallback to AsyncImage
+                        AsyncImage(url: URL(string: photoURL)) { image in
+                            image.resizable()
+                                 .aspectRatio(contentMode: .fill)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: UIScreen.main.bounds.width)
+                        .clipped()
                     }
-                    .frame(width: UIScreen.main.bounds.width) // Set the width to the screen's width
-                    .clipped() // Clip the overflowing part
                 }
 
                 // Display other profile attributes
@@ -31,9 +42,9 @@ struct ProfileView: View {
                 Text("Bio: \(profile.bio)")
                 Text("Ethnicity: \(profile.ethnicity)")
                 Text("Gender: \(profile.gender)")
-                Text("traits: \(profile.traits.joined(separator: ", "))")
+                Text("Traits: \(profile.traits.joined(separator: ", "))")
                 Text("Looking For: \(profile.lookingFor)")
-                Text("email: \(profile.email)")
+                Text("Email: \(profile.email)")
                 // Add more attributes as needed
             }
             .padding()

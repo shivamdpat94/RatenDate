@@ -2,6 +2,11 @@ import SwiftUI
 
 
 struct MatchesView: View {
+    
+    
+    @State private var selectedMatchName: String = ""  // State to keep track of the selected match's name
+     @State private var isChatViewActive: Bool = false  // State to control the navigation link
+
     // Mock data for demonstration
     let topMatches = [
         Match(id: "1", name: "Alex", image: "1024x1024", lastMessage: "Hey there!", messageDate: Date().addingTimeInterval(-86400)),
@@ -24,7 +29,16 @@ struct MatchesView: View {
                 Divider()
 
                 List(chattedMatches) { match in
-                    ChatPreviewView(match: match)
+                    NavigationLink(
+                        destination: ChatView(matchName: $selectedMatchName),
+                        isActive: $isChatViewActive
+                    ) {
+                        ChatPreviewView(match: match)
+                            .onTapGesture {
+                                selectedMatchName = match.name
+                                isChatViewActive = true
+                            }
+                    }
                 }
                 .listStyle(PlainListStyle())
             }
