@@ -36,7 +36,7 @@ class AWS {
         self.s3 = S3(client: client, region: .useast1)
     }
 
-//     Function to upload an image to S3
+    // Function to upload an image to S3
     func uploadImageToS3(bucket: String, key: String, imageData: Data) -> EventLoopFuture<S3.PutObjectOutput> {
         let putRequest = S3.PutObjectRequest(body: .data(imageData), bucket: bucket, key: key)
         return s3.putObject(putRequest)
@@ -47,6 +47,16 @@ class AWS {
         let image = Rekognition.Image(s3Object: Rekognition.S3Object(bucket: bucket, name: key))
         let request = Rekognition.DetectModerationLabelsRequest(image: image)
         return rekognition.detectModerationLabels(request)
+    }
+    
+    func detectNumberOfFaces(bucket: String, key: String) -> EventLoopFuture<Int> {
+        let image = Rekognition.Image(s3Object: Rekognition.S3Object(bucket: bucket, name: key))
+        let request = Rekognition.DetectFacesRequest(attributes: [.all], image: image)
+
+        return rekognition.detectFaces(request).map { response in
+            print(response.faceDetails?.count ?? 0, "HERE WE GO")
+            return response.faceDetails?.count ?? 0
+        }
     }
     
     func clientShutdown(){
