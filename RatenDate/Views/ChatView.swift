@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ChatView: View {
-    @Binding var matchName: String
+    
+    var match: Match
     @State private var newMessageText = ""
     @EnvironmentObject var sessionManager: UserSessionManager
-    @State private var messages: [Message] = [
-        // Dummy data for testing
-        Message(id: UUID().uuidString, text: "Hello!", isCurrentUser: false, date: Date().addingTimeInterval(-86400)),
-        Message(id: UUID().uuidString, text: "Hi there!", isCurrentUser: true, date: Date())
-    ]
+    @State private var messages: [Message] = []
+
+    
     
     private func dateString(from date: Date) -> String {
         let formatter = DateFormatter()
@@ -60,7 +59,7 @@ struct ChatView: View {
                                         .padding(.top, 8)
                                 }
                                 
-                                ChatBubbleView(message: messages[index], matchName: matchName)
+                                ChatBubbleView(message: messages[index])
                                     .padding(.vertical, isLastMessageOfDay(at: index) ? 8 : 2)
                                     .id(messages[index].id)
                             }
@@ -110,8 +109,17 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        // Provide a sample name for the matchName binding
-        ChatView(matchName: .constant("Sample Match Name"))
+        // Create a dummy Match object for the preview
+        let dummyMatch = Match(
+            id: "dummyChatID",
+            name: "Dummy Name",
+            image: "dummyImageURL",
+            lastMessage: "Hello, this is a dummy message",
+            messageDate: Date(),
+            matchedUserEmail: "Dummyemail@gmail.com"
+        )
+
+        ChatView(match: dummyMatch)
             .environmentObject(UserSessionManager()) // Provide a dummy UserSessionManager if needed
     }
 }
