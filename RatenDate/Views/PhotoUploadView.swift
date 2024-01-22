@@ -76,7 +76,7 @@ struct PhotoUploadView: View {
             // Convert UIImage to Data for uploading
             
             var image = OGimage // Creating a mutable image
-            image = image.resized(percentage: 0.50)! // Making the image 50% smaller
+            image = image.resized(percentage: 0.35)! // Making the image 50% smaller
             let compressedData = image.jpegData(compressionQuality: 0.001) // Compressing the image as much as possible
             
             guard let finalImageData = compressedData else { continue }
@@ -89,17 +89,27 @@ struct PhotoUploadView: View {
                         // Check the image for moderation labels
                         aws.detectModerationLabels(bucket: "lemonlime-rekognition-input-bucket", key: key).whenComplete { result in
                             switch result {
-                                case .success(let response):
-                                    if let labels = response.moderationLabels, labels.isEmpty {
-                                        // Image passed moderation
-                                        print("Image \(index) is OK")
-                                    } else {
-                                        // Image contains moderation labels
-                                        print("Image \(index) is lewd")
+                            case .success(let response):
+                                if let labels = response.moderationLabels {
+                                    // Check if any label corresponds to nudity
+                                    let containsNudity = labels.contains { label in
+                                        label.name?.lowercased().contains("nudity") ?? false
                                     }
-                                case .failure(let error):
-                                    // Handle error in moderation label detection
-                                    print("Error in detecting moderation labels: \(error)")
+
+                                    if containsNudity {
+                                        // Image is classified as lewd due to nudity
+                                        print("Image \(index) is lewd")
+                                    } else {
+                                        // Image passed moderation (no nudity detected)
+                                        print("Image \(index) is OK")
+                                    }
+                                } else {
+                                    // No labels detected, image is OK
+                                    print("Image \(index) is OK")
+                                }
+                            case .failure(let error):
+                                // Handle error in moderation label detection
+                                print("Error in detecting moderation labels: \(error)")
                             }
                             count += 1
                             if(count == upto){

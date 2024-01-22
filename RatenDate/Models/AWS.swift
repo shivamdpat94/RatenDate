@@ -59,6 +59,30 @@ class AWS {
         }
     }
     
+    func compareFaces(sourceBucket: String, sourceKey: String, targetBucket: String, targetKey: String) -> EventLoopFuture<Bool> {
+        let sourceImage = Rekognition.Image(s3Object: Rekognition.S3Object(bucket: sourceBucket, name: sourceKey))
+        let targetImage = Rekognition.Image(s3Object: Rekognition.S3Object(bucket: targetBucket, name: targetKey))
+
+        let request = Rekognition.CompareFacesRequest(similarityThreshold: 80, sourceImage: sourceImage, targetImage: targetImage) // Adjust similarity threshold as needed
+
+        return rekognition.compareFaces(request).map { response in
+            guard let faceMatches = response.faceMatches else {
+                print("No face matches found.")
+                return false
+            }
+
+            for match in faceMatches {
+                if match.similarity ?? 0 >= 80 { // Check if the similarity is above the threshold
+                    print("Match found with similarity: \(match.similarity ?? 0)%")
+                    return true
+                }
+            }
+
+            print("No matching faces with sufficient similarity.")
+            return false
+        }
+    }
+    
     func clientShutdown(){
         do {
             try self.client.syncShutdown()
