@@ -1,45 +1,44 @@
-//
-//  RatenDateApp.swift
-//  RatenDate
-//
-//  Created by Shivam Patel on 1/1/24.
-//
-
 import SwiftUI
 import Firebase
+import UserNotifications
+
+// Define a custom AppDelegate
+class CustomAppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Request notification permission
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            // Handle the granted permission or error
+        }
+        application.registerForRemoteNotifications() // Register for remote notifications
+        return true
+    }
+
+    // Add other necessary AppDelegate methods if needed
+}
 
 @main
 struct RatenDateApp: App {
+    @UIApplicationDelegateAdaptor(CustomAppDelegate.self) var appDelegate
     @StateObject var sessionManager = UserSessionManager()
-    @State var isShowingLoadingScreen = true // State to control the display of the LoadingView
-    
-    
-    
+    @State var isShowingLoadingScreen = true
+
     init() {
         FirebaseApp.configure()
     }
 
     var body: some Scene {
         WindowGroup {
-            // Determine which view to show based on the isShowingLoadingScreen state
             if isShowingLoadingScreen {
                 LoadingView()
                     .onAppear {
-                        // Transition to the ContentView after 2 seconds
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             isShowingLoadingScreen = false
                         }
                     }
             } else {
-                ContentView() // Or your initial view
-                    .environmentObject(sessionManager) // Provide the sessionManager to the views
+                ContentView()
+                    .environmentObject(sessionManager)
             }
         }
-
     }
 }
-
-
-
-
-
