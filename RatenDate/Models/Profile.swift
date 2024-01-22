@@ -40,6 +40,7 @@ struct Profile: Identifiable {
     var likeSet: Set<String>
     var matchSet: Set<String>
     var dislikeSet: Set<String>
+    var isPremium: Bool
     
     init(dictionary: [String: Any]) {
         self.id = dictionary["id"] as? String ?? UUID().uuidString
@@ -87,6 +88,7 @@ struct Profile: Identifiable {
         self.likeSet = Set(dictionary["likeSet"] as? [String] ?? [])
         self.matchSet = Set(dictionary["matchSet"] as? [String] ?? [])
         self.dislikeSet = Set(dictionary["dislikeSet"] as? [String] ?? [])
+        self.isPremium = dictionary["isPremium"] as? Bool ?? false
 
     }
 }

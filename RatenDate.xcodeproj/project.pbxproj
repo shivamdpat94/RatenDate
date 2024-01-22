@@ -91,6 +91,7 @@
 		683DC1ED2B5C4DD80079CB7D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */; };
 		683DC1EF2B5C4EAD0079CB7D /* SotoRekognition in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */; };
 		683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1F02B5C4EB60079CB7D /* SotoS3 */; };
+		686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +138,7 @@
 		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
 		683DC1E92B5C4BC40079CB7D /* AWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +290,7 @@
 				683DC1E92B5C4BC40079CB7D /* AWS.swift */,
 				3CE2C3AC2B5C55CE00CF3628 /* ImageCache.swift */,
 				3CE2C3AE2B5CC16E00CF3628 /* ImageManipulation.swift */,
+				686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
 				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
+				686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */,
 				3CE2C3A12B5C373E00CF3628 /* Match.swift in Sources */,
 				3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */,
 				3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */,

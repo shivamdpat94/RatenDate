@@ -48,6 +48,7 @@ struct SequentialSignUpView: View {
     @State private var alcohol = ""
     @State private var cigerettes = ""
     @State private var drugs = ""
+    @state private var isPremium = false
     
 
 
@@ -179,7 +180,8 @@ struct SequentialSignUpView: View {
                         "alcohol": self.alcohol,
                         "cigerettes": self.cigerettes,
                         "drugs": self.drugs,
-                        "interests": self.interests
+                        "interests": self.interests,
+                        "isPremium": self.isPremium
                     ]
 
                     // Initialize the profile with the dictionary
