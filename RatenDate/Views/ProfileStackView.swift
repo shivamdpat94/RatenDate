@@ -137,37 +137,71 @@ struct ProfileStackView: View {
             if likedProfile.likeSet.contains(currentUserEmail) {
                 // It's a match - concatenate and update matchSet for both users
                 let concatenatedEmail = [currentUserEmail, likedProfileEmail].sorted().joined(separator: "")
+
+                // Update the liked user's profile
                 likedProfile.matchSet.insert(concatenatedEmail)
-                FirebaseService().updateProfile(profile: likedProfile) { success in
-                    // Handle the update result
-                }
-
-                // Update matchSet for the current user as well
-                FirebaseService().fetchProfile(email: currentUserEmail) { currentUserProfile in
-                    guard var currentUser = currentUserProfile else { return }
-                    currentUser.matchSet.insert(concatenatedEmail)
-                    FirebaseService().updateProfile(profile: currentUser) { success in
-                        // Handle the update result
+                FirebaseService().updateProfile(profile: likedProfile) { successLikedProfile in
+                    if successLikedProfile {
+                        // Update the current user's profile
+                        FirebaseService().fetchProfile(email: currentUserEmail) { currentUserProfile in
+                            guard var currentUser = currentUserProfile else { return }
+                            currentUser.matchSet.insert(concatenatedEmail)
+                            FirebaseService().updateProfile(profile: currentUser) { successCurrentUser in
+                                if successCurrentUser {
+                                    // Both profiles updated successfully, now create the chat document
+                                    self.createMatchDocument(userEmail1: currentUserEmail, userEmail2: likedProfileEmail)
+                                } else {
+                                    print("Failed to update current user profile.")
+                                }
+                            }
+                        }
+                    } else {
+                        print("Failed to update liked user profile.")
                     }
-                    
-                    // Create a new match document in Firestore
-                    self.createMatchDocument(concatenatedEmail: concatenatedEmail)
                 }
             }
         }
     }
 
-    private func createMatchDocument(concatenatedEmail: String) {
+
+    private func createMatchDocument(userEmail1: String, userEmail2: String) {
         let db = Firestore.firestore()
-        let matchDocument = db.collection("Matches").document(concatenatedEmail)
-        matchDocument.setData(["Chat": []]) { error in
+        
+        // Create the concatenated email as chatID
+        let concatenatedEmail = [userEmail1, userEmail2].sorted().joined(separator: "")
+        
+        // Create a new chat document in the 'Chats' collection
+        let chatDocument = db.collection("Chats").document(concatenatedEmail)
+        
+        // Initialize the chat document with the participants' emails
+        chatDocument.setData([
+            "createdDate": Timestamp(date: Date()),
+            "participants": [userEmail1, userEmail2]  // Array containing both users' emails
+        ]) { error in
             if let error = error {
-                print("Error creating match document: \(error)")
+                print("Error initializing chat document: \(error)")
             } else {
-                print("Match document successfully created!")
+                print("Chat document successfully initialized!")
+
+//                // Optionally, add an initial system message in 'Messages' subcollection
+//                let initialMessage = [
+//                    "text": "Chat started",
+//                    "senderID": "system",
+//                    "timestamp": Timestamp(date: Date())
+//                ]
+//                chatDocument.collection("Messages").document().setData(initialMessage) { error in
+//                    if let error = error {
+//                        print("Error adding initial message: \(error)")
+//                    } else {
+//                        print("Initial message added to chat")
+//                    }
+//                }
             }
         }
     }
+
+
+
     
     
     

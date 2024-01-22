@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ChatBubbleView: View {
     let message: Message
-    let matchName: String  // New parameter for the match name
 
     var body: some View {
         // Define custom colors using the hexadecimal values
@@ -10,12 +9,6 @@ struct ChatBubbleView: View {
         let customGray = Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255)
         
         VStack(alignment: message.isCurrentUser ? .trailing : .leading) {
-            if !message.isCurrentUser {
-                Text(matchName)  // Display the match name
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-
             HStack {
                 if message.isCurrentUser {
                     Spacer()
@@ -46,14 +39,12 @@ struct ChatBubbleView_Previews: PreviewProvider {
         Group {
             // Preview for a message from the current user
             ChatBubbleView(
-                message: Message(id: "1", text: "Hi there!", isCurrentUser: true, date: Date()),
-                matchName: "Alex"
+                message: Message(id: "1", text: "Hi there!", isCurrentUser: true, date: Date())
             )
 
             // Preview for a message from the match
             ChatBubbleView(
-                message: Message(id: "2", text: "Hello!", isCurrentUser: false, date: Date()),
-                matchName: "Alex"
+                message: Message(id: "2", text: "Hello!", isCurrentUser: false, date: Date())
             )
         }
         .previewLayout(.sizeThatFits)

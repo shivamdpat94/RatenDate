@@ -72,6 +72,7 @@
 		3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */; };
 		3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */; };
 		3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */; };
+		3CDF421A2B5DFD19003B41AE /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */; };
 		3CE2C39B2B5C36F100CF3628 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */; };
 		3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */; };
 		3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39E2B5C371700CF3628 /* ChatView.swift */; };
@@ -126,6 +127,7 @@
 		3C94BB3E2B54F67F004FF584 /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsAndInterestsView.swift; sourceTree = "<group>"; };
 		3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoView.swift; sourceTree = "<group>"; };
+		3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewView.swift; sourceTree = "<group>"; };
 		3CE2C39E2B5C371700CF3628 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				3C94BB402B559F6A004FF584 /* TraitsAndInterestsView.swift */,
 				3C94BB422B55A19F004FF584 /* PersonalInfoView.swift */,
 				3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */,
+				3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				683DC1EA2B5C4BC40079CB7D /* AWS.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
+				3CDF421A2B5DFD19003B41AE /* AsyncImageView.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
 				3C7E102D2B45C11B00C3E663 /* FirebaseService.swift in Sources */,
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
