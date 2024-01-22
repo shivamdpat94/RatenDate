@@ -48,7 +48,7 @@ struct SequentialSignUpView: View {
     @State private var alcohol = ""
     @State private var cigerettes = ""
     @State private var drugs = ""
-    @state private var isPremium = false
+    @State private var isPremium = false
     
 
 
