@@ -4,13 +4,14 @@ class ImageCache {
     static let shared = ImageCache()
     private init() {}
 
-    var cache: [String: UIImage] = [:]
+    var images: [String: UIImage] = [:]
 
-    func image(forKey key: String) -> UIImage? {
-        return cache[key]
+    // Corrected method signatures
+    func getImage(forKey key: String) -> UIImage? {
+        return images[key]
     }
 
     func setImage(_ image: UIImage, forKey key: String) {
-        cache[key] = image
+        images[key] = image
     }
 }

@@ -16,8 +16,7 @@ struct ProfileView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(profile.photoURLs, id: \.self) { photoURL in
-                    if let image = ImageCache.shared.image(forKey: photoURL) {
-                        // Load from cache
+                    if let image = ImageCache.shared.getImage(forKey: photoURL) { // Corrected method call
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
