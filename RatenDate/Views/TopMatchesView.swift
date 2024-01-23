@@ -10,16 +10,9 @@ struct TopMatchesView: View {
             HStack(spacing: 10) {
                 ForEach(matches) { match in
                     NavigationLink(destination: ChatView(match: match)) {
-                        if let photoURL = photoURLs[match.matchedUserEmail] {
-                            MatchPhotoView(match: match, photoURLs: $photoURLs)
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(10)
-                        } else {
-                            Rectangle()
-                                .fill(Color.gray)
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(10)
-                        }
+                        MatchPhotoView(match: match, photoURLs: $photoURLs)
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(10)
                     }
                 }
             }
@@ -27,6 +20,8 @@ struct TopMatchesView: View {
         }
     }
 }
+
+
 struct MatchPhotoView: View {
     var match: Match
     @Binding var photoURLs: [String: String]
@@ -36,23 +31,20 @@ struct MatchPhotoView: View {
             if let photoURL = photoURLs[match.matchedUserEmail], let image = ImageCache.shared.getImage(forKey: photoURL) {
                 Image(uiImage: image)
                     .resizable()
-                    .frame(width: 100, height: 100)
-                    .cornerRadius(10)
             } else {
                 // Placeholder if the image is not available in the cache
                 Rectangle()
                     .fill(Color.gray)
-                    .frame(width: 100, height: 100)
-                    .cornerRadius(10)
             }
         }
+        .frame(width: 100, height: 100)
+        .cornerRadius(10)
         .onAppear {
             fetchFirstPhotoURL(matchEmail: match.matchedUserEmail)
         }
     }
-
     private func fetchFirstPhotoURL(matchEmail: String) {
-        print("matchEmail is ", matchEmail)
+        print("fetchFirstPhotoURL called for \(matchEmail)")
         guard !matchEmail.isEmpty else { return }
 
         let db = Firestore.firestore()
@@ -68,9 +60,6 @@ struct MatchPhotoView: View {
         }
     }
 }
-
-
-
 
 struct TopMatchesView_Previews: PreviewProvider {
     static var previews: some View {

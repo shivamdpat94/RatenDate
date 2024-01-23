@@ -62,6 +62,7 @@ struct MainTabView: View {
             .onAppear {
                 self.isLoginSuccessful = true
                 fetchProfiles()
+                preloadMatchData() // Call preloadMatchData here
 
             }
         }
@@ -97,12 +98,14 @@ struct MainTabView: View {
     }
     // Add this method to MainTabView
     private func preloadMatchData() {
+        print("in preload matchdata")
         guard let email = sessionManager.email else { return }
         let db = Firestore.firestore()
 
         db.collection("profiles").document(email).getDocument { (document, error) in
             if let document = document, document.exists, let profileData = document.data(),
                let matchSet = profileData["matchSet"] as? [String] {
+                print("preloadImagesforMatches")
                 self.preloadImagesForMatches(matchSet: matchSet, db: db)
             } else {
                 print("Document does not exist or error: \(error?.localizedDescription ?? "Unknown error")")
@@ -123,6 +126,7 @@ struct MainTabView: View {
                         if let userDoc = userDoc, userDoc.exists,
                            let userData = userDoc.data(),
                            let photoURLs = userData["photoURLs"] as? [String], !photoURLs.isEmpty {
+                            print("DownloadandcacheImage")
                             self.downloadAndCacheImage(from: photoURLs[0])
                         }
                     }
