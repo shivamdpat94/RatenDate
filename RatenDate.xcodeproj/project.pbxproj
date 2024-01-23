@@ -93,6 +93,7 @@
 		683DC1EF2B5C4EAD0079CB7D /* SotoRekognition in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */; };
 		683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1F02B5C4EB60079CB7D /* SotoS3 */; };
 		686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */; };
+		686104DC2B5F48CB006489AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686104DB2B5F48CB006489AA /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +142,8 @@
 		683DC1E92B5C4BC40079CB7D /* AWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionManager.swift; sourceTree = "<group>"; };
+		686104DA2B5F48BD006489AA /* RatenDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RatenDate.entitlements; sourceTree = "<group>"; };
+		686104DB2B5F48CB006489AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +186,7 @@
 				3C5709DD2B435C3D008CEDF6 /* FirebaseAppCheck in Frameworks */,
 				3C570A032B435FB2008CEDF6 /* FirebaseFirestore in Frameworks */,
 				3C570A0F2B435FB2008CEDF6 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
+				686104DC2B5F48CB006489AA /* StoreKit.framework in Frameworks */,
 				3C5709EF2B435FB2008CEDF6 /* FirebaseAnalyticsSwift in Frameworks */,
 				3C570A0B2B435FB2008CEDF6 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				3C570A1D2B435FB2008CEDF6 /* FirebaseStorage in Frameworks */,
@@ -228,6 +232,7 @@
 		3C5709B22B434C54008CEDF6 /* RatenDate */ = {
 			isa = PBXGroup;
 			children = (
+				686104DA2B5F48BD006489AA /* RatenDate.entitlements */,
 				3C2FE5DB2B4CDC84007F5429 /* Font */,
 				3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */,
 				3C5709C42B435374008CEDF6 /* Models */,
@@ -301,6 +306,7 @@
 		683DC1EB2B5C4DD80079CB7D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				686104DB2B5F48CB006489AA /* StoreKit.framework */,
 				683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */,
 			);
 			name = Frameworks;
@@ -595,6 +601,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RatenDate/RatenDate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RatenDate/Preview Content\"";
@@ -627,6 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RatenDate/RatenDate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RatenDate/Preview Content\"";
