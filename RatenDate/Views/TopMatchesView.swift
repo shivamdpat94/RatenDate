@@ -11,9 +11,9 @@ struct TopMatchesView: View {
                 ForEach(matches) { match in
                     NavigationLink(destination: ChatView(match: match)) {
                         if let photoURL = photoURLs[match.matchedUserEmail] {
-                            AsyncImageView(imageURL: photoURL) // Your view to load image from URL
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(10)
+                            MatchPhotoView(match: match, photoURLs: $photoURLs)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10)
                         } else {
                             Rectangle()
                                 .fill(Color.gray)
@@ -33,11 +33,17 @@ struct MatchPhotoView: View {
 
     var body: some View {
         Group {
-            if let photoURL = photoURLs[match.matchedUserEmail] {
-                AsyncImageView(imageURL: photoURL) // Your view to load image from URL
+            if let photoURL = photoURLs[match.matchedUserEmail], let image = ImageCache.shared.getImage(forKey: photoURL) {
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .cornerRadius(10)
             } else {
+                // Placeholder if the image is not available in the cache
                 Rectangle()
                     .fill(Color.gray)
+                    .frame(width: 100, height: 100)
+                    .cornerRadius(10)
             }
         }
         .onAppear {

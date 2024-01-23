@@ -1,10 +1,13 @@
 import SwiftUI
+import Firebase
+
 
 struct MainTabView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var isLoginSuccessful: Bool = false
     @State private var profiles: [Profile] = []
     @State private var selectedTab: Int = 0 // Track the selected tab
+    @EnvironmentObject var sessionManager: UserSessionManager
 
     var body: some View {
         VStack(spacing: 0) {
@@ -92,6 +95,55 @@ struct MainTabView: View {
                 $0.colorInvert()
             }
     }
+    // Add this method to MainTabView
+    private func preloadMatchData() {
+        guard let email = sessionManager.email else { return }
+        let db = Firestore.firestore()
+
+        db.collection("profiles").document(email).getDocument { (document, error) in
+            if let document = document, document.exists, let profileData = document.data(),
+               let matchSet = profileData["matchSet"] as? [String] {
+                self.preloadImagesForMatches(matchSet: matchSet, db: db)
+            } else {
+                print("Document does not exist or error: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+
+    private func preloadImagesForMatches(matchSet: [String], db: Firestore) {
+        for chatID in matchSet {
+            // Fetch chat details
+            db.collection("Chats").document(chatID).getDocument { (document, error) in
+                if let document = document, document.exists,
+                   let chatData = document.data(),
+                   let participants = chatData["participants"] as? [String],
+                   let matchedUserEmail = participants.first(where: { $0 != self.sessionManager.email }) {
+                    // Fetch user profile for image URL
+                    db.collection("profiles").document(matchedUserEmail).getDocument { (userDoc, userError) in
+                        if let userDoc = userDoc, userDoc.exists,
+                           let userData = userDoc.data(),
+                           let photoURLs = userData["photoURLs"] as? [String], !photoURLs.isEmpty {
+                            self.downloadAndCacheImage(from: photoURLs[0])
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func downloadAndCacheImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    ImageCache.shared.setImage(image, forKey: urlString)
+                }
+            }
+        }.resume()
+    }
+
+
+    
 }
 
 // Extension to conditionally apply modifiers
