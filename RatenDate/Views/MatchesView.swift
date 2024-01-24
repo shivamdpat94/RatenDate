@@ -27,6 +27,10 @@ struct MatchesView: View {
             .navigationTitle("LEMONLIME")
         }
         .onAppear(perform: fetchMatchData)
+        .onDisappear {
+            // Reset selectedChatID when leaving the view
+            self.selectedChatID = ""
+        }
     }
 
     private func createMatchNavigationLink(match: Match) -> some View {
@@ -37,7 +41,7 @@ struct MatchesView: View {
                 set: { _ in }
             )
         ) {
-            ChatPreviewView(match: match)
+            ChatPreviewView(match: match, photoURLs: $allPhotoURLs )
                 .onTapGesture {
                     self.selectedChatID = match.id
                     // You can also update any other state here as needed
