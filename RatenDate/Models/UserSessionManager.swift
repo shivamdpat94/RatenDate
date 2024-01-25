@@ -69,18 +69,34 @@ class UserSessionManager: ObservableObject {
     // Sign-up method with improved error handling
     func signUp(email: String, password: String, completion: @escaping (Bool, String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let self = self else { return }
+            
             if let error = error {
                 print("Sign up error: \(error.localizedDescription)")
                 completion(false, error.localizedDescription)
             } else if let email = authResult?.user.email {
-                self?.email = email
-                self?.isAuthenticated = true
-                completion(true, nil)
+                // Update class properties
+                self.email = email
+                self.isAuthenticated = true
+                
+                // Fetch and update FCM token after successful sign-up
+                FCMTokenManager.fetchFCMToken { token in
+                    guard let token = token else {
+                        completion(true, "User created but failed to fetch FCM token.")
+                        return
+                    }
+                    
+                    // Update the user's FCM token in Firestore or your backend
+                    FCMTokenManager.updateUserFCMToken(email: email, token: token) {
+                        completion(true, nil) // Complete the sign-up process
+                    }
+                }
             } else {
                 completion(false, "Failed to retrieve user email.")
             }
         }
     }
+
 
     
     
