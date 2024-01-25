@@ -95,6 +95,7 @@
 		683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1F02B5C4EB60079CB7D /* SotoS3 */; };
 		686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */; };
 		686104DC2B5F48CB006489AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686104DB2B5F48CB006489AA /* StoreKit.framework */; };
+		68DF24FE2B620A4100A0368F /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF24FD2B620A4100A0368F /* MessageRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionManager.swift; sourceTree = "<group>"; };
 		686104DA2B5F48BD006489AA /* RatenDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RatenDate.entitlements; sourceTree = "<group>"; };
 		686104DB2B5F48CB006489AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		68DF24FD2B620A4100A0368F /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 				3CE2C3AA2B5C46E600CF3628 /* MatchesView.swift */,
 				3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */,
 				3CDF421E2B60B28F003B41AE /* MatchPhotoView.swift */,
+				68DF24FD2B620A4100A0368F /* MessageRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
+				68DF24FE2B620A4100A0368F /* MessageRowView.swift in Sources */,
 				683DC1EA2B5C4BC40079CB7D /* AWS.swift in Sources */,
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
