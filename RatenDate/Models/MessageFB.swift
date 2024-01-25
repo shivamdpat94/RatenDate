@@ -6,19 +6,20 @@
 //
 
 import Foundation
-import FirebaseFirestore // Import Firestore to use Timestamp
+import FirebaseFirestore
 
-struct MessageFB: Codable {
+struct MessageFB: Codable, Equatable, Identifiable {
+    
+    var id: String
     var text: String
-    var timestamp: Timestamp
-    var firstName: String
+    var timestamp: Date
     var email: String
 
-    // Initialize the struct with all properties
-    init(text: String, timestamp: Timestamp = Timestamp(date: Date()), firstName: String, email: String) {
+    // Modified initializer to include 'id'
+    init(id: String = UUID().uuidString, text: String, timestamp: Date = Date(), email: String) {
+        self.id = id
         self.text = text
         self.timestamp = timestamp
-        self.firstName = firstName
         self.email = email
     }
 
@@ -26,8 +27,7 @@ struct MessageFB: Codable {
     var dictionary: [String: Any] {
         return [
             "text": text,
-            "timestamp": timestamp,
-            "firstName": firstName,
+            "timestamp": Timestamp(date: timestamp),  // Convert Date to Firestore Timestamp
             "email": email
         ]
     }

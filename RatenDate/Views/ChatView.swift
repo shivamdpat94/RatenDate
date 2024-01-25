@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct ChatView: View {
     
     var match: Match
     @State private var newMessageText = ""
     @EnvironmentObject var sessionManager: UserSessionManager
-    @State private var messages: [Message] = []
-
+    @State private var messages: [MessageFB] = []
     
     
     private func dateString(from date: Date) -> String {
@@ -22,27 +22,70 @@ struct ChatView: View {
         return formatter.string(from: date)
     }
     
-    private func isFirstMessageOfDay(at index: Int) -> Bool {
+    private func isFirstMessageOfDay(message: MessageFB) -> Bool {
+        guard let index = messages.firstIndex(where: { $0.id == message.id }) else {
+            return false
+        }
+
         if index == 0 {
             return true
         } else {
-            let calendar = Calendar.current
-            let prevDate = messages[index - 1].date
-            let currentDate = messages[index].date
-            return !calendar.isDate(prevDate, inSameDayAs: currentDate)
+            let prevDate = messages[index - 1].timestamp
+            let currentDate = message.timestamp
+            return !Calendar.current.isDate(prevDate, inSameDayAs: currentDate)
         }
     }
 
-    private func isLastMessageOfDay(at index: Int) -> Bool {
+    private func isLastMessageOfDay(message: MessageFB) -> Bool {
+        guard let index = messages.firstIndex(where: { $0.id == message.id }) else {
+            return false
+        }
+
         if index == messages.count - 1 {
             return true
         } else {
-            let calendar = Calendar.current
-            let currentDate = messages[index].date
-            let nextDate = messages[index + 1].date
-            return !calendar.isDate(currentDate, inSameDayAs: nextDate)
+            let currentDate = message.timestamp
+            let nextDate = messages[index + 1].timestamp
+            return !Calendar.current.isDate(currentDate, inSameDayAs: nextDate)
         }
     }
+    
+    private func loadMessages() {
+        let db = Firestore.firestore()
+        db.collection("Chats").document(match.id).collection("Messages")
+            .order(by: "timestamp", descending: false)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents in 'Messages'")
+                    return
+                }
+                self.messages = documents.map { queryDocumentSnapshot -> MessageFB in
+                    let data = queryDocumentSnapshot.data()
+                    let id = queryDocumentSnapshot.documentID
+                    let text = data["text"] as? String ?? ""
+                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                    let email = data["email"] as? String ?? ""
+                    return MessageFB(id: id, text: text, timestamp: timestamp, email: email)
+                }
+            }
+    }
+
+    
+    
+    func storeMessageFB(in chatID: String, message: MessageFB) {
+        let db = Firestore.firestore()
+        let messagesRef = db.collection("Chats").document(chatID).collection("Messages")
+
+        messagesRef.addDocument(data: message.dictionary) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Message successfully stored!")
+            }
+        }
+    }
+
+
 
     var body: some View {
         NavigationView {
@@ -50,18 +93,13 @@ struct ChatView: View {
                 ScrollViewReader { scrollView in
                     ScrollView {
                         LazyVStack(spacing: 4) {
-                            ForEach(messages.indices, id: \.self) { index in
-                                if isFirstMessageOfDay(at: index) {
-                                    Text(dateString(from: messages[index].date))
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                        .padding(.top, 8)
-                                }
-                                
-                                ChatBubbleView(message: messages[index])
-                                    .padding(.vertical, isLastMessageOfDay(at: index) ? 8 : 2)
-                                    .id(messages[index].id)
+                            ForEach(messages) { message in
+                                MessageRowView(
+                                    message: message,
+                                    isMessageFirstOfDay: isFirstMessageOfDay(message: message),
+                                    isMessageLastOfDay: isLastMessageOfDay(message: message)
+                                )
+                                .id(message.id)
                             }
                         }
                     }
@@ -96,12 +134,16 @@ struct ChatView: View {
                                             .edgesIgnoringSafeArea(.all) // Let the image extend to the edges
                                     )
         }.edgesIgnoringSafeArea(.top)
+         .onAppear {
+                loadMessages()
+            }
     }
     
     func sendMessage() {
         if !newMessageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            let newMessage = Message(id: UUID().uuidString, text: newMessageText, isCurrentUser: true, date: Date())
+            let newMessage = MessageFB(id: UUID().uuidString, text: newMessageText, email: sessionManager.email!)
             messages.append(newMessage)
+            storeMessageFB(in: match.id, message: newMessage)
             newMessageText = ""
         }
     }
