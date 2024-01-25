@@ -80,16 +80,29 @@ struct LoginView: View {
     func loginUser(email: String, password: String) {
         sessionManager.signIn(email: email, password: password) {
             if sessionManager.isAuthenticated {
-                // Navigate to MainTabView by replacing the root view
-                if let window = UIApplication.shared.windows.first {
-                    window.rootViewController = UIHostingController(rootView: MainTabView().environmentObject(sessionManager))
-                    window.makeKeyAndVisible()
+                // Fetch and update the FCM token after a successful login
+                FCMTokenManager.fetchFCMToken { token in
+                    guard let token = token else { return }
+                    
+                    // Update the user's FCM token in Firestore or your backend
+                    FCMTokenManager.updateUserFCMToken(email: email, token: token)
+                    
+                    // After updating the token, navigate to MainTabView
+                    DispatchQueue.main.async {
+                        if let window = UIApplication.shared.windows.first {
+                            window.rootViewController = UIHostingController(rootView: MainTabView().environmentObject(sessionManager))
+                            window.makeKeyAndVisible()
+                        }
+                    }
                 }
             } else {
-                self.errorMessage = "Failed to login. Please check your credentials."
+                DispatchQueue.main.async {
+                    self.errorMessage = "Failed to login. Please check your credentials."
+                }
             }
         }
     }
+
 }
 
 struct LoginView_Previews: PreviewProvider {

@@ -31,6 +31,7 @@ struct TopMatchesView_Previews: PreviewProvider {
             Match(id: "2", name: "Sam", image: "image2", lastMessage: "Hi there", messageDate: Date(), matchedUserEmail: "Sam@gmail.com")
         ]
 
+        
         // Create a dummy photoURLs dictionary
         let dummyPhotoURLs = [
             "Alex@gmail.com": "https://example.com/photo1.jpg",
