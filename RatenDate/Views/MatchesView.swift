@@ -88,7 +88,7 @@ struct MatchesView: View {
         }
     }
 
-    private func createMatch(chatID: String, hasMessages: Bool, completion: @escaping (Match) -> Void) {
+    public func createMatch(chatID: String, hasMessages: Bool, completion: @escaping (Match) -> Void) {
         let db = Firestore.firestore()
 
         db.collection("Chats").document(chatID).getDocument { (document, error) in

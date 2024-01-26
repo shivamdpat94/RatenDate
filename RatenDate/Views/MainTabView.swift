@@ -27,7 +27,7 @@ struct MainTabView: View {
                     }
                     .tag(0)
 
-                RateView()
+                SessionListView()
                     .tabItem {
                         tabIcon("rate favicon-32x32", isSelected: selectedTab == 1)
                         Text("Ratings")

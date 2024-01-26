@@ -4,10 +4,12 @@ import UserNotifications
 import FirebaseMessaging
 
 // Define a custom AppDelegate
-class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Configure Firebase
         FirebaseApp.configure()
+
+        UNUserNotificationCenter.current().delegate = self
 
         // Request notification permission
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
@@ -18,6 +20,18 @@ class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Set Messaging delegate
         Messaging.messaging().delegate = self
 
+        
+        
+        
+        // Check if launched from notification
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+            handleNotification(notification)
+        }
+        
+        
+        
+        
+        
         
         // Fetch and update FCM token if the user is already logged in
         if let email = Auth.auth().currentUser?.email {
@@ -31,6 +45,35 @@ class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         return true
     }
+    
+    
+    
+    // Handle incoming notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound]) // Customize as needed
+    }
+
+    // Handle notification interaction
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        handleNotification(userInfo)
+        completionHandler()
+    }
+
+    private func handleNotification(_ notification: [AnyHashable: Any]) {
+        // Your existing logic here
+        if let matchId = notification["matchId"] as? String {
+            // Navigate to the chat screen using matchId
+            // Implementation depends on your app's structure
+        }
+    }
+
+    
+    
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Here you can send the deviceToken to Firebase or your server if needed
