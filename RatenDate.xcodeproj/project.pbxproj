@@ -13,6 +13,7 @@
 		3C2FE5D62B4CDA18007F5429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */; };
 		3C2FE5DD2B4CDC94007F5429 /* Allura-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */; };
 		3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5E12B4FA7A2007F5429 /* testview.swift */; };
+		3C351CD02B65757700B6BD0C /* FindCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C351CCF2B65757700B6BD0C /* FindCallView.swift */; };
 		3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */; };
 		3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B52B434C54008CEDF6 /* ContentView.swift */; };
 		3C5709BB2B434C56008CEDF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allura-Regular.ttf"; sourceTree = "<group>"; };
 		3C2FE5DE2B4CDC99007F5429 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		3C2FE5E12B4FA7A2007F5429 /* testview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview.swift; sourceTree = "<group>"; };
+		3C351CCF2B65757700B6BD0C /* FindCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCallView.swift; sourceTree = "<group>"; };
 		3C5709B02B434C54008CEDF6 /* RatenDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatenDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatenDateApp.swift; sourceTree = "<group>"; };
 		3C5709B52B434C54008CEDF6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */,
 				3CDF421E2B60B28F003B41AE /* MatchPhotoView.swift */,
 				68DF24FD2B620A4100A0368F /* MessageRowView.swift */,
+				3C351CCF2B65757700B6BD0C /* FindCallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3CDF421F2B60B28F003B41AE /* MatchPhotoView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
+				3C351CD02B65757700B6BD0C /* FindCallView.swift in Sources */,
 				3CE2C3AB2B5C46E600CF3628 /* MatchesView.swift in Sources */,
 				3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */,
 				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,

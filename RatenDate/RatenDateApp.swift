@@ -3,44 +3,91 @@ import Firebase
 import UserNotifications
 import FirebaseMessaging
 
-// Define a custom AppDelegate
-class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        // Configure Firebase
+class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        configureNotification(application: application)
+        checkLaunchFromNotification(launchOptions: launchOptions)
+        print("Print0")
 
-        // Request notification permission
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            // Handle the granted permission or error
-        }
-        application.registerForRemoteNotifications() // Register for remote notifications
+        // Set up Firebase Auth state listener
+        setupFirebaseAuthStateListener()
 
-        // Set Messaging delegate
-        Messaging.messaging().delegate = self
-
-        
-        // Fetch and update FCM token if the user is already logged in
-        if let email = Auth.auth().currentUser?.email {
-            fetchFCMToken { token in
-                guard let token = token else { return }
-                
-                // Update the user's FCM token in Firestore or your backend
-                self.updateUserFCMToken(email: email, token: token)
-            }
-        }
-        
         return true
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // Here you can send the deviceToken to Firebase or your server if needed
+    private func setupFirebaseAuthStateListener() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let email = user?.email {
+                print("Print1")
+                FCMTokenManager.fetchFCMToken { token in
+                    if let token = token {
+                        print("Print2")
+                        FCMTokenManager.updateUserFCMToken(email: email, token: token)
+                    }
+                }
+            }
+        }
     }
-
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("FAILED TO REGISTER FOR REMOTE NOTIFCATIONS!")
+    private func configureNotification(application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        requestNotificationPermission(application: application)
     }
     
-    func updateUserFCMToken(email: String, token: String) {
+    
+    
+
+
+    
+
+    
+    
+    private func requestNotificationPermission(application: UIApplication) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+            print("Permission granted: \(granted)")
+            guard granted else { return }
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+    }
+
+    private func checkLaunchFromNotification(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+            handleNotification(notification)
+        }
+    }
+
+    // Handle incoming notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound]) // Customize as needed
+    }
+
+    // Handle notification interaction
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        handleNotification(userInfo)
+        completionHandler()
+    }
+
+    private func handleNotification(_ notification: [AnyHashable: Any]) {
+        if let matchId = notification["matchId"] as? String {
+            // Navigate to the chat screen using matchId
+            // Implementation depends on your app's structure
+        }
+    }
+
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        if let email = Auth.auth().currentUser?.email, let fcmToken = fcmToken {
+            updateUserFCMToken(email: email, token: fcmToken)
+        }
+    }
+    private func updateUserFCMToken(email: String, token: String) {
         let usersRef = Firestore.firestore().collection("users")
         let userDoc = usersRef.document(email)
 
@@ -48,30 +95,42 @@ class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             if let error = error {
                 print("Error updating FCM token: \(error)")
             } else {
-                print("FCM token updated successfully")
+                print("FCM token updated successfully for \(email)")
             }
         }
-    }
-    
-    func fetchFCMToken(completion: @escaping (String?) -> Void) {
-        Messaging.messaging().token { token, error in
-            if let error = error {
-                print("Error fetching FCM registration token: \(error)")
-                completion(nil)
-            } else if let token = token {
-                print("FCM registration token: \(token)")
-                completion(token)
-            }
-        }
-    }
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        guard let fcmToken = fcmToken else { return }
-        
-        // Implement logic to send the token to your server or store it in Firestore associated with the user's profile
-        print("FCM Token: \(fcmToken)")
     }
 
-    // Add other necessary AppDelegate methods if needed
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+        print("fetching and updating token")
+        fetchAndUpdateFCMToken()
+    }
+
+
+
+
+    private func fetchAndUpdateFCMToken() {
+        if let email = Auth.auth().currentUser?.email {
+            // Delay the token fetching process
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Delay of 5 seconds
+                Messaging.messaging().token { [weak self] token, error in
+                    if let error = error {
+                        print("Error fetching FCM token: \(error)")
+                    } else if let token = token {
+                        // Using 'self?' to safely unwrap and call the method on 'self'
+                        self?.updateUserFCMToken(email: email, token: token)
+                    }
+                }
+            }
+        }
+    }
+
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("FAILED TO REGISTER FOR REMOTE NOTIFICATIONS: \(error)")
+    }
+    
+
 }
 
 @main
