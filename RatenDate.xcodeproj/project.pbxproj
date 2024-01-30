@@ -13,6 +13,7 @@
 		3C2FE5D62B4CDA18007F5429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D52B4CDA18007F5429 /* Assets.xcassets */; };
 		3C2FE5DD2B4CDC94007F5429 /* Allura-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */; };
 		3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5E12B4FA7A2007F5429 /* testview.swift */; };
+		3C351CD02B65757700B6BD0C /* FindCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C351CCF2B65757700B6BD0C /* FindCallView.swift */; };
 		3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */; };
 		3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5709B52B434C54008CEDF6 /* ContentView.swift */; };
 		3C5709BB2B434C56008CEDF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C5709BA2B434C56008CEDF6 /* Preview Assets.xcassets */; };
@@ -75,12 +76,6 @@
 		3CDF421A2B5DFD19003B41AE /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */; };
 		3CDF421F2B60B28F003B41AE /* MatchPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF421E2B60B28F003B41AE /* MatchPhotoView.swift */; };
 		3CDF42212B6221F4003B41AE /* FCMTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42202B6221F4003B41AE /* FCMTokenManager.swift */; };
-		3CDF42242B634A16003B41AE /* CallSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42232B634A16003B41AE /* CallSession.swift */; };
-		3CDF42262B634A95003B41AE /* CallSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42252B634A95003B41AE /* CallSessionManager.swift */; };
-		3CDF42282B634AB3003B41AE /* SessionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42272B634AB3003B41AE /* SessionListView.swift */; };
-		3CDF422A2B634AE2003B41AE /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF42292B634AE2003B41AE /* SessionDetailView.swift */; };
-		3CDF422C2B634AFE003B41AE /* CreateSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF422B2B634AFE003B41AE /* CreateSessionView.swift */; };
-		3CDF422E2B634EC3003B41AE /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDF422D2B634EC3003B41AE /* WaitingView.swift */; };
 		3CE2C39B2B5C36F100CF3628 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */; };
 		3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */; };
 		3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C39E2B5C371700CF3628 /* ChatView.swift */; };
@@ -113,6 +108,7 @@
 		3C2FE5DC2B4CDC94007F5429 /* Allura-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Allura-Regular.ttf"; sourceTree = "<group>"; };
 		3C2FE5DE2B4CDC99007F5429 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		3C2FE5E12B4FA7A2007F5429 /* testview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview.swift; sourceTree = "<group>"; };
+		3C351CCF2B65757700B6BD0C /* FindCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCallView.swift; sourceTree = "<group>"; };
 		3C5709B02B434C54008CEDF6 /* RatenDate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatenDate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5709B32B434C54008CEDF6 /* RatenDateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatenDateApp.swift; sourceTree = "<group>"; };
 		3C5709B52B434C54008CEDF6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,12 +136,6 @@
 		3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		3CDF421E2B60B28F003B41AE /* MatchPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPhotoView.swift; sourceTree = "<group>"; };
 		3CDF42202B6221F4003B41AE /* FCMTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenManager.swift; sourceTree = "<group>"; };
-		3CDF42232B634A16003B41AE /* CallSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallSession.swift; sourceTree = "<group>"; };
-		3CDF42252B634A95003B41AE /* CallSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallSessionManager.swift; sourceTree = "<group>"; };
-		3CDF42272B634AB3003B41AE /* SessionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListView.swift; sourceTree = "<group>"; };
-		3CDF42292B634AE2003B41AE /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
-		3CDF422B2B634AFE003B41AE /* CreateSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionView.swift; sourceTree = "<group>"; };
-		3CDF422D2B634EC3003B41AE /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		3CE2C39A2B5C36F100CF3628 /* ChatBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewView.swift; sourceTree = "<group>"; };
 		3CE2C39E2B5C371700CF3628 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -274,7 +264,6 @@
 		3C5709C12B434D48008CEDF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3CDF42222B6349F3003B41AE /* CallSession */,
 				3C5709B52B434C54008CEDF6 /* ContentView.swift */,
 				3C5709CB2B435575008CEDF6 /* GenericInfoView.swift */,
 				3C7E10322B45C42A00C3E663 /* ProfileStackView.swift */,
@@ -301,6 +290,7 @@
 				3CDF42192B5DFD19003B41AE /* AsyncImageView.swift */,
 				3CDF421E2B60B28F003B41AE /* MatchPhotoView.swift */,
 				68DF24FD2B620A4100A0368F /* MessageRowView.swift */,
+				3C351CCF2B65757700B6BD0C /* FindCallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,21 +311,8 @@
 				3CE2C3AE2B5CC16E00CF3628 /* ImageManipulation.swift */,
 				686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */,
 				3CDF42202B6221F4003B41AE /* FCMTokenManager.swift */,
-				3CDF42232B634A16003B41AE /* CallSession.swift */,
-				3CDF42252B634A95003B41AE /* CallSessionManager.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		3CDF42222B6349F3003B41AE /* CallSession */ = {
-			isa = PBXGroup;
-			children = (
-				3CDF42272B634AB3003B41AE /* SessionListView.swift */,
-				3CDF42292B634AE2003B41AE /* SessionDetailView.swift */,
-				3CDF422B2B634AFE003B41AE /* CreateSessionView.swift */,
-				3CDF422D2B634EC3003B41AE /* WaitingView.swift */,
-			);
-			path = CallSession;
 			sourceTree = "<group>";
 		};
 		683DC1EB2B5C4DD80079CB7D /* Frameworks */ = {
@@ -477,9 +454,7 @@
 				3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */,
 				3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */,
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
-				3CDF422A2B634AE2003B41AE /* SessionDetailView.swift in Sources */,
 				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
-				3CDF42242B634A16003B41AE /* CallSession.swift in Sources */,
 				3C7E103B2B48E0F100C3E663 /* UserSessionManager.swift in Sources */,
 				3C5709C62B4353A6008CEDF6 /* Profile.swift in Sources */,
 				3C2FE5E22B4FA7A2007F5429 /* testview.swift in Sources */,
@@ -487,6 +462,7 @@
 				3C7E103D2B48E2BB00C3E663 /* SettingsView.swift in Sources */,
 				3CDF421F2B60B28F003B41AE /* MatchPhotoView.swift in Sources */,
 				3C94BB412B559F6A004FF584 /* TraitsAndInterestsView.swift in Sources */,
+				3C351CD02B65757700B6BD0C /* FindCallView.swift in Sources */,
 				3CE2C3AB2B5C46E600CF3628 /* MatchesView.swift in Sources */,
 				3CE2C3A72B5C37A700CF3628 /* Message.swift in Sources */,
 				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,
@@ -498,11 +474,8 @@
 				3C570A4F2B44F71C008CEDF6 /* LocationManager.swift in Sources */,
 				3C5709B42B434C54008CEDF6 /* RatenDateApp.swift in Sources */,
 				3CDF421A2B5DFD19003B41AE /* AsyncImageView.swift in Sources */,
-				3CDF42262B634A95003B41AE /* CallSessionManager.swift in Sources */,
-				3CDF422E2B634EC3003B41AE /* WaitingView.swift in Sources */,
 				3C570A252B43C4B7008CEDF6 /* PhotoUploadView.swift in Sources */,
 				3C7E102D2B45C11B00C3E663 /* FirebaseService.swift in Sources */,
-				3CDF422C2B634AFE003B41AE /* CreateSessionView.swift in Sources */,
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
 				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
@@ -512,7 +485,6 @@
 				3C7E103F2B48E2EA00C3E663 /* MainTabView.swift in Sources */,
 				3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */,
 				3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */,
-				3CDF42282B634AB3003B41AE /* SessionListView.swift in Sources */,
 				3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */,
 				3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */,
 			);

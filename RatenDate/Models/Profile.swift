@@ -41,6 +41,8 @@ struct Profile: Identifiable {
     var matchSet: Set<String>
     var dislikeSet: Set<String>
     var isPremium: Bool
+    var isLookingForCall: Bool
+    var isInCall: Bool
     
     init(dictionary: [String: Any]) {
         self.id = dictionary["id"] as? String ?? UUID().uuidString
@@ -89,6 +91,8 @@ struct Profile: Identifiable {
         self.matchSet = Set(dictionary["matchSet"] as? [String] ?? [])
         self.dislikeSet = Set(dictionary["dislikeSet"] as? [String] ?? [])
         self.isPremium = dictionary["isPremium"] as? Bool ?? false
+        self.isLookingForCall = dictionary["isLookingForCall"] as? Bool ?? false
+        self.isInCall = dictionary["isInCall"] as? Bool ?? false
 
     }
 }
@@ -133,7 +137,10 @@ extension Profile {
             "interests": interests,
             "likeSet": Array(likeSet),
             "matchSet": Array(matchSet),
-            "dislikeSet": Array(dislikeSet)
+            "dislikeSet": Array(dislikeSet),
+            "isLookingForCall": false,
+            "isInCall": false
+            
         ]
     }
 }

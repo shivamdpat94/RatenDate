@@ -13,10 +13,15 @@ class UserSessionManager: ObservableObject {
     @Published var phoneNumber: String?
     @Published var isAuthenticated: Bool = false
     @Published var errorMessage: String?  // To hold error messages
-    
+
     init() {
         setupAuthListener()
     }
+    
+    
+
+    
+    
     
     func setupAuthListener() {
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
