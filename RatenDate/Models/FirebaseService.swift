@@ -6,10 +6,35 @@
 //
 
 import Firebase
+import FirebaseFirestore
+import WebRTC
 
 class FirebaseService {
-    let db = Firestore.firestore()
+    static let shared = FirebaseService()
+    private let db = Firestore.firestore()
 
+    init() {}
+
+    func uploadWebRTCOffer(offer: RTCSessionDescription, forUser email: String, completion: @escaping (Bool) -> Void) {
+        let offerDict: [String: Any] = ["type": "offer", "sdp": offer.sdp]
+        db.collection("WebRTCSignaling").document(email).setData(["offer": offerDict]) { error in
+            completion(error == nil)
+        }
+    }
+
+    func uploadWebRTCAnswer(answer: RTCSessionDescription, forUser email: String, completion: @escaping (Bool) -> Void) {
+        let answerDict: [String: Any] = ["type": "answer", "sdp": answer.sdp]
+        db.collection("WebRTCSignaling").document(email).updateData(["answer": answerDict]) { error in
+            completion(error == nil)
+        }
+    }
+
+    func uploadWebRTCIceCandidate(candidate: RTCIceCandidate, forUser email: String, completion: @escaping (Bool) -> Void) {
+        let candidateDict: [String: Any] = ["candidate": candidate.sdp, "sdpMid": candidate.sdpMid ?? "", "sdpMLineIndex": candidate.sdpMLineIndex]
+        db.collection("WebRTCSignaling").document(email).collection("candidates").addDocument(data: candidateDict) { error in
+            completion(error == nil)
+        }
+    }
     func fetchProfiles(completion: @escaping ([Profile]) -> Void) {
         db.collection("profiles").getDocuments { (querySnapshot, err) in
             if let err = err {

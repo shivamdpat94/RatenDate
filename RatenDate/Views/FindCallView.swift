@@ -4,30 +4,67 @@ import Firebase
 struct FindCallView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
     @State private var isLookingForCall = false
+    @State private var isMatched = false // State to track if the user is matched
     @State private var wasLookingForCallBeforeBackground = false // New state variable
     @State private var timerHasElapsed = false
     @State private var reactivationTimer: Timer?
 
     var body: some View {
-        Button(action: toggleLookingForCall) {
-            Text(isLookingForCall ? "Cancel Call" : "Find a Call")
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            wasLookingForCallBeforeBackground = isLookingForCall // Update state when going to background
-            if isLookingForCall {
-                setCallStatusInactive()
-                startReactivationTimer()
+        VStack {
+            Button(action: toggleLookingForCall) {
+                Text(isLookingForCall ? "Cancel Call" : "Find a Call")
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                wasLookingForCallBeforeBackground = isLookingForCall // Update state when going to background
+                if isLookingForCall {
+                    setCallStatusInactive()
+                    startReactivationTimer()
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                reactivationTimer?.invalidate()
+                if !isLookingForCall && wasLookingForCallBeforeBackground && !timerHasElapsed {
+                    toggleLookingForCall()
+                }
+                timerHasElapsed = false
+            }
+
+            // Conditional view for CallScreenView
+            if isMatched {
+                if let userEmail = sessionManager.email {
+                    CallScreenView()
+                        .environmentObject(WebRTCManager(userEmail: userEmail))
+                } else {
+                    // Handle the case where userEmail is not available
+                    Text("User email not available")
+                }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-            reactivationTimer?.invalidate()
-            if !isLookingForCall && wasLookingForCallBeforeBackground && !timerHasElapsed {
-                toggleLookingForCall()
-            }
-            timerHasElapsed = false
+        .onAppear {
+            listenForMatch()
         }
     }
 
+    
+    
+    // Listen for changes in CallWaiting document
+    private func listenForMatch() {
+        guard let email = sessionManager.email else { return }
+        let db = Firestore.firestore()
+        db.collection("CallWaiting").document(email)
+          .addSnapshotListener { documentSnapshot, error in
+              guard let document = documentSnapshot else {
+                  print("Error fetching document: \(error!)")
+                  return
+              }
+              if let matchedEmail = document.data()?["matchedEmail"] as? String {
+                  print("Match found with \(matchedEmail)")
+                  isMatched = true // Trigger navigation to CallScreenView
+              }
+          }
+    }
+    
+    
     private func setCallStatusInactive() {
         isLookingForCall = false
         updateCallStatusInFirestore()
