@@ -38,6 +38,7 @@ struct Profile: Identifiable {
     var drugs: String
     var interests: [String]
     var likeSet: Set<String>
+    var likeMeSet: Set<String>
     var matchSet: Set<String>
     var dislikeSet: Set<String>
     var isPremium: Bool
@@ -88,6 +89,7 @@ struct Profile: Identifiable {
         self.interests = dictionary["interests"] as? [String] ?? []
         self.images = []
         self.likeSet = Set(dictionary["likeSet"] as? [String] ?? [])
+        self.likeMeSet = Set(dictionary["likeMeSet"] as? [String] ?? [])
         self.matchSet = Set(dictionary["matchSet"] as? [String] ?? [])
         self.dislikeSet = Set(dictionary["dislikeSet"] as? [String] ?? [])
         self.isPremium = dictionary["isPremium"] as? Bool ?? false
@@ -136,6 +138,7 @@ extension Profile {
             "drugs": drugs,
             "interests": interests,
             "likeSet": Array(likeSet),
+            "likeMeSet": Array(likeMeSet),
             "matchSet": Array(matchSet),
             "dislikeSet": Array(dislikeSet),
             "isLookingForCall": false,
