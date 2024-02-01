@@ -86,6 +86,8 @@
 		3CE2C3AD2B5C55CE00CF3628 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3AC2B5C55CE00CF3628 /* ImageCache.swift */; };
 		3CE2C3AF2B5CC16E00CF3628 /* ImageManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2C3AE2B5CC16E00CF3628 /* ImageManipulation.swift */; };
 		3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */; };
+		681D44A02B6B22460049A627 /* LikesMeUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681D449F2B6B22460049A627 /* LikesMeUserView.swift */; };
+		681D44A22B6B3AA00049A627 /* LikesMeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681D44A12B6B3AA00049A627 /* LikesMeViewModel.swift */; };
 		683DC1E02B5C4B5C0079CB7D /* SotoACM in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1DF2B5C4B5C0079CB7D /* SotoACM */; };
 		683DC1E22B5C4B5C0079CB7D /* SotoACMPCA in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E12B5C4B5C0079CB7D /* SotoACMPCA */; };
 		683DC1E42B5C4B5C0079CB7D /* SotoAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1E32B5C4B5C0079CB7D /* SotoAPIGateway */; };
@@ -146,6 +148,8 @@
 		3CE2C3AC2B5C55CE00CF3628 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		3CE2C3AE2B5CC16E00CF3628 /* ImageManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManipulation.swift; sourceTree = "<group>"; };
 		3CEF4A3B2B5A231D00FADD91 /* MessageFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFB.swift; sourceTree = "<group>"; };
+		681D449F2B6B22460049A627 /* LikesMeUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeUserView.swift; sourceTree = "<group>"; };
+		681D44A12B6B3AA00049A627 /* LikesMeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeViewModel.swift; sourceTree = "<group>"; };
 		683DC1E92B5C4BC40079CB7D /* AWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionManager.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				3C2FE5CF2B4CB02B007F5429 /* RateView.swift */,
 				3CE2C39C2B5C36FE00CF3628 /* ChatPreviewView.swift */,
 				3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */,
+				681D449F2B6B22460049A627 /* LikesMeUserView.swift */,
 				3C2FE5E12B4FA7A2007F5429 /* testview.swift */,
 				3C94BB3C2B54F2A7004FF584 /* LifestyleView.swift */,
 				3CE2C3A42B5C377100CF3628 /* TopMatchesView.swift */,
@@ -311,6 +316,7 @@
 				3CE2C3AE2B5CC16E00CF3628 /* ImageManipulation.swift */,
 				686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */,
 				3CDF42202B6221F4003B41AE /* FCMTokenManager.swift */,
+				681D44A12B6B3AA00049A627 /* LikesMeViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -468,6 +474,7 @@
 				3CEF4A3C2B5A231D00FADD91 /* MessageFB.swift in Sources */,
 				3C5709CC2B435575008CEDF6 /* GenericInfoView.swift in Sources */,
 				3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */,
+				681D44A22B6B3AA00049A627 /* LikesMeViewModel.swift in Sources */,
 				3C570A292B43D054008CEDF6 /* ImagePicker.swift in Sources */,
 				68DF24FE2B620A4100A0368F /* MessageRowView.swift in Sources */,
 				683DC1EA2B5C4BC40079CB7D /* AWS.swift in Sources */,
@@ -486,6 +493,7 @@
 				3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */,
 				3CE2C39D2B5C36FE00CF3628 /* ChatPreviewView.swift in Sources */,
 				3C7E10412B49241900C3E663 /* LoadingView.swift in Sources */,
+				681D44A02B6B22460049A627 /* LikesMeUserView.swift in Sources */,
 				3C5709D22B435731008CEDF6 /* SequentialSignUpView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

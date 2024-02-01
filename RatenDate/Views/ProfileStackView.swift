@@ -112,7 +112,7 @@ struct ProfileStackView: View {
             guard var userProfile = currentUserProfile else { return }
             let currentUserEmail = userProfile.email
 
-            // Add liked profile's phone number to current user's likeSet
+            // Add liked profile's email to current user's likeSet
             userProfile.likeSet.insert(likedProfileEmail)
             
             // Update current user's profile
@@ -124,12 +124,24 @@ struct ProfileStackView: View {
                 }
             }
 
-            // Check if mutual like exists
-            print("Checking for mutual likes")
-            self.checkForMutualLike(currentUserEmail: currentUserEmail,
-                                    likedProfileEmail: likedProfileEmail)
+            // Add current user's email to liked profile's likeMeSet
+            FirebaseService().fetchProfile(email: likedProfileEmail) { likedProfile in
+                guard var likedUser = likedProfile else { return }
+                
+                likedUser.likeMeSet.insert(currentUserEmail)
+                
+                // Update liked user's profile
+                FirebaseService().updateProfile(profile: likedUser) { success in
+                    if success {
+                        print("Successfully updated liked user profile with current user's like.")
+                    } else {
+                        print("Failed to update liked user profile.")
+                    }
+                }
+            }
         }
     }
+
 
     private func checkForMutualLike(currentUserEmail: String, likedProfileEmail: String) {
         FirebaseService().fetchProfile(email: likedProfileEmail) { likedUserProfile in
