@@ -6,18 +6,26 @@ struct CallScreenView: View {
     var body: some View {
         VStack {
             if webRTCManager.isCallActive {
-                // Display the call interface
+                // Active call UI
+                Text("Call Connected")
+                // Include controls for muting, hanging up, etc.
             } else {
+                // Waiting for call to connect UI
                 Text("Waiting for call to connect...")
+                // Optionally include a cancel button
             }
         }
         .onAppear {
-            DispatchQueue.main.async {
-                webRTCManager.setupLocalMedia()
+            webRTCManager.setupLocalMedia()
+            if let currentCallId = webRTCManager.currentCallId, !currentCallId.isEmpty {
+                // Callee logic
+                webRTCManager.listenForOffer()
+                webRTCManager.startListeningForRemoteICECandidates()
+            } else {
+                // Caller logic
                 webRTCManager.initiateCall()
             }
         }
-
     }
 }
 

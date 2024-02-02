@@ -3,9 +3,10 @@ import Firebase
 
 struct FindCallView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
+    @EnvironmentObject var webRTCManager: WebRTCManager
     @State private var isLookingForCall = false
-    @State private var isMatched = false // State to track if the user is matched
-    @State private var wasLookingForCallBeforeBackground = false // New state variable
+    @State private var isMatched = false
+    @State private var wasLookingForCallBeforeBackground = false
     @State private var timerHasElapsed = false
     @State private var reactivationTimer: Timer?
 
@@ -15,7 +16,7 @@ struct FindCallView: View {
                 Text(isLookingForCall ? "Cancel Call" : "Find a Call")
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-                wasLookingForCallBeforeBackground = isLookingForCall // Update state when going to background
+                wasLookingForCallBeforeBackground = isLookingForCall
                 if isLookingForCall {
                     setCallStatusInactive()
                     startReactivationTimer()
@@ -29,13 +30,11 @@ struct FindCallView: View {
                 timerHasElapsed = false
             }
 
-            // Conditional view for CallScreenView
             if isMatched {
                 if let userEmail = sessionManager.email {
                     CallScreenView()
-                        .environmentObject(WebRTCManager(userEmail: userEmail))
+                        .environmentObject(webRTCManager)
                 } else {
-                    // Handle the case where userEmail is not available
                     Text("User email not available")
                 }
             }
@@ -45,26 +44,42 @@ struct FindCallView: View {
         }
     }
 
-    
-    
-    // Listen for changes in CallWaiting document
     private func listenForMatch() {
         guard let email = sessionManager.email else { return }
         let db = Firestore.firestore()
         db.collection("CallWaiting").document(email)
-          .addSnapshotListener { documentSnapshot, error in
-              guard let document = documentSnapshot else {
-                  print("Error fetching document: \(error!)")
-                  return
-              }
-              if let matchedEmail = document.data()?["matchedEmail"] as? String {
-                  print("Match found with \(matchedEmail)")
-                  isMatched = true // Trigger navigation to CallScreenView
-              }
-          }
+            .addSnapshotListener { documentSnapshot, error in
+                if let error = error {
+                    print("Error fetching document: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let document = documentSnapshot, document.exists, let matchedEmail = document.data()?["matchedEmail"] as? String else {
+                    print("No match found or document does not exist.")
+                    return
+                }
+
+                print("Match found with \(matchedEmail)")
+                self.isMatched = true // Trigger navigation to CallScreenView
+
+                self.createCallDocumentAndInitiateOffer(with: email, matchedEmail: matchedEmail)
+            }
     }
-    
-    
+
+    private func createCallDocumentAndInitiateOffer(with email: String, matchedEmail: String) {
+        FirebaseService.shared.createCallDocument(forUser: email, matchedUserEmail: matchedEmail) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let callId):
+                    // Now that you have a callId, you can initiate the offer
+                    self.webRTCManager.generateAndUploadOffer(callId: callId)
+                case .failure(let error):
+                    print("Failed to create call document: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
     private func setCallStatusInactive() {
         isLookingForCall = false
         updateCallStatusInFirestore()
@@ -77,8 +92,6 @@ struct FindCallView: View {
         }
     }
 
-    
-
     private func cancelCall() {
         guard let email = sessionManager.email else { return }
         let db = Firestore.firestore()
@@ -90,32 +103,22 @@ struct FindCallView: View {
                 // Remove matched user as well
                 let matchedUserDocRef = db.collection("CallWaiting").document(matchedEmail)
                 matchedUserDocRef.delete()
-                // Reset matched user's profile
                 db.collection("profiles").document(matchedEmail).updateData(["isLookingForCall": false])
             }
 
-            // Remove current user
             userDocRef.delete()
-            // Reset current user's profile
             db.collection("profiles").document(email).updateData(["isLookingForCall": false])
         }
     }
 
-    
-    
-    
     private func toggleLookingForCall() {
+        isLookingForCall.toggle()
         if isLookingForCall {
-            // Immediately set isLookingForCall to false when cancelling
-            isLookingForCall = false
-            cancelCall()
-        } else {
-            // Immediately set isLookingForCall to true when starting to look for a call
-            isLookingForCall = true
             updateCallStatusInFirestore()
+        } else {
+            cancelCall()
         }
     }
-
 
     private func updateCallStatusInFirestore() {
         guard let email = sessionManager.email else { return }
@@ -124,30 +127,18 @@ struct FindCallView: View {
         let userDocRef = db.collection("profiles").document(email)
         let callWaitingDocRef = db.collection("CallWaiting").document(email)
 
-        userDocRef.updateData(["isLookingForCall": isLookingForCall]) { error in
-            if let error = error {
-                print("Error updating user profile: \(error)")
-            }
-        }
-
+        userDocRef.updateData(["isLookingForCall": isLookingForCall])
         if isLookingForCall {
-            callWaitingDocRef.setData(["email": email]) { error in
-                if let error = error {
-                    print("Error adding to CallWaiting: \(error)")
-                }
-            }
+            callWaitingDocRef.setData(["email": email])
         } else {
-            callWaitingDocRef.delete() { error in
-                if let error = error {
-                    print("Error removing from CallWaiting: \(error)")
-                }
-            }
+            callWaitingDocRef.delete()
         }
     }
 }
 
 struct FindCallView_Previews: PreviewProvider {
     static var previews: some View {
-        FindCallView().environmentObject(UserSessionManager())
+        // Assuming "dummy@example.com" as a placeholder email address for preview purposes
+        FindCallView().environmentObject(UserSessionManager()).environmentObject(WebRTCManager(userEmail: "dummy@example.com"))
     }
 }

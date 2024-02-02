@@ -1,156 +1,218 @@
 import Foundation
 import WebRTC
-import Combine
 
 class WebRTCManager: NSObject, ObservableObject {
-    // WebRTC components
     private var peerConnectionFactory: RTCPeerConnectionFactory
     private var peerConnection: RTCPeerConnection?
-    private var localVideoTrack: RTCVideoTrack?
-    private var remoteVideoTrack: RTCVideoTrack?
-    private var userEmail: String
-
-    // Use Published property wrapper for properties that should update the UI
+    @Published var currentCallId: String?
     @Published var isCallActive: Bool = false
-
-    // Delegate for handling remote stream
-    weak var delegate: WebRTCManagerDelegate?
+    var userEmail: String // Add this line to store the user's email
 
     init(userEmail: String) {
         self.userEmail = userEmail
         let encoderFactory = RTCDefaultVideoEncoderFactory()
         let decoderFactory = RTCDefaultVideoDecoderFactory()
         self.peerConnectionFactory = RTCPeerConnectionFactory(encoderFactory: encoderFactory, decoderFactory: decoderFactory)
-
         super.init()
-        
-        self.initializePeerConnection()
+        initializePeerConnection()
     }
+    
+    
+    
+    func handleReceivedAnswer(_ answer: RTCSessionDescription) {
+        peerConnection?.setRemoteDescription(answer, completionHandler: { [weak self] error in
+            if let error = error {
+                print("Error setting remote description (answer): \(error)")
+            } else {
+                self?.isCallActive = true
+                print("Answer set successfully, call is active.")
+            }
+        })
+    }
+    
+    
+    func generateAndUploadOffer(callId: String) {
+        createOffer { [weak self] sdpOffer in
+            guard let sdpOffer = sdpOffer else { return }
+            // Assuming you have a method in FirebaseService to upload the offer
+            FirebaseService.shared.uploadWebRTCOffer(offer: sdpOffer, forCall: callId) { success in
+                if success {
+                    print("Offer successfully uploaded.")
+                } else {
+                    print("Failed to upload offer.")
+                }
+            }
+        }
+    }
+
+    // Add this method to listen for offers specifically for the callee
+    func listenForOffer() {
+        guard let callId = currentCallId else { return }
+        FirebaseService.shared.listenForOffer(callId: callId) { [weak self] offer in
+            guard let self = self, let offer = offer else { return }
+            self.peerConnection?.setRemoteDescription(offer, completionHandler: { error in
+                if let error = error {
+                    print("Error setting remote description: \(error)")
+                    return
+                }
+                // After setting the remote description, create and upload an answer
+                self.createAnswer { answer in
+                    guard let answer = answer else { return }
+                    FirebaseService.shared.uploadWebRTCAnswer(answer: answer, forCall: callId) { success in
+                        if success {
+                            print("Answer uploaded successfully.")
+                        } else {
+                            print("Failed to upload answer.")
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    // Call this method right after initializing the peer connection
+    func startListeningForRemoteICECandidates() {
+        guard let callId = currentCallId else { return }
+        FirebaseService.shared.listenForRemoteICECandidates(callId: callId) { [weak self] candidate in
+            guard let self = self, let candidate = candidate else { return }
+            self.peerConnection?.add(candidate)
+        }
+    }
+
+    func listenForAnswer() {
+        guard let callId = currentCallId else { return }
+        FirebaseService.shared.listenForAnswer(callId: callId) { [weak self] answer in
+            guard let self = self, let answer = answer else { return }
+            self.peerConnection?.setRemoteDescription(answer, completionHandler: { error in
+                if let error = error {
+                    print("Error setting remote description (answer): \(error)")
+                    return
+                }
+                // The call can now proceed with the established connection
+                self.isCallActive = true
+            })
+        }
+    }
+
+    func setupLocalMedia() {
+        let constraints = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: nil)
+        let audioSource = peerConnectionFactory.audioSource(with: constraints)
+        let audioTrack = peerConnectionFactory.audioTrack(with: audioSource, trackId: "audio0")
+        
+        // Add this track to the peer connection
+        peerConnection?.add(audioTrack, streamIds: ["stream0"])
+    }
+
+    func initiateCall() {
+        peerConnection?.offer(for: RTCMediaConstraints(mandatoryConstraints: ["OfferToReceiveAudio": "true"], optionalConstraints: nil), completionHandler: { [weak self] sdp, error in
+            guard let self = self, let sdp = sdp, error == nil else { return }
+            
+            self.peerConnection?.setLocalDescription(sdp, completionHandler: { error in
+                guard error == nil else { return }
+                
+                // Signal this offer SDP to the remote peer via your signaling server or mechanism
+                // This might involve calling a method on your FirebaseService to upload the offer to Firestore
+                FirebaseService.shared.uploadWebRTCOffer(offer: sdp, forCall: self.currentCallId ?? "", completion: { success in
+                    if success {
+                        print("Offer uploaded successfully")
+                    } else {
+                        print("Failed to upload offer")
+                    }
+                })
+            })
+        })
+    }
+
+    
     private func initializePeerConnection() {
         let configuration = RTCConfiguration()
         configuration.iceServers = [RTCIceServer(urlStrings: ["stun:stun.l.google.com:19302"])]
         let constraints = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: ["DtlsSrtpKeyAgreement": kRTCMediaConstraintsValueTrue])
         peerConnection = peerConnectionFactory.peerConnection(with: configuration, constraints: constraints, delegate: self)
     }
-
+    
     func createOffer(completion: @escaping (RTCSessionDescription?) -> Void) {
-        peerConnection?.offer(for: RTCMediaConstraints(mandatoryConstraints: ["OfferToReceiveAudio": "true", "OfferToReceiveVideo": "true"], optionalConstraints: nil), completionHandler: { (sdp, error) in
-            guard let offer = sdp else {
-                print("Error creating offer: \(String(describing: error))")
+        peerConnection?.offer(for: RTCMediaConstraints(mandatoryConstraints: ["OfferToReceiveAudio": "true"], optionalConstraints: nil), completionHandler: { sdp, error in
+            guard let sdp = sdp, error == nil else {
                 completion(nil)
                 return
             }
-            self.peerConnection?.setLocalDescription(offer, completionHandler: { (error) in
-                if let error = error {
-                    print("Error setting local description: \(error)")
+            self.peerConnection?.setLocalDescription(sdp, completionHandler: { error in
+                guard error == nil else {
                     completion(nil)
-                } else {
-                    completion(offer)
+                    return
                 }
+                completion(sdp)
             })
         })
     }
-
+    
     func createAnswer(completion: @escaping (RTCSessionDescription?) -> Void) {
-        peerConnection?.answer(for: RTCMediaConstraints(mandatoryConstraints: ["OfferToReceiveAudio": "true", "OfferToReceiveVideo": "true"], optionalConstraints: nil), completionHandler: { (sdp, error) in
-            guard let answer = sdp else {
-                print("Error creating answer: \(String(describing: error))")
+        peerConnection?.answer(for: RTCMediaConstraints(mandatoryConstraints: ["OfferToReceiveAudio": "true"], optionalConstraints: nil), completionHandler: { sdp, error in
+            guard let sdp = sdp, error == nil else {
                 completion(nil)
                 return
             }
-            self.peerConnection?.setLocalDescription(answer, completionHandler: { (error) in
-                if let error = error {
-                    print("Error setting local description: \(error)")
+            self.peerConnection?.setLocalDescription(sdp, completionHandler: { error in
+                guard error == nil else {
                     completion(nil)
-                } else {
-                    completion(answer)
+                    return
                 }
+                completion(sdp)
             })
         })
     }
-
+    
     func handleRemoteCandidate(_ candidate: RTCIceCandidate) {
         peerConnection?.add(candidate)
     }
-    func initiateCall() {
-        // Create an offer if you are the caller
-        createOffer { [weak self] offer in
-            guard let offer = offer else { return }
-            self?.peerConnection?.setLocalDescription(offer, completionHandler: { error in
-                if let error = error {
-                    print("Error setting local description: \(error)")
-                    return
-                }
-                // Send this offer to the remote peer via your signaling mechanism (e.g., Firestore)
-                // This part depends on how you've implemented signaling
-            })
+}
+
+
+
+
+
+
+
+// MARK: - RTCPeerConnectionDelegate
+extension WebRTCManager: RTCPeerConnectionDelegate {
+    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCPeerConnectionState) {
+        DispatchQueue.main.async { [weak self] in
+            switch newState {
+            case .connected:
+                self?.isCallActive = true
+                print("WebRTC connection established.")
+                // Additional actions when the call is connected, like notifying the UI.
+            case .failed, .disconnected:
+                self?.isCallActive = false
+                print("WebRTC connection failed or disconnected.")
+                // Handle reconnection or call termination.
+            default:
+                print("WebRTC connection state changed: \(newState)")
+            }
+        }
+    }
+
+
+    func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
+        guard let currentCallId = self.currentCallId else { return }
+        FirebaseService.shared.uploadWebRTCIceCandidate(candidate: candidate, forCall: currentCallId) { success in
+            if success {
+                print("Local ICE candidate uploaded successfully.")
+            } else {
+                print("Failed to upload local ICE candidate.")
+            }
         }
     }
 
     
-    func setupLocalMedia() {
-        // Create local video and audio tracks
-        let videoSource = peerConnectionFactory.videoSource()
-        localVideoTrack = peerConnectionFactory.videoTrack(with: videoSource, trackId: "video0")
-        let audioTrack = peerConnectionFactory.audioTrack(withTrackId: "audio0")
-
-        // Add these tracks to the media stream
-        let stream = peerConnectionFactory.mediaStream(withStreamId: "stream0")
-        stream.addVideoTrack(localVideoTrack!)
-        stream.addAudioTrack(audioTrack)
-
-        // Add this stream to the peer connection
-        peerConnection?.add(stream)
-    }
-
-    // More functions as needed for WebRTC setup
-}
-
-// MARK: - RTCPeerConnectionDelegate
-extension WebRTCManager: RTCPeerConnectionDelegate {
-    func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState) {
-        
-    }
-    
-    func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
-        // Handle added stream
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {
-        // Handle removed stream
-    }
-
-    func peerConnectionShouldNegotiate(_ peerConnection: RTCPeerConnection) {
-        // Handle negotiation
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCPeerConnectionState) {
-        // Handle peer connection state change
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceConnectionState) {
-        // Handle ICE connection state change
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {
-        // Handle ICE gathering state change
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
-        // Handle new ICE candidate
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {
-        // Handle removed ICE candidates
-    }
-
-    func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
-        // Handle opened data channel
-    }
-
-}
-
-// MARK: - WebRTCManagerDelegate
-protocol WebRTCManagerDelegate: AnyObject {
-    func didReceiveRemoteVideoTrack(track: RTCVideoTrack?)
+    // Implement other delegate methods as needed.
+    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCSignalingState) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {}
+    func peerConnectionShouldNegotiate(_ peerConnection: RTCPeerConnection) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceConnectionState) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {}
+    func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {}
 }
