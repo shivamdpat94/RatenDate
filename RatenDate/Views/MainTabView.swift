@@ -63,6 +63,7 @@ struct MainTabView: View {
                 self.isLoginSuccessful = true
                 fetchProfiles()
                 preloadMatchData() // Call preloadMatchData here
+                fetchAndUpdateFCMToken()
 
             }
         }
@@ -77,7 +78,17 @@ struct MainTabView: View {
         )
     }
 
-    
+    private func fetchAndUpdateFCMToken() {
+        guard let email = sessionManager.email else { return }
+
+        FCMTokenManager.fetchFCMToken { token in
+            guard let token = token else { return }
+
+            FCMTokenManager.updateUserFCMToken(email: email, token: token) {
+                print("FCM token updated successfully for \(email)")
+            }
+        }
+    }
     private func fetchProfiles() {
         FirebaseService().fetchProfiles { fetchedProfiles in
             self.profiles = fetchedProfiles

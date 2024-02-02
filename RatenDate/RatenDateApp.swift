@@ -137,8 +137,8 @@ class CustomAppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, 
 struct RatenDateApp: App {
     @UIApplicationDelegateAdaptor(CustomAppDelegate.self) var appDelegate
     @StateObject var sessionManager = UserSessionManager()
+//    @StateObject var webRTCManager = WebRTCManager() // Make sure to initialize it correctly
     @State var isShowingLoadingScreen = true
-
     var body: some Scene {
         WindowGroup {
             if isShowingLoadingScreen {
@@ -151,6 +151,8 @@ struct RatenDateApp: App {
             } else {
                 ContentView()
                     .environmentObject(sessionManager)
+//                    .environmentObject(webRTCManager) // Injecting WebRTCManager here
+
             }
         }
     }

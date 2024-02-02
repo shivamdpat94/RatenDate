@@ -15,7 +15,6 @@ exports.matchUsersInCallWaiting = functions.firestore
       // Extract the email of the user who was just added to CallWaiting
       const userEmail = context.params.userEmail;
 
-      // Randomly match with another user in CallWaiting
       try {
         const CallWaitingCollection = db.collection("CallWaiting");
         const querySnapshot = await CallWaitingCollection.get();
@@ -24,32 +23,29 @@ exports.matchUsersInCallWaiting = functions.firestore
 
         // Loop through the documents in CallWaiting
         querySnapshot.forEach((doc) => {
-          if (doc.id !== userEmail && !matchedUserEmail) {
+          // Check if user is already matched
+          const isMatched = doc.data().matchedEmail;
+
+          // Find an unmatched user
+          if (doc.id !== userEmail && !matchedUserEmail && !isMatched) {
             matchedUserEmail = doc.id;
           }
         });
 
         // If a match is found, update both documents
         if (matchedUserEmail) {
-          // make a batch to perform multiple write operations as a single unit
           const batch = db.batch();
 
-          // Set the matched user's email in each user's document
           const currentUserDocRef = CallWaitingCollection.doc(userEmail);
           const matchedUserDocRef = CallWaitingCollection.doc(matchedUserEmail);
 
-          batch.update(currentUserDocRef, {
-            matchedEmail: matchedUserEmail,
-          });
-          batch.update(matchedUserDocRef, {
-            matchedEmail: userEmail,
-          });
+          batch.update(currentUserDocRef, {matchedEmail: matchedUserEmail});
+          batch.update(matchedUserDocRef, {matchedEmail: userEmail});
 
-          // Commit the batch operation
           await batch.commit();
           logger.info(`Matched users: ${userEmail} and ${matchedUserEmail}`);
         } else {
-          logger.info(`No match found for user: ${userEmail}`);
+          logger.info(`No available match found for user: ${userEmail}`);
         }
       } catch (error) {
         logger.error(`Error matching users in CallWaiting: ${error.message}`);

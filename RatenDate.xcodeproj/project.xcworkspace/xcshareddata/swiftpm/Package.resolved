@@ -138,7 +138,7 @@
     {
       "identity" : "soto-core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/soto-project/soto-core",
+      "location" : "https://github.com/soto-project/soto-core.git",
       "state" : {
         "revision" : "3ed66ec536bc372360d7e3ec39a5e8b1870747ea",
         "version" : "6.5.2"
@@ -259,6 +259,15 @@
       "state" : {
         "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
         "version" : "1.25.2"
+      }
+    },
+    {
+      "identity" : "webrtc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stasel/WebRTC.git",
+      "state" : {
+        "revision" : "3edaa8f0ddae889ad8ea236023de88672f6a16ec",
+        "version" : "120.0.0"
       }
     }
   ],
