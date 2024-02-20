@@ -15,12 +15,20 @@ struct LikesMeUserView: View {
                 .frame(width: 165, height: 205)
                 .cornerRadius(20)
                 .shadow(radius: 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray, lineWidth: 2) // Gray border matching cornerRadius
+                )
             } else {
                 Rectangle()
                     .fill(Color.gray)
                     .frame(width: 165, height: 205)
                     .cornerRadius(20)
                     .shadow(radius: 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.gray, lineWidth: 2) // Gray border matching cornerRadius
+                    )
             }
 
             // Display the user's name

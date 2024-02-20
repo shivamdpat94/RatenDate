@@ -138,7 +138,7 @@
     {
       "identity" : "soto-core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/soto-project/soto-core.git",
+      "location" : "https://github.com/soto-project/soto-core",
       "state" : {
         "revision" : "3ed66ec536bc372360d7e3ec39a5e8b1870747ea",
         "version" : "6.5.2"
