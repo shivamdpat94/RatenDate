@@ -100,6 +100,7 @@
 		683DC1ED2B5C4DD80079CB7D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */; };
 		683DC1EF2B5C4EAD0079CB7D /* SotoRekognition in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1EE2B5C4EAD0079CB7D /* SotoRekognition */; };
 		683DC1F12B5C4EB60079CB7D /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 683DC1F02B5C4EB60079CB7D /* SotoS3 */; };
+		684881242B73221E005FFFCA /* PhonePassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684881232B73221E005FFFCA /* PhonePassView.swift */; };
 		686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */; };
 		686104DC2B5F48CB006489AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 686104DB2B5F48CB006489AA /* StoreKit.framework */; };
 		68DF24FE2B620A4100A0368F /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF24FD2B620A4100A0368F /* MessageRowView.swift */; };
@@ -157,6 +158,7 @@
 		681D44A12B6B3AA00049A627 /* LikesMeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeViewModel.swift; sourceTree = "<group>"; };
 		683DC1E92B5C4BC40079CB7D /* AWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWS.swift; sourceTree = "<group>"; };
 		683DC1EC2B5C4DD80079CB7D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		684881232B73221E005FFFCA /* PhonePassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePassView.swift; sourceTree = "<group>"; };
 		686104D52B5DFAC5006489AA /* PremiumSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionManager.swift; sourceTree = "<group>"; };
 		686104DA2B5F48BD006489AA /* RatenDate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RatenDate.entitlements; sourceTree = "<group>"; };
 		686104DB2B5F48CB006489AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -303,6 +305,7 @@
 				68DF24FD2B620A4100A0368F /* MessageRowView.swift */,
 				3C351CCF2B65757700B6BD0C /* FindCallView.swift */,
 				3C9D809E2B68BBE200E51B91 /* CallScreenView.swift */,
+				684881232B73221E005FFFCA /* PhonePassView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				3C7E10312B45C2D500C3E663 /* ProfileView.swift in Sources */,
 				3C94BB3F2B54F67F004FF584 /* LanguageSelectionView.swift in Sources */,
 				3C7E10332B45C42A00C3E663 /* ProfileStackView.swift in Sources */,
+				684881242B73221E005FFFCA /* PhonePassView.swift in Sources */,
 				686104D62B5DFAC5006489AA /* PremiumSubscriptionManager.swift in Sources */,
 				3CE2C3A12B5C373E00CF3628 /* Match.swift in Sources */,
 				3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */,
