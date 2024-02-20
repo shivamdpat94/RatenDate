@@ -3,7 +3,7 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         // Use the image as the background
-        Image("Loading Screen")
+        Image("splash")
             .resizable() // Make the image resizable
             .aspectRatio(contentMode: .fill) // Fill the entire view
             .edgesIgnoringSafeArea(.all) // Extend the background image to the screen edges

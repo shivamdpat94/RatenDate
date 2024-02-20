@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C07AD6F2B6CA95C00E91831 /* CityFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C07AD6E2B6CA95C00E91831 /* CityFetcher.swift */; };
 		3C2FE5CE2B4B8F44007F5429 /* EmailPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */; };
 		3C2FE5D02B4CB02C007F5429 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5CF2B4CB02B007F5429 /* RateView.swift */; };
 		3C2FE5D22B4CB03E007F5429 /* LikesMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */; };
@@ -107,6 +108,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C07AD6E2B6CA95C00E91831 /* CityFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFetcher.swift; sourceTree = "<group>"; };
 		3C2FE5CD2B4B8F44007F5429 /* EmailPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPassView.swift; sourceTree = "<group>"; };
 		3C2FE5CF2B4CB02B007F5429 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		3C2FE5D12B4CB03E007F5429 /* LikesMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesMeView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				3CDF42202B6221F4003B41AE /* FCMTokenManager.swift */,
 				681D44A12B6B3AA00049A627 /* LikesMeViewModel.swift */,
 				3C9D80A52B69FC6900E51B91 /* WebRTCManager.swift */,
+				3C07AD6E2B6CA95C00E91831 /* CityFetcher.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				3CE2C3A52B5C377100CF3628 /* TopMatchesView.swift in Sources */,
 				3CE2C3AD2B5C55CE00CF3628 /* ImageCache.swift in Sources */,
 				3CE2C39F2B5C371700CF3628 /* ChatView.swift in Sources */,
+				3C07AD6F2B6CA95C00E91831 /* CityFetcher.swift in Sources */,
 				3C94BB432B55A19F004FF584 /* PersonalInfoView.swift in Sources */,
 				3C5709B62B434C54008CEDF6 /* ContentView.swift in Sources */,
 				3C94BB3D2B54F2A7004FF584 /* LifestyleView.swift in Sources */,
