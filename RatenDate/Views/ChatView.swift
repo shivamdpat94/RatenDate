@@ -127,7 +127,7 @@ struct ChatView: View {
                         .navigationTitle("LEMONLIME")
                         .navigationBarTitleDisplayMode(.inline)
                         .background(
-                                        Image("lemonfinal") // Using the image as a background
+                                        Image("bg FLAKES") // Using the image as a background
                                             .resizable() // Make it resizable
                                             .scaledToFill() // Scale the image to fill the view
                                             .opacity(0.2)

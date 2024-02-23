@@ -51,25 +51,23 @@ class ProfileService {
 }
 
 class LikesMeViewModel: ObservableObject {
-    @EnvironmentObject var sessionManager: UserSessionManager
     @Published var userProfiles: [UserProfile] = []
     private let profileService = ProfileService()
 
-    init() {
-        // Assuming you have a way to get the current user's email
-        let currentUserEmail = "1@1.com"
-        fetchLikedUsers(currentUserEmail: currentUserEmail)
+    // Optionally allow setting currentUserEmail after initialization
+    var currentUserEmail: String? {
+        didSet {
+            if let email = currentUserEmail {
+                fetchLikedUsers(currentUserEmail: email)
+            }
+        }
     }
 
     func fetchLikedUsers(currentUserEmail: String) {
         profileService.fetchLikedProfiles(currentUserEmail: currentUserEmail) { profiles in
             DispatchQueue.main.async {
                 self.userProfiles = profiles
-                for prof in profiles{
-                    print(prof.email, prof.firstName, prof.photoURL, "HERE IT IS")
-                }
             }
         }
     }
 }
-

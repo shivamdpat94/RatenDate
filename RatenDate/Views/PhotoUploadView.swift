@@ -51,14 +51,12 @@ struct PhotoUploadView: View {
                     get: { self.selectedImages[self.selectedImageIndex ?? 0] },
                     set: { image in
                         if let image = image, let index = self.selectedImageIndex {
-                            // Assign the selected image to the correct index
                             self.selectedImages[index] = image
                         }
                         self.showingImagePicker = false
+                    }), allowsEditing: true) {
+                        // Handle completion if needed
                     }
-                )) {
-                    // Handle completion if needed
-                }
             }
 
             Button("Next") {

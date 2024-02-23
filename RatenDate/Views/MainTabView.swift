@@ -67,15 +67,6 @@ struct MainTabView: View {
 
             }
         }
-        .background(
-            Image("lemonfinal") // Reference your image asset here
-                .resizable() // Make the image resizable
-                .scaledToFill() // Scale the image to fill the background
-                .edgesIgnoringSafeArea(.all) // Ignore the safe area to cover the whole screen
-                .opacity(0.25) // Make the image 25% transparent
-                .padding(.top, 22.9)
-
-        )
     }
 
     private func fetchAndUpdateFCMToken() {

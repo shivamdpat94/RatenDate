@@ -23,16 +23,28 @@ struct MatchesView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
+       
             }
             .navigationTitle("LEMONLIME")
+            .background(
+                Image("bg FLAKES")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+            )                // Background image
         }
+        .edgesIgnoringSafeArea(.all) // Ensure it covers the entire screen, including behind the status bar and navigation bar
         .onAppear(perform: fetchMatchData)
         .onDisappear {
-            // Reset selectedChatID when leaving the view
             self.selectedChatID = ""
         }
+
     }
 
+    
+    
+    
+    
     private func createMatchNavigationLink(match: Match) -> some View {
         NavigationLink(
             destination: ChatView(match: match),

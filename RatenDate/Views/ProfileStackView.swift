@@ -7,75 +7,55 @@ struct ProfileStackView: View {
     @State private var currentIndex: Int = 0
     @EnvironmentObject var sessionManager: UserSessionManager
     @State private var currentUserProfile: Profile?
+    @State private var swipeDirection: CGFloat = 0 // Use -1 for left, 1 for right, 0 for up
+    @State private var animateOut = false
 
-    
-    
     var body: some View {
         ZStack {
-            Image("lemonfinal")
+            Image("bg FLAKES")
                 .resizable()
                 .scaledToFill()
                 .opacity(0.25)
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                if !filteredProfiles.isEmpty {
-                    ProfileView(profile: filteredProfiles[currentIndex])
-                        .transition(.slide)
-                    
-                    HStack {
-                        Button("Dislike") {
-                            dislikeCurrentProfile()
-                            withAnimation {
-                                removeCurrentProfile()
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-      
-                        Button("Next") {
-                            withAnimation {
-                                removeCurrentProfile()
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(10)
-                        
-                        
-                        
-                        Button("Like") {
-                            likeCurrentProfile()
-                            withAnimation {
-                                removeCurrentProfile()
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(10)
-                        
+            VStack(spacing: 20) {
+                Spacer(minLength: 100)
+                if !filteredProfiles.isEmpty && currentIndex < filteredProfiles.count {
+                    ScrollView {
+                        ProfileView(profile: filteredProfiles[currentIndex])
+                            .padding()
                     }
+                    .background(Color.blue.opacity(0.05))
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.blue, lineWidth: 2)
+                    )
+                    .padding(.horizontal)
+                    // Apply offset for swipe direction
+                    .offset(x: animateOut && swipeDirection != 0 ? 600 * swipeDirection : 0,
+                            y: animateOut && swipeDirection == 0 ? -600 : 0) // Swipe up if direction is 0
+                    .animation(.easeInOut(duration: 0.5), value: animateOut)
+                    .padding(.bottom, 90)
+
+                    controlButtons()
                 } else {
                     Text("No profiles available.")
-                    Button(action: fetchProfiles) {
-                        Text("Fetch Profiles Again")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(10)
+                    Button("Fetch Profiles Again") {
+                        fetchProfiles()
                     }
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(10)
                 }
+                
+                Spacer()
             }
-            .padding(.bottom, 100)
         }
         .onAppear {
             fetchCurrentUserProfile()
         }
-        
     }
     
     private func fetchCurrentUserProfile() {
@@ -139,6 +119,58 @@ struct ProfileStackView: View {
                     }
                 }
             }
+        }
+    }
+    
+    
+    
+    
+    
+    func controlButtons() -> some View {
+        HStack(spacing: 20) {
+            Button(action: { triggerSwipe(direction: -1) }) {
+                Image(systemName: "xmark")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.red)
+                    .clipShape(Circle())
+            }
+
+            Button(action: { triggerSwipe(direction: 0) }) {
+                Image(systemName: "arrow.right")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.gray)
+                    .clipShape(Circle())
+            }
+
+            Button(action: { triggerSwipe(direction: 1) }) {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.green)
+                    .clipShape(Circle())
+            }
+        }
+        .padding(.top, -110) // Adjust spacing as needed
+    }
+    
+    
+    
+    
+    private func triggerSwipe(direction: CGFloat) {
+        swipeDirection = direction
+        animateOut = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            animateOut = false
+            // Handle like, dislike, or swipe up action
+            if direction == 1 {
+                likeCurrentProfile()
+            } else if direction == -1 {
+                dislikeCurrentProfile()
+            } // No need for else case, as the swipe up is purely cosmetic
+            removeCurrentProfile()
         }
     }
 
@@ -240,18 +272,18 @@ struct ProfileStackView: View {
             !currentUserProfile.dislikeSet.contains(profile.email)
         }
     }
- 
+
     private func removeCurrentProfile() {
         if !filteredProfiles.isEmpty {
-            // Remove the current profile
             profiles.removeAll { $0.id == filteredProfiles[currentIndex].id }
-            
-            // Reset currentIndex if it's out of bounds
-            if currentIndex >= filteredProfiles.count {
+            if currentIndex >= filteredProfiles.count - 1 {
                 currentIndex = 0
+            } else {
+                currentIndex += 1
             }
         }
     }
+
 }
 
 

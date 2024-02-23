@@ -19,10 +19,6 @@ struct ProfileView: View {
             .padding()
             .background(Color.blue.opacity(0.05))
             .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.blue, lineWidth: 2)
-            )
             .padding()
         }
         .background(
@@ -193,20 +189,32 @@ struct ProfileView: View {
     private var photoCarousel: some View {
         TabView {
             ForEach(profile.photoURLs, id: \.self) { photoURL in
-                AsyncImage(url: URL(string: photoURL)) { image in
-                    image.resizable()
-                         .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
+                GeometryReader { geometry in
+                    AsyncImage(url: URL(string: photoURL)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView() // Displayed while loading
+                        case .success(let image):
+                            image.resizable()
+                                 .aspectRatio(contentMode: .fit) // Ensure the entire image fits
+                                 .frame(width: geometry.size.width) // Use GeometryReader's width
+                        case .failure:
+                            Image(systemName: "photo") // Displayed on error
+                                 .aspectRatio(contentMode: .fit) // Adjusted to .fit
+                                 .frame(width: geometry.size.width) // Use GeometryReader's width
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
                 }
-                .frame(width: UIScreen.main.bounds.width, height: 300)
-                .cornerRadius(20)
-                .clipped()
             }
         }
+        .frame(height: 300) // Set a fixed height for the TabView
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .frame(height: 300)
     }
+
+
+
     
     private var primaryInfo: some View {
         VStack(alignment: .leading) {
